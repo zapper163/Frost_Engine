@@ -1,6 +1,1 @@
-﻿  ModuleRenderer3D.cpp
-  ModuleSceneIntro.cpp
-C:\Users\zapin\Documents\GitHub\Frost_Engine\Frost Engine\ModuleSceneIntro.cpp(30,20): warning C4018: '<': no coinciden signed/unsigned
-  ModuleWindow.cpp
-  Generando código...
-  Frost Engine.vcxproj -> C:\Users\zapin\Documents\GitHub\Frost_Engine\Frost Engine\Debug\Frost Engine.exe
+﻿LINK : fatal error LNK1104: no se puede abrir el archivo 'SDL/libx86/SDL2.lib'

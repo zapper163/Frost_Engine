@@ -48,14 +48,14 @@
       <SDLCheck>false</SDLCheck>
       <ExceptionHandling>false</ExceptionHandling>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <AdditionalIncludeDirectories>C:\Users\zapin\Documents\GitHub\Frost_Engine\Frost Engine\glfw\include\GLFW;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\zapin\Documents\GitHub\Frost_Engine\Frost Engine\Code\Libraries\glfw\include\GLFW;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
-      <AdditionalLibraryDirectories>C:\Users\zapin\Documents\GitHub\Frost_Engine\Frost Engine\glfw\lib-vc2010-32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3dll.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\zapin\Documents\GitHub\Frost_Engine\Frost Engine\Code\Libraries\SDL\libx86;C:\Users\zapin\Documents\GitHub\Frost_Engine\Frost Engine\Code\Libraries\glfw\lib-vc2010-32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3dll.lib;SDL2.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -77,53 +77,53 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Application.h" />
-    <ClInclude Include="Color.h" />
-    <ClInclude Include="glmath.h" />
-    <ClInclude Include="Globals.h" />
-    <ClInclude Include="imGui\imconfig.h" />
-    <ClInclude Include="imGui\imgui.h" />
-    <ClInclude Include="imGui\imgui_impl_glfw.h" />
-    <ClInclude Include="imGui\imgui_impl_opengl3.h" />
-    <ClInclude Include="imGui\imgui_impl_opengl3_loader.h" />
-    <ClInclude Include="imGui\imgui_internal.h" />
-    <ClInclude Include="imGui\imstb_rectpack.h" />
-    <ClInclude Include="imGui\imstb_textedit.h" />
-    <ClInclude Include="imGui\imstb_truetype.h" />
-    <ClInclude Include="Light.h" />
-    <ClInclude Include="ModuleCamera3D.h" />
-    <ClInclude Include="ModuleRenderer3D.h" />
-    <ClInclude Include="p2List.h" />
-    <ClInclude Include="Module.h" />
-    <ClInclude Include="ModuleInput.h" />
-    <ClInclude Include="ModuleSceneIntro.h" />
-    <ClInclude Include="ModuleWindow.h" />
-    <ClInclude Include="p2DynArray.h" />
-    <ClInclude Include="p2Point.h" />
-    <ClInclude Include="Primitive.h" />
-    <ClInclude Include="Timer.h" />
+    <ClInclude Include="Code\Application.h" />
+    <ClInclude Include="Code\Color.h" />
+    <ClInclude Include="Code\glmath.h" />
+    <ClInclude Include="Code\Globals.h" />
+    <ClInclude Include="Code\Libraries\imGui\imconfig.h" />
+    <ClInclude Include="Code\Libraries\imGui\imgui.h" />
+    <ClInclude Include="Code\Libraries\imGui\imgui_impl_glfw.h" />
+    <ClInclude Include="Code\Libraries\imGui\imgui_impl_opengl3.h" />
+    <ClInclude Include="Code\Libraries\imGui\imgui_impl_opengl3_loader.h" />
+    <ClInclude Include="Code\Libraries\imGui\imgui_internal.h" />
+    <ClInclude Include="Code\Libraries\imGui\imstb_rectpack.h" />
+    <ClInclude Include="Code\Libraries\imGui\imstb_textedit.h" />
+    <ClInclude Include="Code\Libraries\imGui\imstb_truetype.h" />
+    <ClInclude Include="Code\Light.h" />
+    <ClInclude Include="Code\Module.h" />
+    <ClInclude Include="Code\ModuleCamera3D.h" />
+    <ClInclude Include="Code\ModuleInput.h" />
+    <ClInclude Include="Code\ModuleRenderer3D.h" />
+    <ClInclude Include="Code\ModuleSceneIntro.h" />
+    <ClInclude Include="Code\ModuleWindow.h" />
+    <ClInclude Include="Code\p2DynArray.h" />
+    <ClInclude Include="Code\p2List.h" />
+    <ClInclude Include="Code\p2Point.h" />
+    <ClInclude Include="Code\Primitive.h" />
+    <ClInclude Include="Code\Timer.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Application.cpp" />
-    <ClCompile Include="Color.cpp" />
-    <ClCompile Include="glmath.cpp" />
-    <ClCompile Include="imGui\imgui.cpp" />
-    <ClCompile Include="imGui\imgui_demo.cpp" />
-    <ClCompile Include="imGui\imgui_draw.cpp" />
-    <ClCompile Include="imGui\imgui_impl_glfw.cpp" />
-    <ClCompile Include="imGui\imgui_impl_opengl3.cpp" />
-    <ClCompile Include="imGui\imgui_tables.cpp" />
-    <ClCompile Include="imGui\imgui_widgets.cpp" />
-    <ClCompile Include="Light.cpp" />
-    <ClCompile Include="log.cpp" />
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="ModuleCamera3D.cpp" />
-    <ClCompile Include="ModuleInput.cpp" />
-    <ClCompile Include="ModuleRenderer3D.cpp" />
-    <ClCompile Include="ModuleSceneIntro.cpp" />
-    <ClCompile Include="ModuleWindow.cpp" />
-    <ClCompile Include="Primitive.cpp" />
-    <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="Code\Application.cpp" />
+    <ClCompile Include="Code\Color.cpp" />
+    <ClCompile Include="Code\glmath.cpp" />
+    <ClCompile Include="Code\Libraries\imGui\imgui.cpp" />
+    <ClCompile Include="Code\Libraries\imGui\imgui_demo.cpp" />
+    <ClCompile Include="Code\Libraries\imGui\imgui_draw.cpp" />
+    <ClCompile Include="Code\Libraries\imGui\imgui_impl_glfw.cpp" />
+    <ClCompile Include="Code\Libraries\imGui\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="Code\Libraries\imGui\imgui_tables.cpp" />
+    <ClCompile Include="Code\Libraries\imGui\imgui_widgets.cpp" />
+    <ClCompile Include="Code\Light.cpp" />
+    <ClCompile Include="Code\log.cpp" />
+    <ClCompile Include="Code\Main.cpp" />
+    <ClCompile Include="Code\ModuleCamera3D.cpp" />
+    <ClCompile Include="Code\ModuleInput.cpp" />
+    <ClCompile Include="Code\ModuleRenderer3D.cpp" />
+    <ClCompile Include="Code\ModuleSceneIntro.cpp" />
+    <ClCompile Include="Code\ModuleWindow.cpp" />
+    <ClCompile Include="Code\Primitive.cpp" />
+    <ClCompile Include="Code\Timer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
