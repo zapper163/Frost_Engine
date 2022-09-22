@@ -1,4 +1,13 @@
 #include "Application.h"
+#include "imGui/imgui.h"
+#include "imGui/imgui_impl_opengl3.h"
+#include "imGui/imgui_impl_glfw.h" 
+#include "glfw3.h"
+
+
+
+
+
 
 Application::Application() : debug(false)
 {
@@ -33,6 +42,7 @@ Application::~Application()
 
 bool Application::Init()
 {
+
 	bool ret = true;
 
 	App = this;
@@ -53,8 +63,9 @@ bool Application::Init()
 		ret = item->data->Start();
 		item = item->next;
 	}
-	
+
 	ms_timer.Start();
+
 	return ret;
 }
 
@@ -96,7 +107,7 @@ update_status Application::Update()
 		ret = item->data->PostUpdate(dt);
 		item = item->next;
 	}
-
+	
 	FinishUpdate();
 	return ret;
 }
@@ -111,6 +122,8 @@ bool Application::CleanUp()
 		ret = item->data->CleanUp();
 		item = item->prev;
 	}
+
+
 	return ret;
 }
 

@@ -5,6 +5,12 @@
 #include <gl/GL.h>
 #include <gl/GLU.h>
 
+#include "imGui/imgui.h"
+#include "imGui/imgui_impl_glfw.h"
+#include "imGui/imgui_impl_opengl3.h"
+#include "glfw3.h" // Will drag system OpenGL headers
+#include "glfw3native.h"
+
 #pragma comment (lib, "glu32.lib")    /* link OpenGL Utility lib     */
 #pragma comment (lib, "opengl32.lib") /* link Microsoft OpenGL lib   */
 
@@ -19,6 +25,7 @@ ModuleRenderer3D::~ModuleRenderer3D()
 // Called before render is available
 bool ModuleRenderer3D::Init()
 {
+	
 	LOG("Creating 3D Renderer context");
 	bool ret = true;
 	
@@ -30,8 +37,14 @@ bool ModuleRenderer3D::Init()
 		ret = false;
 	}
 	
+
+	bool show_demo_window = true;
+	bool show_another_window = false;
+	ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
+
 	if(ret == true)
 	{
+		
 		//Use Vsync
 		if(VSYNC && SDL_GL_SetSwapInterval(1) < 0)
 			LOG("Warning: Unable to set VSync! SDL Error: %s\n", SDL_GetError());
@@ -96,9 +109,10 @@ bool ModuleRenderer3D::Init()
 		glEnable(GL_COLOR_MATERIAL);
 	}
 
+	
 	// Projection matrix for
 	OnResize(SCREEN_WIDTH, SCREEN_HEIGHT);
-
+	
 	return ret;
 }
 
@@ -123,7 +137,11 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 // PostUpdate present buffer to screen
 update_status ModuleRenderer3D::PostUpdate(float dt)
 {
+	
+
+
 	SDL_GL_SwapWindow(App->window->window);
+	
 	return UPDATE_CONTINUE;
 }
 
@@ -133,7 +151,7 @@ bool ModuleRenderer3D::CleanUp()
 	LOG("Destroying 3D Renderer");
 
 	SDL_GL_DeleteContext(context);
-
+	
 	return true;
 }
 

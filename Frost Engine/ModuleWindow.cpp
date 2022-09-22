@@ -2,6 +2,12 @@
 #include "Application.h"
 #include "ModuleWindow.h"
 
+#include "imGui/imgui.h"
+#include "imGui/imgui_impl_glfw.h"
+#include "imGui/imgui_impl_opengl3.h"
+#include <glfw3.h> // Will drag system OpenGL headers
+#include "glfw3native.h"
+
 ModuleWindow::ModuleWindow(bool start_enabled) : Module(start_enabled)
 {
 	window = NULL;
@@ -16,9 +22,10 @@ ModuleWindow::~ModuleWindow()
 // Called before render is available
 bool ModuleWindow::Init()
 {
+
 	LOG("Init SDL window & surface");
 	bool ret = true;
-
+	
 	if(SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
 		LOG("SDL_VIDEO could not initialize! SDL_Error: %s\n", SDL_GetError());
@@ -26,6 +33,7 @@ bool ModuleWindow::Init()
 	}
 	else
 	{
+
 		//Create window
 		int width = SCREEN_WIDTH * SCREEN_SIZE;
 		int height = SCREEN_HEIGHT * SCREEN_SIZE;
@@ -68,7 +76,7 @@ bool ModuleWindow::Init()
 			screen_surface = SDL_GetWindowSurface(window);
 		}
 	}
-
+	
 	return ret;
 }
 
@@ -76,7 +84,8 @@ bool ModuleWindow::Init()
 bool ModuleWindow::CleanUp()
 {
 	LOG("Destroying SDL window and quitting all SDL systems");
-
+	
+	
 	//Destroy window
 	if(window != NULL)
 	{

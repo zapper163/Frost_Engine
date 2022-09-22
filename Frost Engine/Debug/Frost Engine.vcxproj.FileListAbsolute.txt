@@ -1,0 +1,2 @@
+C:\Users\zapin\Documents\GitHub\Frost_Engine\Frost Engine\Debug\Frost Engine.exe
+C:\Users\zapin\Documents\GitHub\Frost_Engine\Frost Engine\Debug\Frost Engine.pdb
