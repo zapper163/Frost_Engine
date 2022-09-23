@@ -19,147 +19,147 @@
     <Filter Include="Sources\Modules\Game">
       <UniqueIdentifier>{83f46af7-e02f-40c0-9e56-41d76082527b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\imGui">
-      <UniqueIdentifier>{de8e12ee-1b51-457c-929a-76834886678c}</UniqueIdentifier>
+    <Filter Include="Sources\ImGui">
+      <UniqueIdentifier>{6f7f6b02-bfdc-48fd-99dc-6147cda1b5a3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Code\Libraries\imGui\imconfig.h">
-      <Filter>Sources\imGui</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Libraries\imGui\imgui.h">
-      <Filter>Sources\imGui</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Libraries\imGui\imgui_impl_glfw.h">
-      <Filter>Sources\imGui</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Libraries\imGui\imgui_impl_opengl3.h">
-      <Filter>Sources\imGui</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Libraries\imGui\imgui_impl_opengl3_loader.h">
-      <Filter>Sources\imGui</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Libraries\imGui\imgui_internal.h">
-      <Filter>Sources\imGui</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Libraries\imGui\imstb_rectpack.h">
-      <Filter>Sources\imGui</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Libraries\imGui\imstb_textedit.h">
-      <Filter>Sources\imGui</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Libraries\imGui\imstb_truetype.h">
-      <Filter>Sources\imGui</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Module.h">
+    <ClInclude Include="Module.h">
       <Filter>Sources\Modules</Filter>
     </ClInclude>
-    <ClInclude Include="Code\ModuleCamera3D.h">
+    <ClInclude Include="ModuleCamera3D.h">
       <Filter>Sources\Modules</Filter>
     </ClInclude>
-    <ClInclude Include="Code\ModuleInput.h">
+    <ClInclude Include="ModuleInput.h">
       <Filter>Sources\Modules</Filter>
     </ClInclude>
-    <ClInclude Include="Code\ModuleRenderer3D.h">
+    <ClInclude Include="ModuleRenderer3D.h">
       <Filter>Sources\Modules</Filter>
     </ClInclude>
-    <ClInclude Include="Code\ModuleWindow.h">
+    <ClInclude Include="ModuleWindow.h">
       <Filter>Sources\Modules</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Color.h">
+    <ClInclude Include="p2DynArray.h">
       <Filter>Sources\Containers</Filter>
     </ClInclude>
-    <ClInclude Include="Code\glmath.h">
+    <ClInclude Include="p2List.h">
       <Filter>Sources\Containers</Filter>
     </ClInclude>
-    <ClInclude Include="Code\p2DynArray.h">
+    <ClInclude Include="p2Point.h">
       <Filter>Sources\Containers</Filter>
     </ClInclude>
-    <ClInclude Include="Code\p2List.h">
+    <ClInclude Include="glmath.h">
       <Filter>Sources\Containers</Filter>
     </ClInclude>
-    <ClInclude Include="Code\p2Point.h">
-      <Filter>Sources\Containers</Filter>
+    <ClInclude Include="Application.h">
+      <Filter>Sources</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Light.h">
+    <ClInclude Include="Globals.h">
+      <Filter>Sources</Filter>
+    </ClInclude>
+    <ClInclude Include="Primitive.h">
       <Filter>Sources\Helpers</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Primitive.h">
+    <ClInclude Include="Color.h">
+      <Filter>Sources\Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="Light.h">
       <Filter>Sources\Helpers</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Timer.h">
+    <ClInclude Include="ModuleSceneIntro.h">
+      <Filter>Sources\Modules\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
       <Filter>Sources\Tools</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Application.h">
-      <Filter>Sources</Filter>
+    <ClInclude Include="ImGui\imconfig.h">
+      <Filter>Sources\ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Globals.h">
-      <Filter>Sources</Filter>
+    <ClInclude Include="ImGui\imgui.h">
+      <Filter>Sources\ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="Code\ModuleSceneIntro.h">
-      <Filter>Sources\Modules\Game</Filter>
+    <ClInclude Include="ImGui\imgui_impl_opengl3.h">
+      <Filter>Sources\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imgui_impl_opengl3_loader.h">
+      <Filter>Sources\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imgui_impl_sdl.h">
+      <Filter>Sources\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imgui_internal.h">
+      <Filter>Sources\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imstb_rectpack.h">
+      <Filter>Sources\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imstb_textedit.h">
+      <Filter>Sources\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imstb_truetype.h">
+      <Filter>Sources\ImGui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Code\Libraries\imGui\imgui.cpp">
-      <Filter>Sources\imGui</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Libraries\imGui\imgui_demo.cpp">
-      <Filter>Sources\imGui</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Libraries\imGui\imgui_draw.cpp">
-      <Filter>Sources\imGui</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Libraries\imGui\imgui_impl_glfw.cpp">
-      <Filter>Sources\imGui</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Libraries\imGui\imgui_impl_opengl3.cpp">
-      <Filter>Sources\imGui</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Libraries\imGui\imgui_tables.cpp">
-      <Filter>Sources\imGui</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Libraries\imGui\imgui_widgets.cpp">
-      <Filter>Sources\imGui</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\ModuleCamera3D.cpp">
+    <ClCompile Include="ModuleCamera3D.cpp">
       <Filter>Sources\Modules</Filter>
     </ClCompile>
-    <ClCompile Include="Code\ModuleInput.cpp">
+    <ClCompile Include="ModuleInput.cpp">
       <Filter>Sources\Modules</Filter>
     </ClCompile>
-    <ClCompile Include="Code\ModuleRenderer3D.cpp">
+    <ClCompile Include="ModuleRenderer3D.cpp">
       <Filter>Sources\Modules</Filter>
     </ClCompile>
-    <ClCompile Include="Code\ModuleWindow.cpp">
+    <ClCompile Include="ModuleWindow.cpp">
       <Filter>Sources\Modules</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Color.cpp">
-      <Filter>Sources\Containers</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\glmath.cpp">
-      <Filter>Sources\Containers</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Light.cpp">
-      <Filter>Sources\Helpers</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Primitive.cpp">
-      <Filter>Sources\Helpers</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\log.cpp">
+    <ClCompile Include="log.cpp">
       <Filter>Sources\Tools</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Timer.cpp">
+    <ClCompile Include="Timer.cpp">
       <Filter>Sources\Tools</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Application.cpp">
+    <ClCompile Include="Application.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Main.cpp">
+    <ClCompile Include="Main.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="Code\ModuleSceneIntro.cpp">
+    <ClCompile Include="glmath.cpp">
+      <Filter>Sources\Containers</Filter>
+    </ClCompile>
+    <ClCompile Include="Primitive.cpp">
+      <Filter>Sources\Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="Color.cpp">
+      <Filter>Sources\Containers</Filter>
+    </ClCompile>
+    <ClCompile Include="Light.cpp">
+      <Filter>Sources\Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleSceneIntro.cpp">
       <Filter>Sources\Modules\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui.cpp">
+      <Filter>Sources\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_demo.cpp">
+      <Filter>Sources\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_draw.cpp">
+      <Filter>Sources\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_impl_opengl3.cpp">
+      <Filter>Sources\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_impl_sdl.cpp">
+      <Filter>Sources\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_tables.cpp">
+      <Filter>Sources\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_widgets.cpp">
+      <Filter>Sources\ImGui</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
