@@ -18,4 +18,9 @@ public:
 public:
 
 	SDL_GLContext context;
+
+	bool show_demo_window = true;
+	bool show_credits_window = false;
+	bool show_main_window = true;
+	
 };

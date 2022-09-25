@@ -118,7 +118,7 @@ update_status ModuleInput::PreUpdate(float dt)
 		}
 	}
 
-	if(quit == true || keyboard[SDL_SCANCODE_ESCAPE] == KEY_UP)
+	if(quit == true || keyboard[SDL_SCANCODE_ESCAPE] == KEY_UP || App->editorGui->show_main_window == false)
 		return UPDATE_STOP;
 
 	return UPDATE_CONTINUE;
