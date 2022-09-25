@@ -99,6 +99,9 @@
     <ClInclude Include="ImGui\imstb_truetype.h">
       <Filter>Sources\ImGui</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleEditorGui.h">
+      <Filter>Sources\Modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleCamera3D.cpp">
@@ -160,6 +163,9 @@
     </ClCompile>
     <ClCompile Include="ImGui\imgui_widgets.cpp">
       <Filter>Sources\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleEditorGui.cpp">
+      <Filter>Sources\Modules</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

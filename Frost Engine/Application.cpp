@@ -7,12 +7,16 @@ Application::Application() : debug(false)
 	scene_intro = new ModuleSceneIntro();
 	renderer3D = new ModuleRenderer3D();
 	camera = new ModuleCamera3D();
+	editorGui = new ModuleEditorGui();
 
 	// Main Modules
 	AddModule(window);
 	AddModule(camera);
 	AddModule(input);
-	
+
+	//ImGui
+	AddModule(editorGui);
+
 	// Scenes
 	AddModule(scene_intro);
 

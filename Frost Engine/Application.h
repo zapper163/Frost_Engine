@@ -9,6 +9,7 @@
 #include "ModuleSceneIntro.h"
 #include "ModuleRenderer3D.h"
 #include "ModuleCamera3D.h"
+#include "ModuleEditorGui.h"
 
 class Application
 {
@@ -18,7 +19,7 @@ public:
 	ModuleSceneIntro* scene_intro;
 	ModuleRenderer3D* renderer3D;
 	ModuleCamera3D* camera;
-
+	ModuleEditorGui* editorGui;
 
 	bool debug;
 private:

@@ -90,6 +90,7 @@
     <ClInclude Include="ImGui\imstb_truetype.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="ModuleCamera3D.h" />
+    <ClInclude Include="ModuleEditorGui.h" />
     <ClInclude Include="ModuleRenderer3D.h" />
     <ClInclude Include="p2List.h" />
     <ClInclude Include="Module.h" />
@@ -116,6 +117,7 @@
     <ClCompile Include="log.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="ModuleCamera3D.cpp" />
+    <ClCompile Include="ModuleEditorGui.cpp" />
     <ClCompile Include="ModuleInput.cpp" />
     <ClCompile Include="ModuleRenderer3D.cpp" />
     <ClCompile Include="ModuleSceneIntro.cpp" />
