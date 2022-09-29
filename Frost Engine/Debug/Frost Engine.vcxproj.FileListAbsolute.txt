@@ -1,4 +1,1 @@
-C:\Users\zapin\Desktop\Frost_Engine-b53a642893c72f78b47dda7663101063d04fc140\Frost_Engine-b53a642893c72f78b47dda7663101063d04fc140\Frost Engine\Debug\Frost Engine.exe
-C:\Users\zapin\Desktop\Frost_Engine-b53a642893c72f78b47dda7663101063d04fc140\Frost_Engine-b53a642893c72f78b47dda7663101063d04fc140\Frost Engine\Debug\Frost Engine.pdb
 C:\Users\zapin\Documents\GitHub\Frost_Engine\Frost Engine\Debug\Frost Engine.exe
-C:\Users\zapin\Documents\GitHub\Frost_Engine\Frost Engine\Debug\Frost Engine.pdb
