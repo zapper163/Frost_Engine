@@ -133,7 +133,7 @@ void ModuleCamera3D::Move(const vec3 &Movement)
 	CalculateViewMatrix();
 }
 
-float* ModuleCamera3D::GetViewMatrix()
+float* ModuleCamera3D::GetOpenGLViewMatrix()
 {
 	return &ViewMatrix;
 }

@@ -1,6 +1,8 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleRenderer3D.h"
+
+#include "Glew/include/glew.h"
 #include "SDL\include\SDL_opengl.h"
 #include <gl/GL.h>
 #include <gl/GLU.h>
@@ -24,9 +26,23 @@ ModuleRenderer3D::~ModuleRenderer3D()
 // Called before render is available
 bool ModuleRenderer3D::Init()
 {
+	//GLEW                         ----------------------ERROR
+	//GLenum err = glewInit();
+	// … check for errors
+	//LOG("Using Glew %s", glewGetString(GLEW_VERSION));
+	// Should be 2.0
+
+	//LOG("Vendor: %s", glGetString(GL_VENDOR));
+	//LOG("Renderer: %s", glGetString(GL_RENDERER));
+	//LOG("OpenGL version supported %s", glGetString(GL_VERSION));
+	//LOG("GLSL: %s\n", glGetString(GL_SHADING_LANGUAGE_VERSION));
+
+
+
+
 	LOG("Creating 3D Renderer context");
 	bool ret = true;
-	
+
 	//Create context
 	context = SDL_GL_CreateContext(App->window->window);
 	if(context == NULL)
@@ -120,7 +136,7 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 	glLoadIdentity();
 
 	glMatrixMode(GL_MODELVIEW);
-	glLoadMatrixf(App->camera->GetViewMatrix());
+	glLoadMatrixf(App->camera->GetOpenGLViewMatrix());
 
 	// light 0 on cam pos
 	lights[0].SetPos(App->camera->Position.x, App->camera->Position.y, App->camera->Position.z);

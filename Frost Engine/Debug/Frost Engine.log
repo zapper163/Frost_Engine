@@ -1,11 +1,2 @@
-﻿  Application.cpp
-  Main.cpp
-  ModuleCamera3D.cpp
-  ModuleEditorGui.cpp
-  ModuleInput.cpp
-  ModuleRenderer3D.cpp
-  ModuleSceneIntro.cpp
-C:\Users\zapin\Documents\GitHub\Frost_Engine\Frost Engine\Modules\ModuleSceneIntro.cpp(30,20): warning C4018: '<': no coinciden signed/unsigned
-  ModuleWindow.cpp
-  Generando código...
+﻿  ModuleRenderer3D.cpp
   Frost Engine.vcxproj -> C:\Users\zapin\Documents\GitHub\Frost_Engine\Frost Engine\Debug\Frost Engine.exe
