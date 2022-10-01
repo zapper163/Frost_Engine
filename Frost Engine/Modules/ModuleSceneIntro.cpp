@@ -22,27 +22,12 @@ bool ModuleSceneIntro::Start()
 	return ret;
 }
 
-// Load assets
-bool ModuleSceneIntro::CleanUp()
-{
-	LOG("Unloading Intro scene");
-
-	for (int n = 0; n < primitives.Count(); n++)
-	{
-		delete primitives[n];
-	}
-	primitives.Clear();
-
-	return true;
-}
-
 // Update
 update_status ModuleSceneIntro::Update(float dt)
 {
 	Plane p(0, 1, 0, 0);
 	p.axis = true;
 	p.Render();
-
 
 	//primitives updated
 	for (uint n = 0; n < primitives.Count(); n++)
@@ -64,3 +49,16 @@ update_status ModuleSceneIntro::PostUpdate(float dt)
 	return UPDATE_CONTINUE;
 }
 
+// UnLoad assets
+bool ModuleSceneIntro::CleanUp()
+{
+	LOG("Unloading Intro scene");
+
+	for (int n = 0; n < primitives.Count(); n++)
+	{
+		delete primitives[n];
+	}
+	primitives.Clear();
+
+	return true;
+}
