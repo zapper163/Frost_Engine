@@ -22,5 +22,8 @@ public:
 	bool show_credits_window = false;
 	bool show_main_window = true;
 	bool show_hardware_window = false;
+
+	bool wireframe = false;
+	bool color = false;
 	
 };

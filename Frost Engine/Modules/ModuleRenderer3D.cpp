@@ -172,7 +172,12 @@ update_status ModuleRenderer3D::Update(float dt)
 
 	// enable vertex arrays
 	glEnableClientState(GL_NORMAL_ARRAY);
-	glEnableClientState(GL_COLOR_ARRAY);
+
+	if (App->editorGui->color)
+	{
+		glEnableClientState(GL_COLOR_ARRAY);
+	}
+
 	glEnableClientState(GL_VERTEX_ARRAY);
 
 	// before draw, specify vertex and index arrays with their offsets
@@ -180,10 +185,21 @@ update_status ModuleRenderer3D::Update(float dt)
 	glColorPointer(3, GL_FLOAT, 0, (void*)(sizeof(vertices) + sizeof(normals)));
 	glVertexPointer(3, GL_FLOAT, 0, 0);
 
+	glPushMatrix();
+	glTranslatef(-0.5, 0.5, -0.5);
+
+	if (App->editorGui->wireframe)
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	else
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+
 	glDrawElements(GL_TRIANGLES,            // primitive type
 		36,                      // # of indices
 		GL_UNSIGNED_INT,         // data type
 		(void*)0);               // ptr to indices
+
+	glPopMatrix();
 
 	glDisableClientState(GL_VERTEX_ARRAY);  // disable vertex arrays
 	glDisableClientState(GL_COLOR_ARRAY);
@@ -209,6 +225,7 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 // Called before quitting
 bool ModuleRenderer3D::CleanUp()
 {
+
 	LOG("Destroying 3D Renderer");
 
 	// Cleanup

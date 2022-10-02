@@ -87,6 +87,10 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 				{
 					ShellExecuteA(NULL, "open", "https://github.com/zapper163/Frost_Engine/releases", NULL, NULL, SW_SHOWDEFAULT);
 				}
+				if (ImGui::MenuItem("Hardware"))
+				{
+					show_hardware_window = true;
+				}
 				if (ImGui::MenuItem("About"))
 				{
 					show_credits_window = true;
@@ -104,7 +108,8 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 			ImGui::EndMenuBar();
 		}
 		ImGui::Text("Main Window");               // Display some text (you can use a format strings too)
-		ImGui::Checkbox("Hardware", &show_hardware_window);      // Edit bools storing our window open/close state
+		ImGui::Checkbox("Wireframe Mode", &wireframe);      // Edit bools storing our window open/close state
+		ImGui::Checkbox("Color", &color);      // Edit bools storing our window open/close state
 		//ImGui::Checkbox("Another Window", &show_credits_window);
 		//ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
 		//ImGui::ColorEdit3("clear color", (float*)&clear_color); // Edit 3 floats representing a color
