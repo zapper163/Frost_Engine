@@ -146,14 +146,27 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 			::ShellExecuteA(NULL, "open", "https://github.com/ocornut/imgui", NULL, NULL, SW_SHOWDEFAULT);
 		}
 		ImGui::SameLine();
+		if (ImGui::Button("MathGeoLib 2016")) {
+
+			::ShellExecuteA(NULL, "open", "https://github.com/juj/MathGeoLib", NULL, NULL, SW_SHOWDEFAULT);
+		}
+		ImGui::SameLine();
+		if (ImGui::Button("Assimp")) {
+
+			::ShellExecuteA(NULL, "open", "https://github.com/assimp/assimp", NULL, NULL, SW_SHOWDEFAULT);
+		}
+		ImGui::SameLine();
+		ImGui::Text("\n\n");
 		if (ImGui::Button("Glew 2.1.0.0")) {
 
 			::ShellExecuteA(NULL, "open", "https://github.com/nigels-com/glew", NULL, NULL, SW_SHOWDEFAULT);
 		}
+		ImGui::SameLine();
 		if (ImGui::Button("Json parser 1.1.0")) {
 
 			::ShellExecuteA(NULL, "open", "https://github.com/json-parser/json-parser", NULL, NULL, SW_SHOWDEFAULT);
 		}
+
 		ImGui::Text("\n\n");
 		ImGui::Text("MIT License\n\nCopyright(c) 2022 zapper163\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this softwareand associated documentation files(the Software), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and /or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions :\n\n");
 		ImGui::Text("The above copyright noticeand this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\n");
@@ -201,7 +214,7 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 // Called before quitting
 bool ModuleEditorGui::CleanUp()
 {
-	LOG("Destroying 3D Renderer");
+	LOG("Destroying ImGui");
 
 	// Cleanup
 	ImGui_ImplOpenGL3_Shutdown();

@@ -8,6 +8,7 @@ Application::Application() : debug(false)
 	renderer3D = new ModuleRenderer3D();
 	camera = new ModuleCamera3D();
 	editorGui = new ModuleEditorGui();
+	loader = new ModuleLoader();
 
 	// Main Modules
 	AddModule(window);
@@ -16,6 +17,9 @@ Application::Application() : debug(false)
 
 	//ImGui
 	AddModule(editorGui);
+
+	//FBX Loader
+	AddModule(loader);
 
 	// Scenes
 	AddModule(scene_intro);

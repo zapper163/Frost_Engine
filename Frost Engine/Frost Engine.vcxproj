@@ -45,6 +45,11 @@
     <ExternalIncludePath>C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\ucrt;$(ExternalIncludePath)</ExternalIncludePath>
     <LibraryPath>C:\Program Files (x86)\Windows Kits\10\lib\10.0.19041.0\ucrt\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\ucrt;$(IncludePath)</IncludePath>
+    <ExternalIncludePath>C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\ucrt;$(ExternalIncludePath)</ExternalIncludePath>
+    <LibraryPath>C:\Program Files (x86)\Windows Kits\10\lib\10.0.19041.0\ucrt\x86;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -70,6 +75,8 @@
       <SDLCheck>false</SDLCheck>
       <ExceptionHandling>false</ExceptionHandling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalIncludeDirectories>$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WINDOWS_IGNORE_PACKING_MISMATCH;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -159,6 +166,7 @@
     <ClInclude Include="Modules\ModuleCamera3D.h" />
     <ClInclude Include="Modules\ModuleEditorGui.h" />
     <ClInclude Include="Modules\ModuleInput.h" />
+    <ClInclude Include="Modules\ModuleLoader.h" />
     <ClInclude Include="Modules\ModuleRenderer3D.h" />
     <ClInclude Include="Modules\ModuleSceneIntro.h" />
     <ClInclude Include="Modules\ModuleWindow.h" />
@@ -218,6 +226,7 @@
     <ClCompile Include="Modules\ModuleCamera3D.cpp" />
     <ClCompile Include="Modules\ModuleEditorGui.cpp" />
     <ClCompile Include="Modules\ModuleInput.cpp" />
+    <ClCompile Include="Modules\ModuleLoader.cpp" />
     <ClCompile Include="Modules\ModuleRenderer3D.cpp" />
     <ClCompile Include="Modules\ModuleSceneIntro.cpp" />
     <ClCompile Include="Modules\ModuleWindow.cpp" />
