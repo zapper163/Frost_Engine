@@ -45,7 +45,6 @@ bool ModuleEditorGui::Init()
 	//ImGui_ImplOpenGL3_Init("#version 130");
 
 
-
 	return ret;
 }
 
@@ -62,7 +61,10 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 	ImGui_ImplSDL2_NewFrame(App->window->window);
 	ImGui::NewFrame();
 
-	
+	ImGui::Begin("Main");
+
+	ImGui::Image((ImTextureID)App->renderer3D->textureColorbuffer, ImGui::GetContentRegionAvail(), ImVec2(0, 1), ImVec2(1, 0));
+	ImGui::End();
 	
 	static float f = 0.0f;
 	static int counter = 0;

@@ -31,7 +31,11 @@ public:
     uint vboId = 0;
     uint iboId = 0;
 
+    unsigned int textureColorbuffer;
+
 };
+
+
 
 // unit cube //////////////////////////////////////////////////////////////////
 //    v6----- v5

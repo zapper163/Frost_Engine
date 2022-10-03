@@ -122,9 +122,39 @@ bool ModuleRenderer3D::Init()
 	OnResize(SCREEN_WIDTH, SCREEN_HEIGHT);
 
 	//ImGui
-	ImGui_ImplSDL2_InitForOpenGL(App->window->window, App->editorGui->context);
+	ImGui_ImplSDL2_InitForOpenGL(App->window->window, App->renderer3D->context);
 	ImGui_ImplOpenGL3_Init("#version 130");
 
+	//---------------------------------------------------------------------------------------------------
+	//FrameBuffer
+	unsigned int framebuffer;
+	glGenFramebuffers(1, &framebuffer);
+	glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
+
+	// generate texture
+	glGenTextures(1, &textureColorbuffer);
+	glBindTexture(GL_TEXTURE_2D, textureColorbuffer);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, SCREEN_WIDTH, SCREEN_HEIGHT, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glBindTexture(GL_TEXTURE_2D, 0);
+
+	// attach it to currently bound framebuffer object
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, textureColorbuffer, 0);
+	
+	//We also want to make sure OpenGL is able to do depth testing (and optionally stencil testing),
+	//so we have to make sure to add a depth (and stencil) attachment to the framebuffer.
+	unsigned int rbo;
+	glGenRenderbuffers(1, &rbo);
+	glBindRenderbuffer(GL_RENDERBUFFER, rbo);
+	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, 800, 600);
+	glBindRenderbuffer(GL_RENDERBUFFER, 0);
+
+	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rbo);
+
+	
+
+	//---------------------------------------------------------------------------------------------------
 	glGenBuffers(1, &vboId);
 	glBindBuffer(GL_ARRAY_BUFFER, vboId);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices) + sizeof(normals) + sizeof(colors), 0, GL_STATIC_DRAW);
@@ -137,7 +167,7 @@ bool ModuleRenderer3D::Init()
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, iboId);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-
+	
 
 	return ret;
 }
@@ -157,15 +187,19 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 	for(uint i = 0; i < MAX_LIGHTS; ++i)
 		lights[i].Render();
 
+	//Cube
+	glBindBuffer(GL_ARRAY_BUFFER, vboId);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, iboId);
+
+	//
+	glBindFramebuffer(GL_FRAMEBUFFER, textureColorbuffer);
+
 	return UPDATE_CONTINUE;
 }
 
 update_status ModuleRenderer3D::Update(float dt)
 {
 	
-	glBindBuffer(GL_ARRAY_BUFFER, vboId);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, iboId);
-
 	// enable vertex arrays
 	glEnableClientState(GL_NORMAL_ARRAY);
 
