@@ -27,6 +27,10 @@ public:
 	mat3x3 NormalMatrix;
 	mat4x4 ModelMatrix, ViewMatrix, ProjectionMatrix;
 
+    uint num_vertices = 8;
+    uint vboId = 0;
+    uint iboId = 0;
+
 };
 
 // unit cube //////////////////////////////////////////////////////////////////
