@@ -147,7 +147,7 @@ bool ModuleRenderer3D::Init()
 	unsigned int rbo;
 	glGenRenderbuffers(1, &rbo);
 	glBindRenderbuffer(GL_RENDERBUFFER, rbo);
-	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, 800, 600);
+	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, 1280, 720); //Size of the screen printed
 	glBindRenderbuffer(GL_RENDERBUFFER, 0);
 
 	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rbo);
@@ -191,7 +191,7 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 	glBindBuffer(GL_ARRAY_BUFFER, vboId);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, iboId);
 
-	//
+	//FrameBuffer
 	glBindFramebuffer(GL_FRAMEBUFFER, textureColorbuffer);
 
 	return UPDATE_CONTINUE;
@@ -247,6 +247,7 @@ update_status ModuleRenderer3D::Update(float dt)
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
 	return UPDATE_CONTINUE;
 }
@@ -255,6 +256,10 @@ update_status ModuleRenderer3D::Update(float dt)
 update_status ModuleRenderer3D::PostUpdate(float dt)
 {
 	SDL_GL_SwapWindow(App->window->window);
+
+	//glDeleteFramebuffers(GL_FRAMEBUFFER);
+
+
 	return UPDATE_CONTINUE;
 }
 
@@ -266,7 +271,6 @@ bool ModuleRenderer3D::CleanUp()
 
 	// Cleanup
 	SDL_GL_DeleteContext(context);
-
 	return true;
 }
 

@@ -61,16 +61,23 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 	ImGui_ImplSDL2_NewFrame(App->window->window);
 	ImGui::NewFrame();
 
-	ImGui::Begin("Main");
-
-	ImGui::Image((ImTextureID)App->renderer3D->textureColorbuffer, ImGui::GetContentRegionAvail(), ImVec2(0, 1), ImVec2(1, 0));
-	ImGui::End();
 	
 	static float f = 0.0f;
 	static int counter = 0;
 	if (show_main_window)
 	{
-		ImGui::Begin("Frost Engine", NULL, ImGuiWindowFlags_MenuBar);                          
+		// Using a Child allow to fill all the space of the window.
+		// It also alows customization
+		ImGui::Begin("GameRender", NULL, ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_AlwaysAutoResize);
+		ImGui::BeginChild("GameRender", ImVec2(1280, 720));
+		// Get the size of the child (i.e. the whole draw size of the windows).
+		ImVec2 wsize = ImGui::GetWindowSize();
+		// Because I use the texture from OpenGL, I need to invert the V from the UV.
+		ImGui::Image((ImTextureID)App->renderer3D->textureColorbuffer, ImVec2(1280, 720), ImVec2(0, 1), ImVec2(1, 0));
+		ImGui::EndChild();
+		ImGui::End();
+
+		ImGui::Begin("Frost Engine", NULL, ImGuiWindowFlags_MenuBar|ImGuiWindowFlags_AlwaysAutoResize);  
 		if (ImGui::BeginMenuBar())
 		{
 			if (ImGui::BeginMenu("Main"))
