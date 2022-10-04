@@ -18,6 +18,10 @@ public:
 	update_status PostUpdate(float dt) override;
 	bool CleanUp();
 
+
+    void InitFrameBuffer();
+    void RefreshBuffer();
+
 	void OnResize(int width, int height);
 
 public:
@@ -32,7 +36,11 @@ public:
     uint iboId = 0;
 
     unsigned int textureColorbuffer;
+    unsigned int framebuffer;
+    unsigned int renderbuffer;
 
+    int width = SCREEN_WIDTH;
+    int height = SCREEN_HEIGHT;
 };
 
 
@@ -89,3 +97,4 @@ static const uint indices[] = {
     16,17,18,  18,19,16,    // v7-v4-v3, v3-v2-v7 (bottom)
     20,21,22,  22,23,20     // v4-v7-v6, v6-v5-v4 (back)
 };
+
