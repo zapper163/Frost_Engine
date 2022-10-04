@@ -60,7 +60,6 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui_ImplSDL2_NewFrame(App->window->window);
 	ImGui::NewFrame();
-
 	
 	static float f = 0.0f;
 	static int counter = 0;
@@ -77,6 +76,7 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 		ImGui::End();
 
 		ImGui::Begin("Main", NULL, ImGuiWindowFlags_MenuBar|ImGuiWindowFlags_AlwaysAutoResize);  
+		
 		if (ImGui::BeginMenuBar())
 		{
 			if (ImGui::BeginMenu("Main"))
