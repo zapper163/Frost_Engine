@@ -3,6 +3,8 @@
 #include "Globals.h"
 #include "glmath.h"
 #include "Light.h"
+#include "MeshLoader.h"
+
 
 #define MAX_LIGHTS 8
 
@@ -25,6 +27,8 @@ public:
 	void OnResize(int width, int height);
 
 public:
+
+    MeshData ourMesh;
 
 	Light lights[MAX_LIGHTS];
 	SDL_GLContext context;

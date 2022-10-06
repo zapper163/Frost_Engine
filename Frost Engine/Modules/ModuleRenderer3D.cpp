@@ -1,6 +1,7 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleRenderer3D.h"
+#include "MeshLoader.h"
 
 #include "Glew/include/glew.h"
 #include "SDL\include\SDL_opengl.h"
@@ -128,9 +129,16 @@ bool ModuleRenderer3D::Init()
 	
 	//FrameBuffer
 	InitFrameBuffer();
+
+	//Load Mesh File
+	//MeshLoader::LoadFile("BakerHouse.fbx", &ourMesh);------------------------------------>Crash
+
+	//Mesh Buffer
+	MeshLoader::CreateMeshBuffer(ourMesh);
 	
 	//---------------------------------------------------------------------------------------------------
 	//Cube
+	/*
 	glGenBuffers(1, &vboId);
 	glBindBuffer(GL_ARRAY_BUFFER, vboId);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices) + sizeof(normals) + sizeof(colors), 0, GL_STATIC_DRAW);
@@ -143,6 +151,7 @@ bool ModuleRenderer3D::Init()
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, iboId);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	*/
 	//---------------------------------------------------------------------------------------------------
 
 	return ret;
@@ -177,7 +186,15 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 
 update_status ModuleRenderer3D::Update(float dt)
 {
-	
+	//Wireframe mode
+	if (App->editorGui->wireframe)
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	else
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+
+	//---------------------------------------------------------------------------------
+	/*
 	// enable vertex arrays
 	glEnableClientState(GL_NORMAL_ARRAY);
 
@@ -193,27 +210,23 @@ update_status ModuleRenderer3D::Update(float dt)
 	glColorPointer(3, GL_FLOAT, 0, (void*)(sizeof(vertices) + sizeof(normals)));
 	glVertexPointer(3, GL_FLOAT, 0, 0);
 
-	//Wireframe mode
-	if (App->editorGui->wireframe)
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	else
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-
+	
 	glDrawElements(GL_TRIANGLES,            // primitive type
 		36,                      // # of indices
 		GL_UNSIGNED_INT,         // data type
 		(void*)0);               // ptr to indices
 
-
+	//Move the cube
 	glPushMatrix();
 	glTranslatef(-0.5, 0.5, -0.5);
+	glPopMatrix();
 
 	glDrawElements(GL_TRIANGLES,            // primitive type
 		36,                      // # of indices
 		GL_UNSIGNED_INT,         // data type
 		(void*)0);               // ptr to indices
 
-	glPopMatrix();
+	
 
 	glDisableClientState(GL_VERTEX_ARRAY);  // disable vertex arrays
 	glDisableClientState(GL_COLOR_ARRAY);
@@ -224,7 +237,11 @@ update_status ModuleRenderer3D::Update(float dt)
 	// pointer, so, normal vertex array operations are re-activated
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	*/
+	//----------------------------------------------------------------------------------
+	
 
+	//FrameBuffer
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
 	return UPDATE_CONTINUE;
