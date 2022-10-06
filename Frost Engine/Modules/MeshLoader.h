@@ -22,7 +22,7 @@ struct MeshData
 namespace MeshLoader 
 {
 	void DebugMode();
-	void LoadFile(char* file_path, MeshData* ourMesh);
+	void LoadFile(const char* file_path, MeshData* ourMesh);
 	void CreateMeshBuffer(MeshData ourMesh);
 	void RenderMesh(MeshData ourMesh);
 	void CleanUp();

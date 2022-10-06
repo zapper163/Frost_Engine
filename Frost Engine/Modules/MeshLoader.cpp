@@ -19,44 +19,47 @@ void MeshLoader::DebugMode()
 	aiAttachLogStream(&stream);
 }
 
-void MeshLoader::LoadFile(char* file_path, MeshData* ourMesh)
+void MeshLoader::LoadFile(const char* file_path, MeshData* ourMesh)
 {
+
 	const aiScene* scene = aiImportFile(file_path, aiProcessPreset_TargetRealtime_MaxQuality);
 	if (scene != nullptr && scene->HasMeshes())
 	{
 		// Use scene->mNumMeshes to iterate on scene->mMeshes array
 		aiReleaseImport(scene);
-	}
-	else
-		LOG("Error loading scene % s", file_path);
 
-	for (size_t i = 0; i < scene->mNumMeshes; i++)
-	{
-		// copy vertices
-		ourMesh->num_vertex = scene->mMeshes[i]->mNumVertices;
-		ourMesh->vertex = new float[ourMesh->num_vertex * 3];
-		memcpy(ourMesh->vertex, scene->mMeshes[i]->mVertices, sizeof(float) * ourMesh->num_vertex * 3);
-		LOG("New mesh with %d vertices", ourMesh->num_vertex);
-
-		// copy faces
-		if (scene->mMeshes[i]->HasFaces())
+		for (size_t i = 0; i < scene->mNumMeshes; i++)
 		{
-			ourMesh->num_vertex = scene->mMeshes[i]->mNumFaces * 3;
-			ourMesh->index = new uint[ourMesh->num_index]; // assume each face is a triangle
-			
-			for (uint j = 0; j < scene->mMeshes[i]->mNumFaces; ++j)
+			// copy vertices
+			ourMesh->num_vertex = scene->mMeshes[i]->mNumVertices;
+			ourMesh->vertex = new float[ourMesh->num_vertex * 3];
+			memcpy(ourMesh->vertex, scene->mMeshes[i]->mVertices, sizeof(float) * ourMesh->num_vertex * 3);
+			LOG("New mesh with %d vertices", ourMesh->num_vertex);
+
+			// copy faces
+			if (scene->mMeshes[i]->HasFaces())
 			{
-				if (scene->mMeshes[i]->mFaces[j].mNumIndices != 3)
+				ourMesh->num_vertex = scene->mMeshes[i]->mNumFaces * 3;
+				ourMesh->index = new uint[ourMesh->num_index]; // assume each face is a triangle
+
+				for (uint j = 0; j < scene->mMeshes[i]->mNumFaces; ++j)
 				{
-					LOG("WARNING, geometry face with != 3 indices!");
-				}
-				else
-				{
-					memcpy(&ourMesh->index[j * 3], scene->mMeshes[i]->mFaces[j].mIndices, 3 * sizeof(uint));
+					if (scene->mMeshes[i]->mFaces[j].mNumIndices != 3)
+					{
+						LOG("WARNING, geometry face with != 3 indices!");
+					}
+					else
+					{
+						memcpy(&ourMesh->index[j * 3], scene->mMeshes[i]->mFaces[j].mIndices, 3 * sizeof(uint));
+					}
 				}
 			}
 		}
 	}
+	else
+		LOG("Error loading scene % s", file_path);
+
+	
 }
 
 void MeshLoader::CreateMeshBuffer(MeshData ourMesh)
@@ -79,11 +82,6 @@ void MeshLoader::RenderMesh(MeshData ourMesh)
 
 
 	glDrawElements(GL_TRIANGLES, ourMesh.num_vertex, GL_UNSIGNED_INT, NULL);
-
-	//Move
-	glPushMatrix();
-	glTranslatef(-0.5, 0.5, -0.5);
-	glPopMatrix();
 
 	glDisableClientState(GL_VERTEX_ARRAY);
 }

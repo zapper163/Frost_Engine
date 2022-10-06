@@ -28,6 +28,8 @@ public:
 
 public:
 
+   const char* filepath = "C:/Users/zapin/Documents/GitHub/Frost_Engine/Frost Engine";
+
     MeshData ourMesh;
 
 	Light lights[MAX_LIGHTS];

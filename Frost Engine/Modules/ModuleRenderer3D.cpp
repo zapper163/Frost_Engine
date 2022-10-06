@@ -131,7 +131,7 @@ bool ModuleRenderer3D::Init()
 	InitFrameBuffer();
 
 	//Load Mesh File
-	//MeshLoader::LoadFile("BakerHouse.fbx", &ourMesh);------------------------------------>Crash
+	MeshLoader::LoadFile(filepath, &ourMesh);//------------------------------------>Crash
 
 	//Mesh Buffer
 	MeshLoader::CreateMeshBuffer(ourMesh);
@@ -239,7 +239,7 @@ update_status ModuleRenderer3D::Update(float dt)
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	*/
 	//----------------------------------------------------------------------------------
-	
+	MeshLoader::RenderMesh(ourMesh);
 
 	//FrameBuffer
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
