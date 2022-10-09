@@ -28,8 +28,7 @@ public:
 
 public:
 
-   const char* filepath = "C:/Users/zapin/Documents/GitHub/Frost_Engine/Frost Engine";
-
+   const char* filepath = "C:/Users/zapin/Documents/GitHub/Frost_Engine/Frost Engine/Assets/BakerHouse.fbx";
     MeshData ourMesh;
 
 	Light lights[MAX_LIGHTS];

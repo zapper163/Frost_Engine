@@ -21,7 +21,7 @@ void MeshLoader::DebugMode()
 
 void MeshLoader::LoadFile(const char* file_path, MeshData* ourMesh)
 {
-
+	//file_path = "C:/Users/zapin/Documents/GitHub/Frost_Engine/Frost Engine/Assets/BakerHouse.fbx";
 	const aiScene* scene = aiImportFile(file_path, aiProcessPreset_TargetRealtime_MaxQuality);
 	if (scene != nullptr && scene->HasMeshes())
 	{
