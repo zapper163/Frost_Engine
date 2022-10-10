@@ -21,8 +21,8 @@ void MeshLoader::DebugMode()
 
 void MeshLoader::LoadFile(const char* file_path, MeshData* ourMesh)
 {
-	//file_path = "C:/Users/zapin/Documents/GitHub/Frost_Engine/Frost Engine/Assets/BakerHouse.fbx";
 	const aiScene* scene = aiImportFile(file_path, aiProcessPreset_TargetRealtime_MaxQuality);
+	
 	if (scene != nullptr && scene->HasMeshes())
 	{
 		// Use scene->mNumMeshes to iterate on scene->mMeshes array
@@ -33,7 +33,7 @@ void MeshLoader::LoadFile(const char* file_path, MeshData* ourMesh)
 			// copy vertices
 			ourMesh->num_vertex = scene->mMeshes[i]->mNumVertices;
 			ourMesh->vertex = new float[ourMesh->num_vertex * 3];
-			memcpy(ourMesh->vertex, scene->mMeshes[i]->mVertices, sizeof(float) * ourMesh->num_vertex * 3);
+			memcpy(ourMesh->vertex, &scene->mMeshes[i]->mVertices->x, sizeof(float) * ourMesh->num_vertex * 3);
 			LOG("New mesh with %d vertices", ourMesh->num_vertex);
 
 			// copy faces
@@ -58,13 +58,11 @@ void MeshLoader::LoadFile(const char* file_path, MeshData* ourMesh)
 	}
 	else
 		LOG("Error loading scene % s", file_path);
-
-	
 }
 
 void MeshLoader::CreateMeshBuffer(MeshData ourMesh)
 {
-	glGenBuffers(1, (GLuint*)&(ourMesh.id_vertex));
+	glGenBuffers(1, (GLuint*)(ourMesh.id_vertex));
 	glBindBuffer(GL_ARRAY_BUFFER, ourMesh.id_vertex);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * ourMesh.num_vertex * 3, ourMesh.vertex, GL_STATIC_DRAW);
 
