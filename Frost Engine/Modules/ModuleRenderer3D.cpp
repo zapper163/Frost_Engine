@@ -134,7 +134,7 @@ bool ModuleRenderer3D::Init()
 	MeshLoader::LoadFile(filepath, &ourMesh);//------------------------------------>Crash
 
 	//Mesh Buffer
-	MeshLoader::CreateMeshBuffer(ourMesh);
+	//MeshLoader::CreateMeshBuffer(ourMesh);
 	
 	//---------------------------------------------------------------------------------------------------
 	//Cube
