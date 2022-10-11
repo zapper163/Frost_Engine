@@ -41,8 +41,8 @@ void MeshLoader::LoadFile(const char* file_path, MeshData* ourMesh)
 			// copy faces
 			if (scene->mMeshes[i]->HasFaces())
 			{
-				ourMesh->num_vertex = scene->mMeshes[i]->mNumFaces * 3;
-				ourMesh->index = new uint[ourMesh->num_index]; // assume each face is a triangle
+				//ourMesh->num_vertex = scene->mMeshes[i]->mNumFaces * 3;
+				//ourMesh->index = new uint[ourMesh->num_index]; // assume each face is a triangle
 
 				for (uint j = 0; j < scene->mMeshes[i]->mNumFaces; j++)
 				{
@@ -52,7 +52,7 @@ void MeshLoader::LoadFile(const char* file_path, MeshData* ourMesh)
 					}
 					else
 					{
-						memcpy(&ourMesh->index[j * 3], scene->mMeshes[i]->mFaces[j].mIndices, 3 * sizeof(uint));
+						//memcpy(&ourMesh->index[j * 3], scene->mMeshes[i]->mFaces[j].mIndices, 3 * sizeof(uint));
 					}
 				}
 			}
