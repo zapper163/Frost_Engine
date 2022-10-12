@@ -131,7 +131,7 @@ bool ModuleRenderer3D::Init()
 	InitFrameBuffer();
 
 	//Load Mesh File
-	MeshLoader::LoadFile(filepath, &ourMesh);//------------------------------------>Crash
+	MeshLoader::LoadFile(filepath, &houseMesh);//------------------------------------>Crash
 
 	//Mesh Buffer
 	//MeshLoader::CreateMeshBuffer(ourMesh);
@@ -192,7 +192,7 @@ update_status ModuleRenderer3D::Update(float dt)
 	else
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
-
+	MeshLoader::Render();
 	//---------------------------------------------------------------------------------
 	/*
 	// enable vertex arrays
@@ -239,8 +239,7 @@ update_status ModuleRenderer3D::Update(float dt)
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	*/
 	//----------------------------------------------------------------------------------
-	MeshLoader::RenderMesh(ourMesh);
-
+	
 	//FrameBuffer
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 

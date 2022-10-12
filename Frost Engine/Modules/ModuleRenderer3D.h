@@ -28,8 +28,8 @@ public:
 
 public:
 
-   const char* filepath = "C:/Users/Alejandrogs4/Documents/GitHub/Frost_Engine/Frost Engine/Assets/BakerHouse.fbx";
-    MeshData ourMesh;
+    const char* filepath = "C:/Users/zapin/Documents/GitHub/Frost_Engine/Frost Engine/Assets/BakerHouse.fbx";
+    MeshInfo houseMesh;
 
 	Light lights[MAX_LIGHTS];
 	SDL_GLContext context;
