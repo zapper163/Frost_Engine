@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "ModuleInput.h"
 #include "ImGui/imgui_impl_sdl.h"
+#include "MeshLoader.h"
 
 #define MAX_KEYS 300
 
@@ -25,6 +26,8 @@ bool ModuleInput::Init()
 	LOG("Init SDL input event system");
 	bool ret = true;
 	SDL_Init(0);
+
+	//SDL_EventState(SDL_DROPFILE, SDL_ENABLE);
 
 	if(SDL_InitSubSystem(SDL_INIT_EVENTS) < 0)
 	{
@@ -114,6 +117,19 @@ update_status ModuleInput::PreUpdate(float dt)
 			{
 				if(e.window.event == SDL_WINDOWEVENT_RESIZED)
 					App->renderer3D->OnResize(e.window.data1, e.window.data2);
+				break;
+			}
+
+			case (SDL_DROPFILE): 
+			{      // In case if dropped file
+				
+				dropped_filedir = e.drop.file;
+				// Show directory of dropped file
+				LOG("File droped")
+				MeshLoader::LoadFile(App->input->dropped_filedir, &houseMesh);
+				App->renderer3D->file_droped = true;
+				SDL_free(dropped_filedir);    // Free dropped_filedir memory-------------------------> Crashea
+				break;
 			}
 		}
 	}
@@ -128,6 +144,7 @@ update_status ModuleInput::Update(float dt)
 {
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 		App->debug = !App->debug;
+
 
 	return UPDATE_CONTINUE;
 }

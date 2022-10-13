@@ -1,6 +1,7 @@
 #pragma once
 #include "Module.h"
 #include "Globals.h"
+#include "MeshLoader.h"
 
 #define MAX_MOUSE_BUTTONS 5
 
@@ -23,6 +24,9 @@ public:
 	update_status PreUpdate(float dt) override;
 	update_status Update(float dt) override;
 	bool CleanUp();
+
+	char* dropped_filedir = NULL;
+	MeshInfo houseMesh;
 
 	KEY_STATE GetKey(int id) const
 	{
@@ -67,4 +71,5 @@ private:
 	int mouse_z;
 	int mouse_x_motion;
 	int mouse_y_motion;
+
 };

@@ -46,6 +46,8 @@ public:
 
     int width = SCREEN_WIDTH;
     int height = SCREEN_HEIGHT;
+
+    bool file_droped = false;
 };
 
 

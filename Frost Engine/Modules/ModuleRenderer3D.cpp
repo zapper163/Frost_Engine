@@ -28,6 +28,7 @@ ModuleRenderer3D::~ModuleRenderer3D()
 // Called before render is available
 bool ModuleRenderer3D::Init()
 {
+
 	LOG("Creating 3D Renderer context");
 	bool ret = true;
 
@@ -130,9 +131,12 @@ bool ModuleRenderer3D::Init()
 	//FrameBuffer
 	InitFrameBuffer();
 
-	//Load Mesh File
-	MeshLoader::LoadFile(filepath, &houseMesh);//------------------------------------>Crash
 
+	if (file_droped == true)
+	{
+		//Load Mesh File
+		MeshLoader::LoadFile(App->input->dropped_filedir, &houseMesh);
+	}
 	//Mesh Buffer
 	//MeshLoader::CreateMeshBuffer(ourMesh);
 	
