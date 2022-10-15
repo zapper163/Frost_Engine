@@ -309,6 +309,9 @@
     <ClInclude Include="Modules\External_Libraries\Json\json.h">
       <Filter>Sources\Tools\Json</Filter>
     </ClInclude>
+    <ClInclude Include="Modules\TextureLoader.h">
+      <Filter>Sources\Helpers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Modules\Application.cpp">
@@ -475,6 +478,9 @@
     </ClCompile>
     <ClCompile Include="Modules\External_Libraries\Json\json.c">
       <Filter>Sources\Tools\Json</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\TextureLoader.cpp">
+      <Filter>Sources\Helpers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

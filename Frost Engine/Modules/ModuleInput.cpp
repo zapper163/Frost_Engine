@@ -3,6 +3,7 @@
 #include "ModuleInput.h"
 #include "ImGui/imgui_impl_sdl.h"
 #include "MeshLoader.h"
+#include "TextureLoader.h"
 
 #define MAX_KEYS 300
 
@@ -127,8 +128,16 @@ update_status ModuleInput::PreUpdate(float dt)
 				// Show directory of dropped file
 				LOG("File droped")
 				MeshLoader::LoadFile(App->input->dropped_filedir, &houseMesh);
+				//Load texture
+				if (!gLoadedTexture.loadTextureFromFile("C:/Users/zapin/Documents/GitHub/Frost_Engine/Frost Engine/Assets/texture.png"))
+				{
+					LOG("Unable to load file texture!\n");
+				}
+				else {
+					LOG("Texture loaded succesfully")
+				}
 				App->renderer3D->file_droped = true;
-				SDL_free(dropped_filedir);    // Free dropped_filedir memory-------------------------> Crashea
+				SDL_free(dropped_filedir);
 				break;
 			}
 		}

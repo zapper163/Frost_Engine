@@ -4,6 +4,7 @@
 #include "glmath.h"
 #include "Light.h"
 #include "MeshLoader.h"
+#include "TextureLoader.h"
 
 
 #define MAX_LIGHTS 8
@@ -30,6 +31,7 @@ public:
 
     const char* filepath = "C:/Users/zapin/Documents/GitHub/Frost_Engine/Frost Engine/Assets/BakerHouse.fbx";
     MeshInfo houseMesh;
+    
 
 	Light lights[MAX_LIGHTS];
 	SDL_GLContext context;

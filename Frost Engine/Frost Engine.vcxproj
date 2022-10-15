@@ -178,6 +178,7 @@
     <ClInclude Include="Modules\p2List.h" />
     <ClInclude Include="Modules\p2Point.h" />
     <ClInclude Include="Modules\Primitive.h" />
+    <ClInclude Include="Modules\TextureLoader.h" />
     <ClInclude Include="Modules\Timer.h" />
   </ItemGroup>
   <ItemGroup>
@@ -235,6 +236,7 @@
     <ClCompile Include="Modules\ModuleSceneIntro.cpp" />
     <ClCompile Include="Modules\ModuleWindow.cpp" />
     <ClCompile Include="Modules\Primitive.cpp" />
+    <ClCompile Include="Modules\TextureLoader.cpp" />
     <ClCompile Include="Modules\Timer.cpp" />
   </ItemGroup>
   <ItemGroup>

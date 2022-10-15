@@ -2,6 +2,7 @@
 #include "Module.h"
 #include "Globals.h"
 #include "MeshLoader.h"
+#include "TextureLoader.h"
 
 #define MAX_MOUSE_BUTTONS 5
 
@@ -27,6 +28,9 @@ public:
 
 	char* dropped_filedir = NULL;
 	MeshInfo houseMesh;
+
+	//File loaded texture
+	TextureLoader gLoadedTexture;
 
 	KEY_STATE GetKey(int id) const
 	{

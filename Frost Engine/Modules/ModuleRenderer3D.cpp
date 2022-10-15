@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "ModuleRenderer3D.h"
 #include "MeshLoader.h"
+#include "TextureLoader.h"
 
 #include "Glew/include/glew.h"
 #include "SDL\include\SDL_opengl.h"
@@ -11,6 +12,10 @@
 #include "ImGui/imgui.h"
 #include "ImGui/imgui_impl_sdl.h"
 #include "ImGui/imgui_impl_opengl3.h"
+
+
+#include "DevIL/include/il.h"
+#include "DevIL/include/ilut.h"
 
 
 #pragma comment (lib, "glu32.lib")    /* link OpenGL Utility lib     */
@@ -28,7 +33,6 @@ ModuleRenderer3D::~ModuleRenderer3D()
 // Called before render is available
 bool ModuleRenderer3D::Init()
 {
-
 	LOG("Creating 3D Renderer context");
 	bool ret = true;
 
@@ -44,13 +48,6 @@ bool ModuleRenderer3D::Init()
 	GLenum err = glewInit();
 	LOG("Using Glew %s", glewGetString(GLEW_VERSION));
 	//Should be 2.0
-
-	/*
-	LOG("Vendor: %s", glGetString(GL_VENDOR));
-	LOG("Renderer: %s", glGetString(GL_RENDERER));
-	LOG("OpenGL version supported %s", glGetString(GL_VERSION));
-	LOG("GLSL: %s\n", glGetString(GL_SHADING_LANGUAGE_VERSION));
-	*/
 
 	SDL_GL_MakeCurrent(App->window->window, context);
 
@@ -118,6 +115,9 @@ bool ModuleRenderer3D::Init()
 		lights[0].Active(true);
 		glEnable(GL_LIGHTING);
 		glEnable(GL_COLOR_MATERIAL);
+		
+		//Enable texturing
+		glEnable(GL_TEXTURE_2D);
 	}
 
 	// Projection matrix for
@@ -127,6 +127,17 @@ bool ModuleRenderer3D::Init()
 	ImGui_ImplSDL2_InitForOpenGL(App->window->window, context);
 	ImGui_ImplOpenGL3_Init("#version 130");
 
+	//Initialize DevIL
+	ilInit();
+	ilClearColour(255, 255, 255, 000);
+
+	//Check for error
+	ILenum ilError = ilGetError();
+	if (ilError != IL_NO_ERROR)
+	{
+		printf("Error initializing DevIL! %s\n", iluErrorString(ilError));
+		return false;
+	}
 	
 	//FrameBuffer
 	InitFrameBuffer();
@@ -136,7 +147,11 @@ bool ModuleRenderer3D::Init()
 	{
 		//Load Mesh File
 		MeshLoader::LoadFile(App->input->dropped_filedir, &houseMesh);
+		
 	}
+	
+	
+
 	//Mesh Buffer
 	//MeshLoader::CreateMeshBuffer(ourMesh);
 	
@@ -197,6 +212,8 @@ update_status ModuleRenderer3D::Update(float dt)
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 	MeshLoader::Render();
+
+	
 	//---------------------------------------------------------------------------------
 	/*
 	// enable vertex arrays
