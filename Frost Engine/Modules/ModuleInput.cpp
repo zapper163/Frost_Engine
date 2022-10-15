@@ -129,7 +129,7 @@ update_status ModuleInput::PreUpdate(float dt)
 				LOG("File droped")
 				MeshLoader::LoadFile(App->input->dropped_filedir, &houseMesh);
 				//Load texture
-				if (!gLoadedTexture.loadTextureFromFile("C:/Users/zapin/Documents/GitHub/Frost_Engine/Frost Engine/Assets/texture.png"))
+				if (!gLoadedTexture.LoadTextureFromFile("C:/Users/zapin/Documents/GitHub/Frost_Engine/Frost Engine/Assets/texture.png"))
 				{
 					LOG("Unable to load file texture!\n");
 				}

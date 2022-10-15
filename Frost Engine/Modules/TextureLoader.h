@@ -12,7 +12,8 @@ class TextureLoader
 {
 public:
 	
-	static bool loadTextureFromFile(std::string path);
+	static bool LoadTextureFromFile(std::string path);
+	static bool RenderTexture();
 
 	void CleanUp();
 };

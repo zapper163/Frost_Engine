@@ -150,11 +150,6 @@ bool ModuleRenderer3D::Init()
 		
 	}
 	
-	
-
-	//Mesh Buffer
-	//MeshLoader::CreateMeshBuffer(ourMesh);
-	
 	//---------------------------------------------------------------------------------------------------
 	//Cube
 	/*
@@ -191,9 +186,11 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 	for(uint i = 0; i < MAX_LIGHTS; ++i)
 		lights[i].Render();
 
+	/*
 	//Cube
 	glBindBuffer(GL_ARRAY_BUFFER, vboId);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, iboId);
+	*/
 
 	//FrameBuffer
 	glBindFramebuffer(GL_FRAMEBUFFER, textureColorbuffer);

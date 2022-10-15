@@ -13,7 +13,7 @@
 #pragma comment (lib, "DevIL/libx86/ILU.lib" )
 #pragma comment (lib, "DevIL/libx86/ILUT.lib" )
 
-bool TextureLoader::loadTextureFromFile(std::string path)
+bool TextureLoader::LoadTextureFromFile(std::string path)
 {
     //Texture loading success
     bool textureLoaded = false;
