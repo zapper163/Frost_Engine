@@ -111,6 +111,8 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 				show_console_window = true;
 				console_visible = !console_visible;
 
+				console.AddLog(__FILE__, __LINE__, "Console Started");
+
 				ImGui::EndMenu();
 			}
 			if (ImGui::BeginMenu("Exit"))
@@ -248,6 +250,7 @@ void ModuleEditorGui::ShowConsole()
 	if (show_console_window)
 	{
 		console.DrawConsole("Console", &show_console_window);
+		
 	}
 	if (show_console_window == NULL)
 	{
