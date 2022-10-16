@@ -17,6 +17,7 @@
 #pragma comment (lib, "glu32.lib")    /* link OpenGL Utility lib     */
 #pragma comment (lib, "opengl32.lib") /* link Microsoft OpenGL lib   */
 
+
 ModuleEditorGui::ModuleEditorGui(bool start_enabled) : Module(start_enabled)
 {
 }
@@ -105,6 +106,13 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 				}
 				ImGui::EndMenu();
 			}
+			if (ImGui::BeginMenu("Console"))
+			{
+				show_console_window = true;
+				console_visible = !console_visible;
+
+				ImGui::EndMenu();
+			}
 			if (ImGui::BeginMenu("Exit"))
 			{
 				if (ImGui::MenuItem("Exit"))
@@ -118,6 +126,7 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 		ImGui::Text("Main Window");               // Display some text (you can use a format strings too)
 		ImGui::Checkbox("Wireframe Mode", &wireframe);      // Edit bools storing our window open/close state
 		ImGui::Checkbox("Color", &color);      // Edit bools storing our window open/close state
+		//ImGui::Checkbox("Console", &show_console_window);
 		//ImGui::Checkbox("Another Window", &show_credits_window);
 		//ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
 		//ImGui::ColorEdit3("clear color", (float*)&clear_color); // Edit 3 floats representing a color
@@ -132,10 +141,10 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 	{
 		ImGui::ShowDemoWindow();
 	}
-
+	
 	if (show_credits_window)
 	{
-		ImGui::Begin("Credits", 0, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_MenuBar);                          // Create a window called "Hello, world!" and append into it.
+		ImGui::Begin("Credits", &show_credits_window, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_MenuBar);                          // Create a window called "Hello, world!" and append into it.
 		if (ImGui::BeginMenuBar())
 		{
 			if (ImGui::BeginMenu("Menu"))
@@ -143,10 +152,6 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 				if (ImGui::MenuItem("Settings"))
 				{
 
-				}
-				if (ImGui::MenuItem("Close Tab"))
-				{
-					show_credits_window = false;                     //See ModuleImput 121
 				}
 				ImGui::EndMenu();
 			}
@@ -190,7 +195,7 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 
 	if (show_hardware_window)
 	{
-		ImGui::Begin("Hardware", 0, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_MenuBar);
+		ImGui::Begin("Hardware", &show_hardware_window, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_MenuBar);
 		if (ImGui::BeginMenuBar())
 		{
 			if (ImGui::BeginMenu("Menu"))
@@ -198,10 +203,6 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 				if (ImGui::MenuItem("Settings"))
 				{
 
-				}
-				if (ImGui::MenuItem("Close Tab"))
-				{
-					show_hardware_window = false;
 				}
 				ImGui::EndMenu();
 			}
@@ -214,6 +215,11 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 		ImGui::Text("\n\n");
 
 		ImGui::End();
+	}
+
+	if (console_visible)
+	{
+		ShowConsole();
 	}
 
 	// Rendering
@@ -237,3 +243,14 @@ bool ModuleEditorGui::CleanUp()
 	return true;
 }
 
+void ModuleEditorGui::ShowConsole()
+{
+	if (show_console_window)
+	{
+		console.DrawConsole("Console", &show_console_window);
+	}
+	if (show_console_window == NULL)
+	{
+		console_visible = !console_visible;
+	}
+}
