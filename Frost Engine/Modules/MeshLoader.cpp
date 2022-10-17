@@ -1,5 +1,6 @@
 
 #include "MeshLoader.h"
+#include "Application.h"
 
 #include "Assimp/include/cimport.h"
 #include "Assimp/include/scene.h"
@@ -29,7 +30,7 @@ void MeshLoader::LoadFile(const char* file_path, MeshInfo* ourMesh)
 			ourMesh->num_vertex = scene->mMeshes[i]->mNumVertices;
 			ourMesh->vertex = new float[ourMesh->num_vertex * 3];
 			memcpy(ourMesh->vertex, scene->mMeshes[i]->mVertices, sizeof(float) * ourMesh->num_vertex * 3);
-			//App->menus->info.AddConsoleLog(__FILE__, __LINE__, "New mesh with %d vertices", ourMesh->num_vertex);
+			App->editorGui->console.AddLog(__FILE__, __LINE__, "New mesh with %d vertices", ourMesh->num_vertex);
 
 			// copy faces
 			if (scene->mMeshes[i]->HasFaces())
@@ -41,7 +42,7 @@ void MeshLoader::LoadFile(const char* file_path, MeshInfo* ourMesh)
 				{
 					if (scene->mMeshes[i]->mFaces[j].mNumIndices != 3)
 					{
-						//App->menus->info.AddConsoleLog(__FILE__, __LINE__, "WARNING, geometry face with != 3 indices!");
+						App->editorGui->console.AddLog(__FILE__, __LINE__, "WARNING, geometry face with != 3 indices!");
 					}
 					else
 					{
