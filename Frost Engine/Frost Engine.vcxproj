@@ -166,7 +166,6 @@
     <ClInclude Include="Modules\glmath.h" />
     <ClInclude Include="Modules\Globals.h" />
     <ClInclude Include="Modules\Light.h" />
-    <ClInclude Include="Modules\Mesh.h" />
     <ClInclude Include="Modules\MeshLoader.h" />
     <ClInclude Include="Modules\Module.h" />
     <ClInclude Include="Modules\ModuleCamera3D.h" />
@@ -229,7 +228,6 @@
     <ClCompile Include="Modules\Light.cpp" />
     <ClCompile Include="Modules\log.cpp" />
     <ClCompile Include="Modules\Main.cpp" />
-    <ClCompile Include="Modules\Mesh.cpp" />
     <ClCompile Include="Modules\MeshLoader.cpp" />
     <ClCompile Include="Modules\ModuleCamera3D.cpp" />
     <ClCompile Include="Modules\ModuleEditorGui.cpp" />

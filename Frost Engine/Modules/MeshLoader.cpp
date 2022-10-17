@@ -17,7 +17,7 @@ void MeshLoader::DebugMode()
 	aiAttachLogStream(&stream);
 }
 
-void MeshLoader::LoadMesh(const char* file_path, MeshInfo* ourMesh)
+void MeshLoader::LoadFile(const char* file_path, MeshInfo* ourMesh)
 {
 	const aiScene* scene = aiImportFile(file_path, aiProcessPreset_TargetRealtime_MaxQuality);
 
