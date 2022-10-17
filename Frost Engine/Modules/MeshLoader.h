@@ -10,9 +10,9 @@
 
 using namespace std;
 
-struct MeshInfo
+class MeshInfo
 {
-
+public:
 	MeshInfo() {}
 
 	~MeshInfo() {
@@ -29,13 +29,18 @@ struct MeshInfo
 	float* vertex = nullptr;
 
 	void RenderMesh();
+
+
+
+private:
+
  };
 
 class MeshLoader
 {
 public:
 	void DebugMode();
-	static void LoadFile(const char* file_path, MeshInfo* ourMesh);
+	static void LoadMesh(const char* file_path, MeshInfo* ourMesh);
 
 	static void Render();
 	void CleanUp();

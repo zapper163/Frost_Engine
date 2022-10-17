@@ -312,6 +312,9 @@
     <ClInclude Include="Modules\TextureLoader.h">
       <Filter>Sources\Helpers</Filter>
     </ClInclude>
+    <ClInclude Include="Modules\Mesh.h">
+      <Filter>Sources\Helpers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Modules\Application.cpp">
@@ -480,6 +483,9 @@
       <Filter>Sources\Tools\Json</Filter>
     </ClCompile>
     <ClCompile Include="Modules\TextureLoader.cpp">
+      <Filter>Sources\Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\Mesh.cpp">
       <Filter>Sources\Helpers</Filter>
     </ClCompile>
   </ItemGroup>

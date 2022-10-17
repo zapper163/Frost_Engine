@@ -13,7 +13,7 @@
 #pragma comment (lib, "DevIL/libx86/ILU.lib" )
 #pragma comment (lib, "DevIL/libx86/ILUT.lib" )
 
-bool TextureLoader::LoadTextureFromFile(std::string path)
+uint TextureLoader::LoadTextureFromFile(std::string path)
 {
     //Texture loading success
     bool textureLoaded = false;
@@ -30,18 +30,24 @@ bool TextureLoader::LoadTextureFromFile(std::string path)
     if (success == IL_TRUE)
     {
         textureLoaded = true;
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-        
-        imgID = ilutGLBindTexImage();
-        glBindTexture(GL_TEXTURE_2D, 0);
-
-        //Delete file from memory
-        ilDeleteImages(1, &imgID);
     }
 
+    GLuint texture = ilutGLBindTexImage();
+    glBindTexture(GL_TEXTURE_2D, texture);
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+
+    glBindTexture(GL_TEXTURE_2D, 0);
+
+    //Delete file from memory
+    ilDeleteImages(1, &imgID);
+
+    Texture bakerTexture;
+    bakerTexture.ID = texture;
+    bakerTexture.name = path;
     
     //Report error
     if (!textureLoaded)
@@ -49,7 +55,7 @@ bool TextureLoader::LoadTextureFromFile(std::string path)
         LOG("Unable to load %s\n", path.c_str());
     }
 
-    return textureLoaded;
+    return texture;
 }
 
 
