@@ -99,33 +99,6 @@
     <ClInclude Include="Modules\MeshLoader.h">
       <Filter>Sources\Helpers</Filter>
     </ClInclude>
-    <ClInclude Include="Modules\External_Libraries\ImGui\imconfig.h">
-      <Filter>Sources\ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="Modules\External_Libraries\ImGui\imgui.h">
-      <Filter>Sources\ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="Modules\External_Libraries\ImGui\imgui_impl_opengl3.h">
-      <Filter>Sources\ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="Modules\External_Libraries\ImGui\imgui_impl_opengl3_loader.h">
-      <Filter>Sources\ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="Modules\External_Libraries\ImGui\imgui_impl_sdl.h">
-      <Filter>Sources\ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="Modules\External_Libraries\ImGui\imgui_internal.h">
-      <Filter>Sources\ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="Modules\External_Libraries\ImGui\imstb_rectpack.h">
-      <Filter>Sources\ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="Modules\External_Libraries\ImGui\imstb_textedit.h">
-      <Filter>Sources\ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="Modules\External_Libraries\ImGui\imstb_truetype.h">
-      <Filter>Sources\ImGui</Filter>
-    </ClInclude>
     <ClInclude Include="Modules\External_Libraries\MathGeoLib\include\Algorithm\Random\LCG.h">
       <Filter>Sources\MathGeoLib\Algorithm\Random</Filter>
     </ClInclude>
@@ -312,6 +285,33 @@
     <ClInclude Include="Modules\TextureLoader.h">
       <Filter>Sources\Helpers</Filter>
     </ClInclude>
+    <ClInclude Include="Modules\External_Libraries\ImGui\imconfig.h">
+      <Filter>Sources\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\External_Libraries\ImGui\imgui.h">
+      <Filter>Sources\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\External_Libraries\ImGui\imgui_impl_opengl3.h">
+      <Filter>Sources\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\External_Libraries\ImGui\imgui_impl_opengl3_loader.h">
+      <Filter>Sources\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\External_Libraries\ImGui\imgui_impl_sdl.h">
+      <Filter>Sources\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\External_Libraries\ImGui\imgui_internal.h">
+      <Filter>Sources\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\External_Libraries\ImGui\imstb_rectpack.h">
+      <Filter>Sources\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\External_Libraries\ImGui\imstb_textedit.h">
+      <Filter>Sources\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\External_Libraries\ImGui\imstb_truetype.h">
+      <Filter>Sources\ImGui</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Modules\Application.cpp">
@@ -358,27 +358,6 @@
     </ClCompile>
     <ClCompile Include="Modules\MeshLoader.cpp">
       <Filter>Sources\Helpers</Filter>
-    </ClCompile>
-    <ClCompile Include="Modules\External_Libraries\ImGui\imgui.cpp">
-      <Filter>Sources\ImGui</Filter>
-    </ClCompile>
-    <ClCompile Include="Modules\External_Libraries\ImGui\imgui_demo.cpp">
-      <Filter>Sources\ImGui</Filter>
-    </ClCompile>
-    <ClCompile Include="Modules\External_Libraries\ImGui\imgui_draw.cpp">
-      <Filter>Sources\ImGui</Filter>
-    </ClCompile>
-    <ClCompile Include="Modules\External_Libraries\ImGui\imgui_impl_opengl3.cpp">
-      <Filter>Sources\ImGui</Filter>
-    </ClCompile>
-    <ClCompile Include="Modules\External_Libraries\ImGui\imgui_impl_sdl.cpp">
-      <Filter>Sources\ImGui</Filter>
-    </ClCompile>
-    <ClCompile Include="Modules\External_Libraries\ImGui\imgui_tables.cpp">
-      <Filter>Sources\ImGui</Filter>
-    </ClCompile>
-    <ClCompile Include="Modules\External_Libraries\ImGui\imgui_widgets.cpp">
-      <Filter>Sources\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="Modules\External_Libraries\MathGeoLib\include\Algorithm\Random\LCG.cpp">
       <Filter>Sources\MathGeoLib\Algorithm\Random</Filter>
@@ -481,6 +460,27 @@
     </ClCompile>
     <ClCompile Include="Modules\TextureLoader.cpp">
       <Filter>Sources\Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\External_Libraries\ImGui\imgui.cpp">
+      <Filter>Sources\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\External_Libraries\ImGui\imgui_demo.cpp">
+      <Filter>Sources\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\External_Libraries\ImGui\imgui_draw.cpp">
+      <Filter>Sources\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\External_Libraries\ImGui\imgui_impl_opengl3.cpp">
+      <Filter>Sources\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\External_Libraries\ImGui\imgui_impl_sdl.cpp">
+      <Filter>Sources\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\External_Libraries\ImGui\imgui_tables.cpp">
+      <Filter>Sources\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\External_Libraries\ImGui\imgui_widgets.cpp">
+      <Filter>Sources\ImGui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

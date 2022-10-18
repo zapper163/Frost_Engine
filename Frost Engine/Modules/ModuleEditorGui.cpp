@@ -1,21 +1,9 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleEditorGui.h"
-#include "SDL\include\SDL_opengl.h"
 
 
-#include "ImGui/imgui.h"
-#include "ImGui/imgui_impl_sdl.h"
-#include "ImGui/imgui_impl_opengl3.h"
-
-#if defined(IMGUI_IMPL_OPENGL_ES2)
-#include <SDL_opengles2.h>
-#else
-#include "SDL/include/SDL_opengl.h"
-#endif
-
-#pragma comment (lib, "glu32.lib")    /* link OpenGL Utility lib     */
-#pragma comment (lib, "opengl32.lib") /* link Microsoft OpenGL lib   */
+#include <Windows.h>
 
 
 ModuleEditorGui::ModuleEditorGui(bool start_enabled) : Module(start_enabled)
@@ -35,16 +23,10 @@ bool ModuleEditorGui::Init()
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
 	ImGuiIO& io = ImGui::GetIO(); (void)io;
-	//io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
-	//io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
-
-	// Setup Dear ImGui style
+	io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
+	io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
+	
 	ImGui::StyleColorsDark();
-
-	// Setup Platform/Renderer backends---------------------------------------------------------------------------->Esto va en el MOduleRender3D
-	//ImGui_ImplSDL2_InitForOpenGL(App->window->window, context);
-	//ImGui_ImplOpenGL3_Init("#version 130");
-
 
 	return ret;
 }
@@ -69,7 +51,7 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 	{
 		// Using a Child allow to fill all the space of the window.
 		// It also alows customization
-		ImGui::Begin("GameRender", NULL, ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBringToFrontOnFocus);
+		ImGui::Begin("GameRender", NULL, ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBringToFrontOnFocus );
 		ImGui::BeginChild("GameRender", ImVec2(SCREEN_WIDTH, SCREEN_HEIGHT));
 		ImVec2 wsize = ImGui::GetWindowSize();
 		ImGui::Image((ImTextureID)App->renderer3D->textureColorbuffer, wsize, ImVec2(0, 1), ImVec2(1, 0));

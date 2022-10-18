@@ -54,7 +54,7 @@ bool ModuleSceneIntro::CleanUp()
 {
 	LOG("Unloading Intro scene");
 
-	for (int n = 0; n < primitives.Count(); n++)
+	for (uint n = 0; n < primitives.Count(); n++)
 	{
 		delete primitives[n];
 	}

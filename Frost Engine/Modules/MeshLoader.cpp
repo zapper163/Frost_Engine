@@ -24,7 +24,7 @@ void MeshLoader::LoadFile(const char* file_path, MeshInfo* ourMesh)
 
 	if (scene != nullptr && scene->HasMeshes())
 	{
-		for (int i = 0; i < scene->mNumMeshes; i++)
+		for (uint i = 0; i < scene->mNumMeshes; i++)
 		{
 			// copy vertices
 			ourMesh->num_vertex = scene->mMeshes[i]->mNumVertices;
@@ -65,7 +65,7 @@ void MeshInfo::RenderMesh()
 {
 	glBegin(GL_TRIANGLES); 
 
-	for (int i = 0; i < num_index; i++) {
+	for (uint i = 0; i < num_index; i++) {
 		glVertex3f(vertex[index[i] * 3], vertex[index[i] * 3 + 1], vertex[index[i] * 3 + 2]);
 	}
 
@@ -74,7 +74,7 @@ void MeshInfo::RenderMesh()
 
 void MeshLoader::Render()
 {
-	for (int i = 0; i < meshList.size(); i++) {
+	for (size_t i = 0; i < meshList.size(); i++) {
 		meshList[i]->RenderMesh();
 	}
 }
