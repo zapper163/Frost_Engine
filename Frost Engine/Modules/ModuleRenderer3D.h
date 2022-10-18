@@ -25,6 +25,10 @@ public:
     void InitFrameBuffer();
     void RefreshBuffer();
 
+    void InitCube();
+    void RefreshCube();
+    void PrintCube();
+
 	void OnResize(int width, int height);
 
 public:
