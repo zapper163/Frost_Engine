@@ -30,7 +30,16 @@ bool ModuleEditorGui::Init()
 
 	return ret;
 }
+update_status ModuleEditorGui::Update(float dt)
+{
+	float FPS = floorf(App->GetFrameRate());
+	float MS = (App->GetDt() * 1000.f);
 
+	PushLog(&fpsLog, FPS);
+	PushLog(&timeLog, MS);
+
+	return UPDATE_CONTINUE;
+}
 
 // PostUpdate present buffer to screen
 update_status ModuleEditorGui::PostUpdate(float dt)
@@ -47,6 +56,30 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 	static float f = 0.0f;
 	static int counter = 0;
 
+	ImGuiWindowFlags windowFlags = ImGuiWindowFlags_NoDocking | ImGuiWindowFlags_NoTitleBar |
+	ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove |
+	ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus |
+	ImGuiWindowFlags_NoBackground;
+
+	ImGuiViewport* viewport = ImGui::GetMainViewport();
+	ImGui::SetNextWindowPos(viewport->Pos);
+	ImGui::SetNextWindowSize(viewport->Size);
+	ImGui::SetNextWindowViewport(viewport->ID);
+
+	ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
+	ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
+	ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
+
+	ImGui::Begin("BackGround Window", nullptr, windowFlags);
+
+	ImGui::PopStyleVar(3);
+
+	ImGuiID dockSpaceId = ImGui::GetID("BackGroundWindowDockSpace");
+
+	ImGui::DockSpace(dockSpaceId, ImVec2(0.0f, 0.0f), ImGuiDockNodeFlags_PassthruCentralNode);
+	ImGui::End();
+
+
 	if (show_main_window)
 	{
 		// Using a Child allow to fill all the space of the window.
@@ -58,7 +91,8 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 		ImGui::EndChild();
 		ImGui::End();
 
-		ImGui::Begin("Main", NULL, ImGuiWindowFlags_MenuBar|ImGuiWindowFlags_AlwaysAutoResize);  
+		ImGui::Begin("Main", NULL, ImGuiWindowFlags_MenuBar);  
+		
 		
 		if (ImGui::BeginMenuBar())
 		{
@@ -107,25 +141,27 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 			}
 			ImGui::EndMenuBar();
 		}
-		ImGui::Text("Main Window");               // Display some text (you can use a format strings too)
-		ImGui::Checkbox("Wireframe Mode", &wireframe);      // Edit bools storing our window open/close state
-		ImGui::Checkbox("Color", &color);      // Edit bools storing our window open/close state
-		//ImGui::Checkbox("Console", &show_console_window);
-		//ImGui::Checkbox("Another Window", &show_credits_window);
+		ImGui::Text("Main Window");              
+		ImGui::Checkbox("Wireframe Mode", &wireframe);
+		ImGui::Checkbox("Color", &color);      
+		
 		//ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
 		//ImGui::ColorEdit3("clear color", (float*)&clear_color); // Edit 3 floats representing a color
-		//if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
-		//	counter++;
-		//ImGui::SameLine();
-		//ImGui::Text("counter = %d", counter);
-		ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+		
+		if (ImGui::CollapsingHeader("FRAMERATE"))
+		{
+			ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+			char title[25];
+			sprintf_s(title, 25, "Framerate %1.f", fpsLog[fpsLog.size() - 1]);
+			ImGui::PlotHistogram("##framerate", &fpsLog[0], fpsLog.size(), 0, title, 0.0f, 100.0f, ImVec2(310, 100));
+			sprintf_s(title, 25, "Milliseconds %0.f", timeLog[timeLog.size() - 1]);
+			ImGui::PlotHistogram("##milliseconds", &timeLog[0], timeLog.size(), 0, title, 0.0f, 100.0f, ImVec2(310, 100));
+
+		}
 		ImGui::End();
 	}
-	if (show_demo_window)
-	{
-		ImGui::ShowDemoWindow();
-	}
-	
+
+
 	if (show_credits_window)
 	{
 		ImGui::Begin("Credits", &show_credits_window, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_MenuBar);                          // Create a window called "Hello, world!" and append into it.
@@ -238,4 +274,17 @@ void ModuleEditorGui::ShowConsole()
 	{
 		console_visible = !console_visible;
 	}
+}
+
+void ModuleEditorGui::PushLog(std::vector<float>* Log, float toPush)
+{
+
+	if (Log->size() > 100)
+	{
+		Log->erase(Log->begin());
+		Log->push_back(toPush);
+	}
+	else Log->push_back(toPush);
+
+
 }

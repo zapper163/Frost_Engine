@@ -46,7 +46,6 @@ struct Console_window
 
 	void    DrawConsole(const char* title, bool* p_opened)
 	{
-		ImGui::SetNextWindowSize(ImVec2(500, 400));
 		ImGui::Begin(title, p_opened);
 		if (ImGui::Button("Clear")) Clear();
 		ImGui::SameLine();
@@ -95,17 +94,20 @@ public:
 	~ModuleEditorGui();
 
 	bool Init();
+	update_status Update(float dt) override;
 	update_status PostUpdate(float dt) override;
+
 	bool CleanUp();
 
 	void ShowConsole();
+
+	void PushLog(std::vector<float>* Log, float toPush);
 
 public:
 
 	SDL_GLContext context;
 	Console_window console;
 
-	bool show_demo_window = false;
 	bool show_credits_window = false;
 	bool show_main_window = true;
 	bool show_hardware_window = false;
@@ -114,5 +116,8 @@ public:
 
 	bool wireframe = false;
 	bool color = false;
+
+	std::vector<float> fpsLog;
+	std::vector<float> timeLog;
 	
 };
