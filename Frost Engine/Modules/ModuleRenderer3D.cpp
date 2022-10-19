@@ -13,7 +13,6 @@
 #include "ImGui/imgui_impl_sdl.h"
 #include "ImGui/imgui_impl_opengl3.h"
 
-
 #include "DevIL/include/il.h"
 #include "DevIL/include/ilut.h"
 
@@ -156,9 +155,11 @@ bool ModuleRenderer3D::Init()
 	//Cube
 	InitCube();
 	
+	
 	// Checker Texture
 	// 
 	// Load pattern into image data array
+	
 	int value;
 	for (int row = 0; row < IMAGE_ROWS; row++) {
 		for (int col = 0; col < IMAGE_COLS; col++) {
@@ -169,15 +170,16 @@ bool ModuleRenderer3D::Init()
 			imageData[row][col][2] = (GLubyte)value;
 		}
 	}
+	
 	glTexImage2D(GL_TEXTURE_2D, 0, 3, IMAGE_COLS, IMAGE_ROWS, 0, GL_RGB,
 		GL_UNSIGNED_BYTE, imageData);  // Create texture from image data
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
-
+	
 	glEnable(GL_TEXTURE_2D);  // Enable 2D texture 
-
+	
 	return ret;
 }
 

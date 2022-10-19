@@ -127,7 +127,9 @@ update_status ModuleInput::PreUpdate(float dt)
 				dropped_filedir = e.drop.file;
 				// Show directory of dropped file
 				LOG("File droped")
-				MeshLoader::LoadFile(App->input->dropped_filedir, &houseMesh);
+				MeshLoader::LoadFile(dropped_filedir, &houseMesh);
+				TextureLoader::LoadTextureFromFile(App->input->dropped_filedir);
+
 				//Load texture
 				if (!gLoadedTexture.LoadTextureFromFile("C:/Users/zapin/Documents/GitHub/Frost_Engine/Frost Engine/Assets/texture.png"))
 				{

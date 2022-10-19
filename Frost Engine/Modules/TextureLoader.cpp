@@ -36,7 +36,9 @@ bool TextureLoader::LoadTextureFromFile(std::string path)
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
         
         imgID = ilutGLBindTexImage();
-        glBindTexture(GL_TEXTURE_2D, 0);
+        glBindTexture(GL_TEXTURE_2D, imgID);
+
+        glEnable(GL_TEXTURE_2D);  // Enable 2D texture 
 
         //Delete file from memory
         ilDeleteImages(1, &imgID);

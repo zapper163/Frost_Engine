@@ -25,7 +25,7 @@ struct MeshInfo
 	uint num_index = 0;
 	uint* index = nullptr;
 
-	//aiVector3D* texture_vertex = nullptr;
+	float* texture_vertex = nullptr;
 
 	uint num_vertex = 0;
 	float* vertex = nullptr;
