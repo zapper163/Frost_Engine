@@ -9,6 +9,9 @@
 
 #define MAX_LIGHTS 8
 
+#define IMAGE_ROWS 64      // Texture image rows and columns
+#define IMAGE_COLS 64
+
 class ModuleRenderer3D : public Module
 {
 public:
@@ -28,6 +31,7 @@ public:
     void InitCube();
     void RefreshCube();
     void PrintCube();
+    void PrintCubeV2();
 
 	void OnResize(int width, int height);
 
@@ -36,7 +40,6 @@ public:
     const char* filepath = "C:/Users/zapin/Documents/GitHub/Frost_Engine/Frost Engine/Assets/BakerHouse.fbx";
     MeshInfo houseMesh;
     
-
 	Light lights[MAX_LIGHTS];
 	SDL_GLContext context;
 	mat3x3 NormalMatrix;
@@ -54,6 +57,13 @@ public:
     int height = SCREEN_HEIGHT;
 
     bool file_droped = false;
+
+    float x = 0;
+    float y = 0;
+    float z = 0;
+
+    // Texture
+    GLubyte imageData[IMAGE_ROWS][IMAGE_COLS][3]; // Texture image data
 };
 
 

@@ -33,6 +33,7 @@ ModuleRenderer3D::~ModuleRenderer3D()
 // Called before render is available
 bool ModuleRenderer3D::Init()
 {
+
 	LOG("Creating 3D Renderer context");
 	bool ret = true;
 
@@ -83,7 +84,9 @@ bool ModuleRenderer3D::Init()
 		
 		glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 		glClearDepth(1.0f);
-		
+
+		// Enable smooth shading of color
+		glShadeModel(GL_SMOOTH);               
 		//Initialize clear color
 		glClearColor(0.f, 0.f, 0.f, 1.f);
 
@@ -150,10 +153,30 @@ bool ModuleRenderer3D::Init()
 		
 	}
 	
-	//---------------------------------------------------------------------------------------------------
 	//Cube
 	InitCube();
-	//---------------------------------------------------------------------------------------------------
+	
+	// Checker Texture
+	// 
+	// Load pattern into image data array
+	int value;
+	for (int row = 0; row < IMAGE_ROWS; row++) {
+		for (int col = 0; col < IMAGE_COLS; col++) {
+			// Each cell is 8x8, value is 0 or 255 (black or white)
+			value = (((row & 0x8) == 0) ^ ((col & 0x8) == 0)) * 255;
+			imageData[row][col][0] = (GLubyte)value;
+			imageData[row][col][1] = (GLubyte)value;
+			imageData[row][col][2] = (GLubyte)value;
+		}
+	}
+	glTexImage2D(GL_TEXTURE_2D, 0, 3, IMAGE_COLS, IMAGE_ROWS, 0, GL_RGB,
+		GL_UNSIGNED_BYTE, imageData);  // Create texture from image data
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+
+	glEnable(GL_TEXTURE_2D);  // Enable 2D texture 
 
 	return ret;
 }
@@ -175,8 +198,6 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 
 	
 	RefreshCube();
-	
-	
 
 	//FrameBuffer
 	glBindFramebuffer(GL_FRAMEBUFFER, textureColorbuffer);
@@ -195,6 +216,8 @@ update_status ModuleRenderer3D::Update(float dt)
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 	MeshLoader::Render();
+
+	PrintCubeV2();
 
 	PrintCube();
 
@@ -237,7 +260,6 @@ void ModuleRenderer3D::OnResize(int width, int height)
 }
 
 
-
 void ModuleRenderer3D::InitFrameBuffer()
 {
 	glGenFramebuffers(1, &framebuffer);
@@ -253,7 +275,6 @@ void ModuleRenderer3D::InitFrameBuffer()
 
 	// attach it to currently bound framebuffer object
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, textureColorbuffer, 0);
-
 	// create render buffer object
 	glGenRenderbuffers(1, &renderbuffer);
 	glBindRenderbuffer(GL_RENDERBUFFER, renderbuffer);
@@ -296,6 +317,7 @@ void ModuleRenderer3D::RefreshCube()
 
 void ModuleRenderer3D::PrintCube()
 {
+	
 	// enable vertex arrays
 	glEnableClientState(GL_NORMAL_ARRAY);
 
@@ -312,18 +334,15 @@ void ModuleRenderer3D::PrintCube()
 	glVertexPointer(3, GL_FLOAT, 0, 0);
 
 
+	//Move the cube
+	//glPushMatrix();
+	glTranslatef(-3.5, 0.5, -0.5);
+	glPopMatrix();
+
 	glDrawElements(GL_TRIANGLES,            // primitive type
 		36,                      // # of indices
 		GL_UNSIGNED_INT,         // data type
 		(void*)0);               // ptr to indices
-
-	//Move the cube
-	glPushMatrix();
-	glTranslatef(-0.5, 0.5, -0.5);
-	glPopMatrix();
-
-	
-
 
 	glDisableClientState(GL_VERTEX_ARRAY);  // disable vertex arrays
 	glDisableClientState(GL_COLOR_ARRAY);
@@ -336,5 +355,47 @@ void ModuleRenderer3D::PrintCube()
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
 	//----------------------------------------------------------------------------------
+
+}
+
+void ModuleRenderer3D::PrintCubeV2()
+{
+	
+	glBegin(GL_QUADS);
+	// Front Face
+	glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, -1.0f, 1.0f);
+	glTexCoord2f(1.0f, 0.0f); glVertex3f(1.0f, -1.0f, 1.0f);
+	glTexCoord2f(1.0f, 1.0f); glVertex3f(1.0f, 1.0f, 1.0f);
+	glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f, 1.0f, 1.0f);
+	// Back Face
+	glTexCoord2f(1.0f, 0.0f); glVertex3f(-1.0f, -1.0f, -1.0f);
+	glTexCoord2f(1.0f, 1.0f); glVertex3f(-1.0f, 1.0f, -1.0f);
+	glTexCoord2f(0.0f, 1.0f); glVertex3f(1.0f, 1.0f, -1.0f);
+	glTexCoord2f(0.0f, 0.0f); glVertex3f(1.0f, -1.0f, -1.0f);
+	// Top Face
+	glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f, 1.0f, -1.0f);
+	glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, 1.0f, 1.0f);
+	glTexCoord2f(1.0f, 0.0f); glVertex3f(1.0f, 1.0f, 1.0f);
+	glTexCoord2f(1.0f, 1.0f); glVertex3f(1.0f, 1.0f, -1.0f);
+	// Bottom Face
+	glTexCoord2f(1.0f, 1.0f); glVertex3f(-1.0f, -1.0f, -1.0f);
+	glTexCoord2f(0.0f, 1.0f); glVertex3f(1.0f, -1.0f, -1.0f);
+	glTexCoord2f(0.0f, 0.0f); glVertex3f(1.0f, -1.0f, 1.0f);
+	glTexCoord2f(1.0f, 0.0f); glVertex3f(-1.0f, -1.0f, 1.0f);
+	// Right face
+	glTexCoord2f(1.0f, 0.0f); glVertex3f(1.0f, -1.0f, -1.0f);
+	glTexCoord2f(1.0f, 1.0f); glVertex3f(1.0f, 1.0f, -1.0f);
+	glTexCoord2f(0.0f, 1.0f); glVertex3f(1.0f, 1.0f, 1.0f);
+	glTexCoord2f(0.0f, 0.0f); glVertex3f(1.0f, -1.0f, 1.0f);
+	// Left Face
+	glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, -1.0f, -1.0f);
+	glTexCoord2f(1.0f, 0.0f); glVertex3f(-1.0f, -1.0f, 1.0f);
+	glTexCoord2f(1.0f, 1.0f); glVertex3f(-1.0f, 1.0f, 1.0f);
+	glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f, 1.0f, -1.0f);
+	glEnd();
+
+	//glPushMatrix();
+	glTranslatef(-1.5, 1.5, -1.5);
+	glPopMatrix();
 
 }

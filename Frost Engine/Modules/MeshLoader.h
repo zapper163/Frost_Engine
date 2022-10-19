@@ -5,6 +5,7 @@
 #include "SDL\include\SDL_opengl.h"
 #include <gl/GL.h>
 #include <gl/GLU.h>
+
 #include <vector>
 
 
@@ -21,10 +22,11 @@ struct MeshInfo
 
 	}
 
-	uint id_index = 0; // index in VRAM
 	uint num_index = 0;
 	uint* index = nullptr;
-	uint id_vertex = 0; // unique vertex in VRAM
+
+	//aiVector3D* texture_vertex = nullptr;
+
 	uint num_vertex = 0;
 	float* vertex = nullptr;
 
