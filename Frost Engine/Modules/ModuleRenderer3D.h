@@ -37,8 +37,9 @@ public:
 
 public:
 
-    const char* filepath = "C:/Users/zapin/Documents/GitHub/Frost_Engine/Frost Engine/Assets/BakerHouse.fbx";
+    //const char* filepath = "C:/Users/zapin/Documents/GitHub/Frost_Engine/Frost Engine/Assets/BakerHouse.fbx";
     MeshInfo houseMesh;
+    //const char* tex = "C:/Users/zapin/Documents/GitHub/Frost_Engine/Frost Engine/Assets/texture.png";
     
 	Light lights[MAX_LIGHTS];
 	SDL_GLContext context;

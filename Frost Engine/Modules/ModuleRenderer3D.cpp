@@ -178,8 +178,7 @@ bool ModuleRenderer3D::Init()
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
 	
-	glEnable(GL_TEXTURE_2D);  // Enable 2D texture 
-	
+
 	return ret;
 }
 

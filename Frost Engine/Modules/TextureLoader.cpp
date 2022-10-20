@@ -13,45 +13,52 @@
 #pragma comment (lib, "DevIL/libx86/ILU.lib" )
 #pragma comment (lib, "DevIL/libx86/ILUT.lib" )
 
-bool TextureLoader::LoadTextureFromFile(std::string path)
+bool TextureLoader::LoadTextureFromFile(const char* path)
 {
-    //Texture loading success
-    bool textureLoaded = false;
+    ilInit();
+    iluInit();
+    ilutInit();
 
-    //Generate and set current image ID
-    ILuint imgID = 0;
-    ilGenImages(1, &imgID);
-    ilBindImage(imgID);
-   
-    //Load image
-    ILboolean success = ilLoadImage(path.c_str());
-
-    //Image loaded successfully
-    if (success == IL_TRUE)
+    // -------------------------------------- Loading Image
+    if (ilLoadImage(path))
     {
-        textureLoaded = true;
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+        ILuint imageID;
+        ilGenImages(1, &imageID);
+        ilBindImage(imageID);
         
-        imgID = ilutGLBindTexImage();
-        glBindTexture(GL_TEXTURE_2D, imgID);
+        ilLoadImage(path);
 
-        glEnable(GL_TEXTURE_2D);  // Enable 2D texture 
+        BYTE* data = ilGetData();
+        
+        int const width = ilGetInteger(IL_IMAGE_WIDTH);
+        int const height = ilGetInteger(IL_IMAGE_HEIGHT);
+        int const type = ilGetInteger(IL_IMAGE_TYPE); // matches OpenGL
+        int const format = ilGetInteger(IL_IMAGE_FORMAT); // matches OpenGL
 
-        //Delete file from memory
-        ilDeleteImages(1, &imgID);
+        GLuint textureID;
+        glGenTextures(1, &textureID);
+        glBindTexture(GL_TEXTURE_2D, textureID);
+
+        //glPixelStorei(GL_UNPACK_SWAP_BYTES, GL_FALSE);
+        glPixelStorei(GL_UNPACK_ROW_LENGTH, 0); // rows are tightly packed
+        glPixelStorei(GL_UNPACK_SKIP_PIXELS, 0);
+        glPixelStorei(GL_UNPACK_SKIP_ROWS, 0);
+        glPixelStorei(GL_UNPACK_ALIGNMENT, 1); // pixels are tightly packed
+
+
+
+        glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, type, data);
+
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+        return textureID;
     }
-
-    
-    //Report error
-    if (!textureLoaded)
+    else
     {
-        LOG("Unable to load %s\n", path.c_str());
-    }
+        //App->menus->info.AddConsoleLog(FILE, LINE, "DevIL ERROR: Could not Load Image. Error: %s", ilGetError());
 
-    return textureLoaded;
+        return 0;
+    }
 }
 
 

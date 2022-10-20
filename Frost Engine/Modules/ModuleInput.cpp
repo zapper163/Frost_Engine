@@ -128,16 +128,8 @@ update_status ModuleInput::PreUpdate(float dt)
 				// Show directory of dropped file
 				LOG("File droped")
 				MeshLoader::LoadFile(dropped_filedir, &houseMesh);
-				TextureLoader::LoadTextureFromFile(App->input->dropped_filedir);
+				TextureLoader::LoadTextureFromFile(tex);
 
-				//Load texture
-				if (!gLoadedTexture.LoadTextureFromFile("C:/Users/zapin/Documents/GitHub/Frost_Engine/Frost Engine/Assets/texture.png"))
-				{
-					LOG("Unable to load file texture!\n");
-				}
-				else {
-					LOG("Texture loaded succesfully")
-				}
 				App->renderer3D->file_droped = true;
 				SDL_free(dropped_filedir);
 				break;

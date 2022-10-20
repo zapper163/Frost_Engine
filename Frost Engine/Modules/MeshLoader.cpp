@@ -32,8 +32,10 @@ void MeshLoader::LoadFile(const char* file_path, MeshInfo* ourMesh)
 			memcpy(ourMesh->vertex, scene->mMeshes[i]->mVertices, sizeof(float) * ourMesh->num_vertex * 3);
 			App->editorGui->console.AddLog(__FILE__, __LINE__, "New mesh with %d vertices", ourMesh->num_vertex);
 
+			/*
 			ourMesh->texture_vertex = new float[ourMesh->num_vertex * 3];
 			memcpy(ourMesh->texture_vertex, scene->mMeshes[i]->mTextureCoords, sizeof(float) * ourMesh->num_vertex * 3);
+			*/
 
 			// copy faces
 			if (scene->mMeshes[i]->HasFaces())
@@ -69,8 +71,9 @@ void MeshInfo::RenderMesh()
 	glBegin(GL_TRIANGLES); 
 
 	for (uint i = 0; i < num_index; i++) {
+		glTexCoord3f(vertex[index[i] * 3], vertex[index[i] * 3 + 1], vertex[index[i] * 3 + 2]);
 		glVertex3f(vertex[index[i] * 3], vertex[index[i] * 3 + 1], vertex[index[i] * 3 + 2]);
-		glTexCoord3f(texture_vertex[index[i] * 3], texture_vertex[index[i] * 3 + 1], texture_vertex[index[i] * 3 + 2]);
+		
 	}
 
 	glEnd();

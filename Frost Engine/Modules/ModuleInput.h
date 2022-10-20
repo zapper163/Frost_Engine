@@ -27,6 +27,8 @@ public:
 	bool CleanUp();
 
 	char* dropped_filedir = NULL;
+	const char* tex = "C:/Users/zapin/Documents/GitHub/Frost_Engine/Frost Engine/Assets/Baker_house.png";
+
 	MeshInfo houseMesh;
 
 	//File loaded texture
