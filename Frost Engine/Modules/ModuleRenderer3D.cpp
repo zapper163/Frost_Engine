@@ -153,7 +153,7 @@ bool ModuleRenderer3D::Init()
 	}
 	
 	//Cube
-	InitCube();
+	//InitCube();
 	
 	
 	// Checker Texture
@@ -220,7 +220,7 @@ update_status ModuleRenderer3D::Update(float dt)
 
 	PrintCubeV2();
 
-	PrintCube();
+	//PrintCube();
 
 	//FrameBuffer
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);

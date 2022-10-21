@@ -30,6 +30,11 @@ struct MeshInfo
 	uint num_vertex = 0;
 	float* vertex = nullptr;
 
+	uint num_uvs;
+	float* uvs = nullptr;
+	//unsigned int VAO, VBO, EBO;
+
+	//void SetUpMesh();
 	void RenderMesh();
  };
 
@@ -41,7 +46,6 @@ public:
 
 	static void Render();
 	void CleanUp();
-
 	
 	static vector<MeshInfo*> meshList;
 };

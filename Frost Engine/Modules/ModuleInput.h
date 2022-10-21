@@ -27,7 +27,7 @@ public:
 	bool CleanUp();
 
 	char* dropped_filedir = NULL;
-	const char* tex = "C:/Users/zapin/Documents/GitHub/Frost_Engine/Frost Engine/Assets/Baker_house.png";
+	const char* tex = "C:/Users/Alejandrogs4/Documents/GitHub/Frost_Engine/Frost Engine/Assets/Baker_house.png";
 
 	MeshInfo houseMesh;
 

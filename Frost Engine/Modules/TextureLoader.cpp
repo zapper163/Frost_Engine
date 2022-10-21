@@ -45,8 +45,6 @@ bool TextureLoader::LoadTextureFromFile(const char* path)
         glPixelStorei(GL_UNPACK_SKIP_ROWS, 0);
         glPixelStorei(GL_UNPACK_ALIGNMENT, 1); // pixels are tightly packed
 
-
-
         glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, type, data);
 
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
