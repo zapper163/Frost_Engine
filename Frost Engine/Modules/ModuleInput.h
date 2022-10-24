@@ -31,9 +31,7 @@ public:
 
 	MeshInfo Mesh;
 
-	//File loaded texture
-	TextureLoader gLoadedTexture;
-
+	
 	KEY_STATE GetKey(int id) const
 	{
 		return keyboard[id];

@@ -1,5 +1,6 @@
 
 #include "TextureLoader.h"
+#include "Application.h"
 
 #include "Glew/include/glew.h"
 #include "SDL\include\SDL_opengl.h"
@@ -13,7 +14,7 @@
 #pragma comment (lib, "DevIL/libx86/ILU.lib" )
 #pragma comment (lib, "DevIL/libx86/ILUT.lib" )
 
-static GLuint TextureLoader::LoadTextureFromFile(const char* path)
+GLuint TextureLoader::LoadTextureFromFile(const char* path)
 {
     ilInit();
     iluInit();

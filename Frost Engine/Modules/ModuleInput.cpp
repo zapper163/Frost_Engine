@@ -128,8 +128,7 @@ update_status ModuleInput::PreUpdate(float dt)
 				// Show directory of dropped file
 				LOG("File droped")
 				MeshLoader::LoadFile(dropped_filedir, &Mesh);
-				//TextureLoader::LoadTextureFromFile(tex);
-
+				
 				App->renderer3D->file_droped = true;
 				SDL_free(dropped_filedir);
 				break;

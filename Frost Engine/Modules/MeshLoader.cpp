@@ -21,6 +21,8 @@ void MeshLoader::DebugMode()
 
 void MeshLoader::LoadFile(const char* file_path, MeshInfo* ourMesh)
 {
+	
+
 	const aiScene* scene = aiImportFile(file_path, aiProcessPreset_TargetRealtime_MaxQuality);
 
 	if (scene != nullptr && scene->HasMeshes())
@@ -58,6 +60,7 @@ void MeshLoader::LoadFile(const char* file_path, MeshInfo* ourMesh)
 
 				MeshInfo::SetUpMesh(ourMesh);
 				meshList.push_back(ourMesh);
+				ourMesh->texture_id = TextureLoader::LoadTextureFromFile(ourMesh->tex);
 			}
 
 		}
@@ -84,7 +87,7 @@ void MeshInfo::RenderMesh()
 
 	glEnd();*/
 
-	texture_id = TextureLoader::LoadTextureFromFile(tex);
+	
 	//Bind checker texture
 	glActiveTexture(GL_TEXTURE0);
 	glEnable(GL_TEXTURE_2D);

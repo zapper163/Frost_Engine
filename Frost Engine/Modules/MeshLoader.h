@@ -37,7 +37,7 @@ struct MeshInfo
 	float* uvs = nullptr;
 	//unsigned int VAO, VBO, EBO;
 
-	const char* tex = "C:/Users/Alejandrogs4/Documents/GitHub/Frost_Engine/Frost Engine/Assets/Baker_house.png";
+	const char* tex = "/Assets/Baker_house.png";
 
 
 	static void SetUpMesh(MeshInfo* ourMesh);
@@ -52,6 +52,7 @@ public:
 
 	static void Render();
 	void CleanUp();
+
 	
 	static vector<MeshInfo*> meshList;
 };
