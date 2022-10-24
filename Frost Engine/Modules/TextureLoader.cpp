@@ -13,7 +13,7 @@
 #pragma comment (lib, "DevIL/libx86/ILU.lib" )
 #pragma comment (lib, "DevIL/libx86/ILUT.lib" )
 
-bool TextureLoader::LoadTextureFromFile(const char* path)
+static GLuint TextureLoader::LoadTextureFromFile(const char* path)
 {
     ilInit();
     iluInit();

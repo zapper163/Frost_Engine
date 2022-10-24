@@ -1,5 +1,6 @@
 
 #include "MeshLoader.h"
+#include "TextureLoader.h"
 #include "Application.h"
 
 #include "Assimp/include/cimport.h"
@@ -54,6 +55,8 @@ void MeshLoader::LoadFile(const char* file_path, MeshInfo* ourMesh)
 						memcpy(&ourMesh->index[j * 3], scene->mMeshes[i]->mFaces[j].mIndices, 3 * sizeof(uint));
 					}
 				}
+
+				MeshInfo::SetUpMesh(ourMesh);
 				meshList.push_back(ourMesh);
 			}
 
@@ -67,7 +70,7 @@ void MeshLoader::LoadFile(const char* file_path, MeshInfo* ourMesh)
 
 void MeshInfo::RenderMesh()
 {
-	glBegin(GL_TRIANGLES);
+	/*glBegin(GL_TRIANGLES);
 
 	for (uint i = 0; i < num_index; i++) {
 		//glTexCoord2f(vertex[index[i] * 3], vertex[index[i] * 3 + 1], vertex[index[i] * 3 + 2]);
@@ -79,7 +82,28 @@ void MeshInfo::RenderMesh()
 		glTexCoord2f(uvs[z] * 2, uvs[z] * 2 + 1);
 	}
 
-	glEnd();
+	glEnd();*/
+
+	texture_id = TextureLoader::LoadTextureFromFile(tex);
+	//Bind checker texture
+	glActiveTexture(GL_TEXTURE0);
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, texture_id);
+
+	// Binding buffers
+	glBindBuffer(GL_ARRAY_BUFFER, id_vertex);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, id_index);
+
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glVertexPointer(3, GL_FLOAT, 0, NULL);
+
+	// Draw
+	glDrawElements(GL_TRIANGLES, num_index, GL_UNSIGNED_INT, NULL);
+
+	// Unbind buffers
+	glDisableClientState(GL_VERTEX_ARRAY);
+	glBindTexture(GL_TEXTURE_2D, 0);
+	glDisable(GL_TEXTURE_2D);
 }
 
 void MeshLoader::Render()
@@ -99,30 +123,22 @@ void MeshLoader::CleanUp()
 	aiDetachAllLogStreams();
 }
 
-/*void MeshInfo::SetUpMesh()
+void MeshInfo::SetUpMesh(MeshInfo* ourMesh)
 {
-	glGenVertexArrays(1, &VAO);
-    glGenBuffers(1, &VBO);
-    glGenBuffers(1, &EBO);
-  
-    glBindVertexArray(VAO);
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	//Create vertices and indices buffers
+	glGenBuffers(1, (GLuint*)&(ourMesh->id_vertex));
+	glGenBuffers(1, (GLuint*)&(ourMesh->id_index));
 
-    glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex), &vertices[0], GL_STATIC_DRAW);  
+	//Bind and fill buffers
+	glBindBuffer(GL_ARRAY_BUFFER, ourMesh->id_vertex);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * ourMesh->num_vertex * 3, ourMesh->vertex, GL_STATIC_DRAW);
 
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), 
-                 &indices[0], GL_STATIC_DRAW);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ourMesh->id_index);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * ourMesh->num_index, ourMesh->index, GL_STATIC_DRAW);
 
-    // vertex positions
-    glEnableVertexAttribArray(0);	
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)0);
-    // vertex normals
-    glEnableVertexAttribArray(1);	
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, Normal));
-    // vertex texture coords
-    glEnableVertexAttribArray(2);	
-    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, TexCoords));
+	//Unbind buffers
+	glDisableClientState(GL_VERTEX_ARRAY);
 
-    glBindVertexArray(0)
-}*/
+	//Add mesh to meshes vector
+	//meshList.push_back(mesh);
+}

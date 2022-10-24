@@ -153,14 +153,14 @@ bool ModuleRenderer3D::Init()
 	}
 	
 	//Cube
-	//InitCube();
+	InitCube();
 	
 	
 	// Checker Texture
 	// 
 	// Load pattern into image data array
 	
-	int value;
+	/*int value;
 	for (int row = 0; row < IMAGE_ROWS; row++) {
 		for (int col = 0; col < IMAGE_COLS; col++) {
 			// Each cell is 8x8, value is 0 or 255 (black or white)
@@ -178,6 +178,9 @@ bool ModuleRenderer3D::Init()
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
 	
+	*/
+
+	MeshLoader::LoadFile(filepath, &houseMesh);
 
 	return ret;
 }
@@ -218,7 +221,7 @@ update_status ModuleRenderer3D::Update(float dt)
 
 	MeshLoader::Render();
 
-	PrintCubeV2();
+	//PrintCubeV2();
 
 	//PrintCube();
 

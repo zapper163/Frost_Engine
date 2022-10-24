@@ -12,7 +12,9 @@ class TextureLoader
 {
 public:
 	
-	static bool LoadTextureFromFile(const char* path);
+	static GLuint LoadTextureFromFile(const char* path);
+
+	
 	//static bool RenderTexture();
 
 	void CleanUp();

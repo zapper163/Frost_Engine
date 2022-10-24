@@ -22,11 +22,14 @@ struct MeshInfo
 
 	}
 
+	uint id_vertex = 0;
 	uint num_index = 0;
 	uint* index = nullptr;
 
 	float* texture_vertex = nullptr;
+	GLuint texture_id;
 
+	uint id_index = 0;
 	uint num_vertex = 0;
 	float* vertex = nullptr;
 
@@ -34,7 +37,10 @@ struct MeshInfo
 	float* uvs = nullptr;
 	//unsigned int VAO, VBO, EBO;
 
-	//void SetUpMesh();
+	const char* tex = "C:/Users/Alejandrogs4/Documents/GitHub/Frost_Engine/Frost Engine/Assets/Baker_house.png";
+
+
+	static void SetUpMesh(MeshInfo* ourMesh);
 	void RenderMesh();
  };
 
