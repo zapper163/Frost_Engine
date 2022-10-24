@@ -59,43 +59,6 @@ bool TextureLoader::LoadTextureFromFile(const char* path)
     }
 }
 
-uint TextureLoader::CheckerTexture()
-{
-    int value;
-    for (int row = 0; row < IMAGE_ROWS; row++) {
-        for (int col = 0; col < IMAGE_COLS; col++) {
-            // Each cell is 8x8, value is 0 or 255 (black or white)
-            value = (((row & 0x8) == 0) ^ ((col & 0x8) == 0)) * 255;
-            imageData[row][col][0] = (GLubyte)value;
-            imageData[row][col][1] = (GLubyte)value;
-            imageData[row][col][2] = (GLubyte)value;
-        }
-    }
-
-    //Generate and bind texture
-    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-    glGenTextures(1, &textureID);
-    glBindTexture(GL_TEXTURE_2D, textureID);
-
-    //How texture behaves outside 0,1 range (S->x, T->y)
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT); //GL_CLAMP
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-
-    //Texture behaviour after resize (MIN->smaller , MAG->bigger)
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-
-    //Create Texture
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, IMAGE_ROWS, IMAGE_COLS,
-        0, GL_RGBA, GL_UNSIGNED_BYTE, imageData);
-    glGenerateMipmap(GL_TEXTURE_2D);
-
-    //unbind texture
-    glBindTexture(GL_TEXTURE_2D, 0);
-
-    return textureID;
-}
-
 
 void TextureLoader::CleanUp()
 {

@@ -8,7 +8,6 @@ Application::Application() : debug(false)
 	renderer3D = new ModuleRenderer3D();
 	camera = new ModuleCamera3D();
 	editorGui = new ModuleEditorGui();
-	meshRenderer = new ModuleMeshRenderer();
 
 	// Main Modules
 	AddModule(window);
@@ -23,8 +22,6 @@ Application::Application() : debug(false)
 
 	// Renderer
 	AddModule(renderer3D);
-
-	AddModule(meshRenderer);
 }
 
 Application::~Application()

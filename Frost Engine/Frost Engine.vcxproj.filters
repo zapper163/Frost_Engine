@@ -312,9 +312,6 @@
     <ClInclude Include="Modules\External_Libraries\ImGui\imstb_truetype.h">
       <Filter>Sources\ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="Modules\ModuleMeshRenderer.h">
-      <Filter>Sources\Modules</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Modules\Application.cpp">
@@ -484,9 +481,6 @@
     </ClCompile>
     <ClCompile Include="Modules\External_Libraries\ImGui\imgui_widgets.cpp">
       <Filter>Sources\ImGui</Filter>
-    </ClCompile>
-    <ClCompile Include="Modules\ModuleMeshRenderer.cpp">
-      <Filter>Sources\Modules</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
