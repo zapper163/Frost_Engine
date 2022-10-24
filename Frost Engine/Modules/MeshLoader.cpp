@@ -61,6 +61,7 @@ void MeshLoader::LoadFile(const char* file_path, MeshInfo* ourMesh)
 				MeshInfo::SetUpMesh(ourMesh);
 				meshList.push_back(ourMesh);
 				ourMesh->texture_id = TextureLoader::LoadTextureFromFile(ourMesh->tex);
+				
 			}
 
 		}

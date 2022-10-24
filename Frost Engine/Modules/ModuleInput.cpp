@@ -1,11 +1,22 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleInput.h"
-#include "ImGui/imgui_impl_sdl.h"
 #include "MeshLoader.h"
 #include "TextureLoader.h"
 
+#include "ImGui/imgui_impl_sdl.h"
+
+#include "Assimp/include/cimport.h"
+#include "Assimp/include/scene.h"
+#include "Assimp/include/postprocess.h"
+
+#include <iostream>
+#include <filesystem>
+
+
 #define MAX_KEYS 300
+
+
 
 ModuleInput::ModuleInput(bool start_enabled) : Module(start_enabled)
 {
@@ -35,6 +46,9 @@ bool ModuleInput::Init()
 		LOG("SDL_EVENTS could not initialize! SDL_Error: %s\n", SDL_GetError());
 		ret = false;
 	}
+
+	
+
 
 	return ret;
 }
@@ -123,13 +137,17 @@ update_status ModuleInput::PreUpdate(float dt)
 
 			case (SDL_DROPFILE): 
 			{      // In case if dropped file
-				
 				dropped_filedir = e.drop.file;
-				// Show directory of dropped file
-				LOG("File droped")
-				MeshLoader::LoadFile(dropped_filedir, &Mesh);
-				
-				App->renderer3D->file_droped = true;
+				std::string fn = e.drop.file;
+				if (fn.substr(fn.find_last_of(".") + 1) == "fbx") {
+					MeshLoader::LoadFile(dropped_filedir, &Mesh);
+					App->editorGui->console.AddLog(__FILE__, __LINE__, "Fbx Loaded");
+				}
+				else if(fn.substr(fn.find_last_of(".") + 1) == "png") {
+					TextureLoader::LoadTextureFromFile(dropped_filedir);
+					App->editorGui->console.AddLog(__FILE__, __LINE__, "Png Loaded");
+				}
+
 				SDL_free(dropped_filedir);
 				break;
 			}
