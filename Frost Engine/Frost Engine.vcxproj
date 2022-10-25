@@ -93,6 +93,8 @@
   <ItemGroup>
     <ClInclude Include="Modules\Application.h" />
     <ClInclude Include="Modules\Color.h" />
+    <ClInclude Include="Modules\Component.h" />
+    <ClInclude Include="Modules\C_Transform.h" />
     <ClInclude Include="Modules\External_Libraries\ImGui\imconfig.h" />
     <ClInclude Include="Modules\External_Libraries\ImGui\imgui.h" />
     <ClInclude Include="Modules\External_Libraries\ImGui\imgui_impl_opengl3.h" />
@@ -163,6 +165,7 @@
     <ClInclude Include="Modules\External_Libraries\MathGeoLib\include\Math\sse_mathfun.h" />
     <ClInclude Include="Modules\External_Libraries\MathGeoLib\include\Math\TransformOps.h" />
     <ClInclude Include="Modules\External_Libraries\MathGeoLib\include\Time\Clock.h" />
+    <ClInclude Include="Modules\GameObject.h" />
     <ClInclude Include="Modules\glmath.h" />
     <ClInclude Include="Modules\Globals.h" />
     <ClInclude Include="Modules\Light.h" />
@@ -184,6 +187,8 @@
   <ItemGroup>
     <ClCompile Include="Modules\Application.cpp" />
     <ClCompile Include="Modules\Color.cpp" />
+    <ClCompile Include="Modules\Component.cpp" />
+    <ClCompile Include="Modules\C_Transform.cpp" />
     <ClCompile Include="Modules\External_Libraries\ImGui\imgui.cpp" />
     <ClCompile Include="Modules\External_Libraries\ImGui\imgui_demo.cpp" />
     <ClCompile Include="Modules\External_Libraries\ImGui\imgui_draw.cpp" />
@@ -224,6 +229,7 @@
     <ClCompile Include="Modules\External_Libraries\MathGeoLib\include\Math\SSEMath.cpp" />
     <ClCompile Include="Modules\External_Libraries\MathGeoLib\include\Math\TransformOps.cpp" />
     <ClCompile Include="Modules\External_Libraries\MathGeoLib\include\Time\Clock.cpp" />
+    <ClCompile Include="Modules\GameObject.cpp" />
     <ClCompile Include="Modules\glmath.cpp" />
     <ClCompile Include="Modules\Light.cpp" />
     <ClCompile Include="Modules\log.cpp" />
