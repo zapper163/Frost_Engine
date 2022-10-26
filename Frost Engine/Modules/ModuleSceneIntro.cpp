@@ -62,3 +62,7 @@ bool ModuleSceneIntro::CleanUp()
 
 	return true;
 }
+
+
+//GameObject* CreateGameObject()
+

@@ -2,6 +2,7 @@
 #include "Module.h"
 #include "p2DynArray.h"
 #include "Globals.h"
+#include "GameObject.h"
 
 class Primitive;
 
@@ -16,7 +17,10 @@ public:
 	update_status PostUpdate(float dt) override;
 	bool CleanUp();
 
+	//GameObject* CreateGameObject();
+
 
 private:
 	p2DynArray<Primitive*> primitives;
+	vector<GameObject*> game_objects;
 };
