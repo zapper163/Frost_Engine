@@ -11,6 +11,8 @@
 
 using namespace std;
 
+#define VERTEX_FEATURES 5
+
 struct MeshInfo
 {
 
@@ -32,15 +34,9 @@ struct MeshInfo
 	uint id_index = 0;
 	uint num_vertex = 0;
 	float* vertex = nullptr;
+	
+	const char* tex = "Assets/Baker_house.png";
 
-	uint num_uvs;
-	float* uvs = nullptr;
-	//unsigned int VAO, VBO, EBO;
-
-	const char* tex = "/Assets/Baker_house.png";
-
-
-	static void SetUpMesh(MeshInfo* ourMesh);
 	void RenderMesh();
  };
 
@@ -51,8 +47,11 @@ public:
 	static void LoadFile(const char* file_path, MeshInfo* ourMesh);
 
 	static void Render();
-	void CleanUp();
+	static void CleanUp();
 
+	static void SetUpMesh(MeshInfo* ourMesh);
 	
 	static vector<MeshInfo*> meshList;
+
+	
 };

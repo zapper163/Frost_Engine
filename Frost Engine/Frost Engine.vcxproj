@@ -174,6 +174,7 @@
     <ClInclude Include="Modules\ModuleCamera3D.h" />
     <ClInclude Include="Modules\ModuleEditorGui.h" />
     <ClInclude Include="Modules\ModuleInput.h" />
+    <ClInclude Include="Modules\ModuleMeshRender.h" />
     <ClInclude Include="Modules\ModuleRenderer3D.h" />
     <ClInclude Include="Modules\ModuleSceneIntro.h" />
     <ClInclude Include="Modules\ModuleWindow.h" />
@@ -238,6 +239,7 @@
     <ClCompile Include="Modules\ModuleCamera3D.cpp" />
     <ClCompile Include="Modules\ModuleEditorGui.cpp" />
     <ClCompile Include="Modules\ModuleInput.cpp" />
+    <ClCompile Include="Modules\ModuleMeshRender.cpp" />
     <ClCompile Include="Modules\ModuleRenderer3D.cpp" />
     <ClCompile Include="Modules\ModuleSceneIntro.cpp" />
     <ClCompile Include="Modules\ModuleWindow.cpp" />

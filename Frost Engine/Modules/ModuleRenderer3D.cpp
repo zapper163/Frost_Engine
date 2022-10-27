@@ -144,14 +144,6 @@ bool ModuleRenderer3D::Init()
 	//FrameBuffer
 	InitFrameBuffer();
 
-
-	if (file_droped == true)
-	{
-		//Load Mesh File
-		MeshLoader::LoadFile(App->input->dropped_filedir, &houseMesh);
-		
-	}
-	
 	//Cube
 	InitCube();
 	
@@ -246,6 +238,8 @@ bool ModuleRenderer3D::CleanUp()
 
 	// Cleanup
 	SDL_GL_DeleteContext(context);
+
+	MeshLoader::CleanUp();
 	return true;
 }
 

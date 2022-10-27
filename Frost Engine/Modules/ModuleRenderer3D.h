@@ -57,14 +57,12 @@ public:
     int width = SCREEN_WIDTH;
     int height = SCREEN_HEIGHT;
 
-    bool file_droped = false;
-
     float x = 0;
     float y = 0;
     float z = 0;
 
     // Texture
-    GLubyte imageData[IMAGE_ROWS][IMAGE_COLS][3]; // Texture image data
+    //GLubyte imageData[IMAGE_ROWS][IMAGE_COLS][3]; // Texture image data
 };
 
 

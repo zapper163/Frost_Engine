@@ -1,6 +1,7 @@
 
 #include "TextureLoader.h"
 #include "Application.h"
+#include "ModuleEditorGui.h"
 
 #include "Glew/include/glew.h"
 #include "SDL\include\SDL_opengl.h"
@@ -51,11 +52,12 @@ GLuint TextureLoader::LoadTextureFromFile(const char* path)
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
         return textureID;
+        LOG(" Could Load Image.");
     }
     else
     {
-        //App->menus->info.AddConsoleLog(FILE, LINE, "DevIL ERROR: Could not Load Image. Error: %s", ilGetError());
-
+       //App->editorGui->console.AddLog(__FILE__, __LINE__, "DevIL ERROR: Could not Load Image. Error: %s", ilGetError());
+        LOG("DevIL ERROR : Could not Load Image.Error : ");
         return 0;
     }
 }

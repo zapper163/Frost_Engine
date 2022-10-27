@@ -29,16 +29,34 @@ void MeshLoader::LoadFile(const char* file_path, MeshInfo* ourMesh)
 	{
 		for (uint i = 0; i < scene->mNumMeshes; i++)
 		{
+
+			MeshInfo* ourMesh = new MeshInfo();
 			// copy vertices
 			ourMesh->num_vertex = scene->mMeshes[i]->mNumVertices;
-			ourMesh->vertex = new float[ourMesh->num_vertex * 3];
-			memcpy(ourMesh->vertex, scene->mMeshes[i]->mVertices, sizeof(float) * ourMesh->num_vertex * 3);
+			ourMesh->vertex = new float[ourMesh->num_vertex * VERTEX_FEATURES];
+			//memcpy(ourMesh->vertex, scene->mMeshes[i]->mVertices, sizeof(float) * ourMesh->num_vertex * 3);
 			App->editorGui->console.AddLog(__FILE__, __LINE__, "New mesh with %d vertices", ourMesh->num_vertex);
 
-			ourMesh->num_uvs = *scene->mMeshes[i]->mNumUVComponents;
-			ourMesh->uvs = new float[ourMesh->num_uvs * 2];
-			memcpy(ourMesh->uvs, scene->mMeshes[i]->mNumUVComponents, sizeof(float) * ourMesh->num_uvs * 2);
-			
+			for (int v = 0; v < ourMesh->num_vertex; v++) {
+				// Vertex
+				ourMesh->vertex[v * VERTEX_FEATURES] = scene->mMeshes[i]->mVertices[v].x;
+				ourMesh->vertex[v * VERTEX_FEATURES + 1] = scene->mMeshes[i]->mVertices[v].y;
+				ourMesh->vertex[v * VERTEX_FEATURES + 2] = scene->mMeshes[i]->mVertices[v].z;
+
+				if (scene->mMeshes[i]->HasTextureCoords(0))
+				{
+					// UVs
+					ourMesh->vertex[v * VERTEX_FEATURES + 3] = scene->mMeshes[i]->mTextureCoords[0][v].x;
+					ourMesh->vertex[v * VERTEX_FEATURES + 4] = scene->mMeshes[i]->mTextureCoords[0][v].y;
+				}
+				// -------------------------------------------------------------------------------------- In a future
+				//if (scene->mMeshes[i]->HasNormals())
+				//{
+					//newMesh->vertex[v * VERTEX_FEATURES + 5] = scene->mMeshes[i]->mNormals[v].x;
+					//newMesh->vertex[v * VERTEX_FEATURES + 6] = scene->mMeshes[i]->mNormals[v].y;
+					//newMesh->vertex[v * VERTEX_FEATURES + 7] = scene->mMeshes[i]->mNormals[v].z;
+				//}
+			}
 
 			// copy faces
 			if (scene->mMeshes[i]->HasFaces())
@@ -58,14 +76,15 @@ void MeshLoader::LoadFile(const char* file_path, MeshInfo* ourMesh)
 					}
 				}
 
-				MeshInfo::SetUpMesh(ourMesh);
-				meshList.push_back(ourMesh);
+				MeshLoader::SetUpMesh(ourMesh);
+				//meshList.push_back(ourMesh);
+				
 				ourMesh->texture_id = TextureLoader::LoadTextureFromFile(ourMesh->tex);
+
 				
 			}
 
 		}
-
 		aiReleaseImport(scene);
 	}
 	else
@@ -74,44 +93,57 @@ void MeshLoader::LoadFile(const char* file_path, MeshInfo* ourMesh)
 
 void MeshInfo::RenderMesh()
 {
-	/*glBegin(GL_TRIANGLES);
 
-	for (uint i = 0; i < num_index; i++) {
-		//glTexCoord2f(vertex[index[i] * 3], vertex[index[i] * 3 + 1], vertex[index[i] * 3 + 2]);
-		glVertex3f(vertex[index[i] * 3], vertex[index[i] * 3 + 1], vertex[index[i] * 3 + 2]);
-	}
-
-	for (uint z = 0; z < num_uvs; z++)
-	{
-		glTexCoord2f(uvs[z] * 2, uvs[z] * 2 + 1);
-	}
-
-	glEnd();*/
-
-	
-	//Bind checker texture
-	glActiveTexture(GL_TEXTURE0);
-	glEnable(GL_TEXTURE_2D);
+	//Bind Texture
+	glEnable(GL_TEXTURE_COORD_ARRAY);
+	//glEnable(GL_TEXTURE_2D);
+	glEnableClientState(GL_VERTEX_ARRAY);
 	glBindTexture(GL_TEXTURE_2D, texture_id);
 
-	// Binding buffers
+	// Bind Buffers
 	glBindBuffer(GL_ARRAY_BUFFER, id_vertex);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, id_index);
 
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glVertexPointer(3, GL_FLOAT, 0, NULL);
+	// Vertex Array [ x, y, z, u, v ]
+	glVertexPointer(3, GL_FLOAT, sizeof(float) * VERTEX_FEATURES, NULL);
+	glTexCoordPointer(2, GL_FLOAT, sizeof(float) * VERTEX_FEATURES, (void*)(3 * sizeof(float)));
+	glNormalPointer(GL_FLOAT, sizeof(float) * VERTEX_FEATURES, NULL);
+
+	//glPushMatrix();
 
 	// Draw
 	glDrawElements(GL_TRIANGLES, num_index, GL_UNSIGNED_INT, NULL);
 
+	//glPopMatrix(); 
+
+	for (int v = 0; v < num_vertex; v++) {
+		//glEnableClientState(GL_VERTEX_ARRAY);
+		glVertexPointer(3, GL_FLOAT, sizeof(float) * VERTEX_FEATURES, &vertex[v * VERTEX_FEATURES]);
+		glVertexPointer(3, GL_FLOAT, sizeof(float) * VERTEX_FEATURES, &vertex[v * VERTEX_FEATURES + 1]);
+		glVertexPointer(3, GL_FLOAT, sizeof(float) * VERTEX_FEATURES, &vertex[v * VERTEX_FEATURES + 2]);
+		glClientActiveTexture(GL_TEXTURE0);
+		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+		glTexCoordPointer(2, GL_FLOAT, sizeof(float) * VERTEX_FEATURES, &vertex[v * VERTEX_FEATURES + 3]);
+		glTexCoordPointer(2, GL_FLOAT, sizeof(float) * VERTEX_FEATURES, &vertex[v * VERTEX_FEATURES + 4]);
+		glEnableClientState(GL_NORMAL_ARRAY);
+		glNormalPointer(GL_FLOAT, sizeof(float) * VERTEX_FEATURES, &vertex[v * VERTEX_FEATURES + 5]);
+		glNormalPointer(GL_FLOAT, sizeof(float) * VERTEX_FEATURES, &vertex[v * VERTEX_FEATURES + 6]);
+		glNormalPointer(GL_FLOAT, sizeof(float) * VERTEX_FEATURES, &vertex[v * VERTEX_FEATURES + 7]);
+
+		//glDrawRangeElements(GL_TRIANGLES, vertex[v * VERTEX_FEATURES], vertex[v * VERTEX_FEATURES + 1], vertex[v * VERTEX_FEATURES + 2], GL_UNSIGNED_SHORT, index);
+
+	}
+
 	// Unbind buffers
-	glDisableClientState(GL_VERTEX_ARRAY);
 	glBindTexture(GL_TEXTURE_2D, 0);
-	glDisable(GL_TEXTURE_2D);
+	glDisableClientState(GL_VERTEX_ARRAY);
+	glDisable(GL_TEXTURE_COORD_ARRAY);
+
 }
 
 void MeshLoader::Render()
 {
+	
 	for (size_t i = 0; i < meshList.size(); i++) {
 		meshList[i]->RenderMesh();
 	}
@@ -127,7 +159,7 @@ void MeshLoader::CleanUp()
 	aiDetachAllLogStreams();
 }
 
-void MeshInfo::SetUpMesh(MeshInfo* ourMesh)
+void MeshLoader::SetUpMesh(MeshInfo* ourMesh)
 {
 	//Create vertices and indices buffers
 	glGenBuffers(1, (GLuint*)&(ourMesh->id_vertex));
@@ -135,7 +167,7 @@ void MeshInfo::SetUpMesh(MeshInfo* ourMesh)
 
 	//Bind and fill buffers
 	glBindBuffer(GL_ARRAY_BUFFER, ourMesh->id_vertex);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * ourMesh->num_vertex * 3, ourMesh->vertex, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * ourMesh->num_vertex * 5, ourMesh->vertex, GL_STATIC_DRAW);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ourMesh->id_index);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * ourMesh->num_index, ourMesh->index, GL_STATIC_DRAW);
@@ -144,5 +176,5 @@ void MeshInfo::SetUpMesh(MeshInfo* ourMesh)
 	glDisableClientState(GL_VERTEX_ARRAY);
 
 	//Add mesh to meshes vector
-	//meshList.push_back(mesh);
+	meshList.push_back(ourMesh);
 }

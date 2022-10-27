@@ -324,6 +324,9 @@
     <ClInclude Include="Modules\Component.h">
       <Filter>Sources\Components</Filter>
     </ClInclude>
+    <ClInclude Include="Modules\ModuleMeshRender.h">
+      <Filter>Sources\Modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Modules\Application.cpp">
@@ -502,6 +505,9 @@
     </ClCompile>
     <ClCompile Include="Modules\Component.cpp">
       <Filter>Sources\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\ModuleMeshRender.cpp">
+      <Filter>Sources\Modules</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
