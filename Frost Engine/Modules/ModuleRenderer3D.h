@@ -19,6 +19,7 @@ public:
 	~ModuleRenderer3D();
 
 	bool Init();
+    bool Start();
 	update_status PreUpdate(float dt) override;
 	update_status Update(float dt) override;
 	update_status PostUpdate(float dt) override;
@@ -56,6 +57,8 @@ public:
 
     int width = SCREEN_WIDTH;
     int height = SCREEN_HEIGHT;
+
+    bool cube = false;
 
     float x = 0;
     float y = 0;

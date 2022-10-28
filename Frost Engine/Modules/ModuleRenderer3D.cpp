@@ -144,8 +144,7 @@ bool ModuleRenderer3D::Init()
 	//FrameBuffer
 	InitFrameBuffer();
 
-	//Cube
-	InitCube();
+	
 	
 	
 	// Checker Texture
@@ -175,6 +174,16 @@ bool ModuleRenderer3D::Init()
 	MeshLoader::LoadFile(filepath, &houseMesh);
 
 	return ret;
+}
+
+bool ModuleRenderer3D::Start()
+{
+	if (cube)
+	{
+		//Cube
+		InitCube();
+	}
+	return true;
 }
 
 // PreUpdate: clear buffer
@@ -216,6 +225,14 @@ update_status ModuleRenderer3D::Update(float dt)
 	//PrintCubeV2();
 
 	//PrintCube();
+
+
+	if (cube)
+	{
+		PrintCubeV2();
+
+		//PrintCube();
+	}
 
 	//FrameBuffer
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
