@@ -8,12 +8,7 @@
 #include <gl/GL.h>
 #include <gl/GLU.h>
 
-#include "DevIL/include/il.h"
-#include "DevIL/include/ilut.h"
 
-#pragma comment (lib, "DevIL/libx86/DevIL.lib")
-#pragma comment (lib, "DevIL/libx86/ILU.lib" )
-#pragma comment (lib, "DevIL/libx86/ILUT.lib" )
 
 GLuint TextureLoader::LoadTextureFromFile(const char* path)
 {
@@ -24,35 +19,39 @@ GLuint TextureLoader::LoadTextureFromFile(const char* path)
     // -------------------------------------- Loading Image
     if (ilLoadImage(path))
     {
-        ILuint imageID;
-        ilGenImages(1, &imageID);
-        ilBindImage(imageID);
-        
-        ilLoadImage(path);
+		ilEnable(IL_FILE_OVERWRITE);
+		ilSaveImage(path);
 
-        BYTE* data = ilGetData();
-        
-        int const width = ilGetInteger(IL_IMAGE_WIDTH);
-        int const height = ilGetInteger(IL_IMAGE_HEIGHT);
-        int const type = ilGetInteger(IL_IMAGE_TYPE); // matches OpenGL
-        int const format = ilGetInteger(IL_IMAGE_FORMAT); // matches OpenGL
+		ILuint ImgId;
+		ilGenImages(1, &ImgId);
+		ilBindImage(ImgId);
 
-        GLuint textureID;
-        glGenTextures(1, &textureID);
-        glBindTexture(GL_TEXTURE_2D, textureID);
+		ilLoadImage(path);
 
-        glPixelStorei(GL_UNPACK_SWAP_BYTES, GL_FALSE);
-        glPixelStorei(GL_UNPACK_ROW_LENGTH, 0); // rows are tightly packed
-        glPixelStorei(GL_UNPACK_SKIP_PIXELS, 0);
-        glPixelStorei(GL_UNPACK_SKIP_ROWS, 0);
-        glPixelStorei(GL_UNPACK_ALIGNMENT, 1); // pixels are tightly packed
+		//ilBindImage(ImgId);
+		BYTE* data = ilGetData();
 
-        glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, type, data);
+		ILuint imgWidth, imgHeight;
+		imgWidth = ilGetInteger(IL_IMAGE_WIDTH);
+		imgHeight = ilGetInteger(IL_IMAGE_HEIGHT);
+		int const type = ilGetInteger(IL_IMAGE_TYPE);
+		int const format = ilGetInteger(IL_IMAGE_FORMAT);
 
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		// ---------------------------------------------------------------------------------------------------- Create Texture from ImageData
+		glTexImage2D(GL_TEXTURE_2D, 0, format, imgWidth, imgHeight, 0, format,
+			type, data);
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
 
-        return textureID;
-        LOG(" Could Load Image.");
+		ImgId = ilutGLBindTexImage();
+		glBindTexture(GL_TEXTURE_2D, ImgId);
+		ilDeleteImages(1, &ImgId);
+
+		//info.LOGC("TEX ID: %d", ImgId);
+
+		return ImgId;
     }
     else
     {
