@@ -22,7 +22,6 @@ void MeshLoader::DebugMode()
 void MeshLoader::LoadFile(const char* file_path, MeshInfo* ourMesh)
 {
 	
-
 	const aiScene* scene = aiImportFile(file_path, aiProcessPreset_TargetRealtime_MaxQuality);
 
 	if (scene != nullptr && scene->HasMeshes())
@@ -79,10 +78,9 @@ void MeshLoader::LoadFile(const char* file_path, MeshInfo* ourMesh)
 				MeshLoader::SetUpMesh(ourMesh);
 				//meshList.push_back(ourMesh);
 				
-				ourMesh->texture_id = TextureLoader::LoadTextureFromFile(ourMesh->tex);
-
-				
 			}
+
+			ourMesh->texture_id = TextureLoader::LoadTextureFromFile(ourMesh->tex);
 
 		}
 		aiReleaseImport(scene);

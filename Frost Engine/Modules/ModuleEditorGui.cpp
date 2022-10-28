@@ -142,7 +142,7 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 			ImGui::EndMenuBar();
 		}
 		ImGui::Text("Main Window");
-		ImGui::Checkbox("Cube", &App->renderer3D->cube);
+		ImGui::Checkbox("Cube", &App->meshRender->cube);
 		ImGui::Checkbox("Wireframe Mode", &wireframe);
 		ImGui::Checkbox("Color", &color);      
 		
