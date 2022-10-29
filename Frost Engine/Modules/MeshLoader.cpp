@@ -23,12 +23,12 @@ void MeshLoader::LoadFile(const char* file_path, MeshInfo* ourMesh)
 {
 	
 	const aiScene* scene = aiImportFile(file_path, aiProcessPreset_TargetRealtime_MaxQuality);
+	
 
 	if (scene != nullptr && scene->HasMeshes())
 	{
 		for (uint i = 0; i < scene->mNumMeshes; i++)
 		{
-
 			MeshInfo* ourMesh = new MeshInfo();
 			// copy vertices
 			ourMesh->num_vertex = scene->mMeshes[i]->mNumVertices;
@@ -49,12 +49,12 @@ void MeshLoader::LoadFile(const char* file_path, MeshInfo* ourMesh)
 					ourMesh->vertex[v * VERTEX_FEATURES + 4] = scene->mMeshes[i]->mTextureCoords[0][v].y;
 				}
 				// -------------------------------------------------------------------------------------- In a future
-				//if (scene->mMeshes[i]->HasNormals())
-				//{
-					//newMesh->vertex[v * VERTEX_FEATURES + 5] = scene->mMeshes[i]->mNormals[v].x;
-					//newMesh->vertex[v * VERTEX_FEATURES + 6] = scene->mMeshes[i]->mNormals[v].y;
-					//newMesh->vertex[v * VERTEX_FEATURES + 7] = scene->mMeshes[i]->mNormals[v].z;
-				//}
+				/*if (scene->mMeshes[i]->HasNormals())
+				{
+					ourMesh->vertex[v * VERTEX_FEATURES + 5] = scene->mMeshes[i]->mNormals[v].x;
+					ourMesh->vertex[v * VERTEX_FEATURES + 6] = scene->mMeshes[i]->mNormals[v].y;
+					ourMesh->vertex[v * VERTEX_FEATURES + 7] = scene->mMeshes[i]->mNormals[v].z;
+				}*/
 			}
 
 			// copy faces
@@ -75,14 +75,14 @@ void MeshLoader::LoadFile(const char* file_path, MeshInfo* ourMesh)
 					}
 				}
 
-				MeshLoader::SetUpMesh(ourMesh);
-				//meshList.push_back(ourMesh);
 				
 			}
 
 			ourMesh->texture_id = TextureLoader::LoadTextureFromFile(ourMesh->tex);
 
+			MeshLoader::SetUpMesh(ourMesh);
 		}
+		
 		aiReleaseImport(scene);
 	}
 	else
@@ -91,46 +91,27 @@ void MeshLoader::LoadFile(const char* file_path, MeshInfo* ourMesh)
 
 void MeshInfo::RenderMesh()
 {
-
-	//Bind Texture
-	glEnable(GL_TEXTURE_COORD_ARRAY);
-	//glEnable(GL_TEXTURE_2D);
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glBindTexture(GL_TEXTURE_2D, texture_id);
-
 	// Bind Buffers
 	glBindBuffer(GL_ARRAY_BUFFER, id_vertex);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, id_index);
+
+	glBindTexture(GL_TEXTURE_2D, texture_id);
+
+
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+	//glEnableClientState(GL_NORMAL_ARRAY);
 
 	// Vertex Array [ x, y, z, u, v ]
 	glVertexPointer(3, GL_FLOAT, sizeof(float) * VERTEX_FEATURES, NULL);
 	glTexCoordPointer(2, GL_FLOAT, sizeof(float) * VERTEX_FEATURES, (void*)(3 * sizeof(float)));
 	glNormalPointer(GL_FLOAT, sizeof(float) * VERTEX_FEATURES, NULL);
-
-	//glPushMatrix();
+	
 
 	// Draw
 	glDrawElements(GL_TRIANGLES, num_index, GL_UNSIGNED_INT, NULL);
 
-	//glPopMatrix(); 
-
-	for (int v = 0; v < num_vertex; v++) {
-		//glEnableClientState(GL_VERTEX_ARRAY);
-		glVertexPointer(3, GL_FLOAT, sizeof(float) * VERTEX_FEATURES, &vertex[v * VERTEX_FEATURES]);
-		glVertexPointer(3, GL_FLOAT, sizeof(float) * VERTEX_FEATURES, &vertex[v * VERTEX_FEATURES + 1]);
-		glVertexPointer(3, GL_FLOAT, sizeof(float) * VERTEX_FEATURES, &vertex[v * VERTEX_FEATURES + 2]);
-		glClientActiveTexture(GL_TEXTURE0);
-		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-		glTexCoordPointer(2, GL_FLOAT, sizeof(float) * VERTEX_FEATURES, &vertex[v * VERTEX_FEATURES + 3]);
-		glTexCoordPointer(2, GL_FLOAT, sizeof(float) * VERTEX_FEATURES, &vertex[v * VERTEX_FEATURES + 4]);
-		glEnableClientState(GL_NORMAL_ARRAY);
-		glNormalPointer(GL_FLOAT, sizeof(float) * VERTEX_FEATURES, &vertex[v * VERTEX_FEATURES + 5]);
-		glNormalPointer(GL_FLOAT, sizeof(float) * VERTEX_FEATURES, &vertex[v * VERTEX_FEATURES + 6]);
-		glNormalPointer(GL_FLOAT, sizeof(float) * VERTEX_FEATURES, &vertex[v * VERTEX_FEATURES + 7]);
-
-		//glDrawRangeElements(GL_TRIANGLES, vertex[v * VERTEX_FEATURES], vertex[v * VERTEX_FEATURES + 1], vertex[v * VERTEX_FEATURES + 2], GL_UNSIGNED_SHORT, index);
-
-	}
+	glClientActiveTexture(GL_TEXTURE0);
 
 	// Unbind buffers
 	glBindTexture(GL_TEXTURE_2D, 0);
