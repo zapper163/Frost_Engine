@@ -136,7 +136,7 @@ update_status ModuleInput::PreUpdate(float dt)
 				dropped_filedir = e.drop.file;
 				std::string fn = e.drop.file;
 				if (fn.substr(fn.find_last_of(".") + 1) == "fbx") {
-					MeshLoader::LoadFile(dropped_filedir, &Mesh);
+					MeshLoader::LoadFile(dropped_filedir);
 					App->editorGui->console.AddLog(__FILE__, __LINE__, "Fbx Loaded");
 				}
 				else if(fn.substr(fn.find_last_of(".") + 1) == "png") {

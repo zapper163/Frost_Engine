@@ -60,7 +60,7 @@ bool ModuleMeshRender::Init()
 
 bool ModuleMeshRender::Start()
 {
-	MeshLoader::LoadFile(filepath, &houseMesh);
+	MeshLoader::LoadFile(filepath);
 
 	if (cube)
 	{

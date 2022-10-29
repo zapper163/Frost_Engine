@@ -19,7 +19,7 @@ void MeshLoader::DebugMode()
 	aiAttachLogStream(&stream);
 }
 
-void MeshLoader::LoadFile(const char* file_path, MeshInfo* ourMesh)
+void MeshLoader::LoadFile(const char* file_path)
 {
 	
 	const aiScene* scene = aiImportFile(file_path, aiProcessPreset_TargetRealtime_MaxQuality);
@@ -119,7 +119,6 @@ void MeshInfo::RenderMesh()
 
 void MeshLoader::Render()
 {
-	
 	for (size_t i = 0; i < meshList.size(); i++) {
 		meshList[i]->RenderMesh();
 	}

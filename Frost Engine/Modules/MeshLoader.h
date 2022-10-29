@@ -44,7 +44,7 @@ class MeshLoader
 {
 public:
 	void DebugMode();
-	static void LoadFile(const char* file_path, MeshInfo* ourMesh);
+	static void LoadFile(const char* file_path);
 
 	static void Render();
 	static void CleanUp();

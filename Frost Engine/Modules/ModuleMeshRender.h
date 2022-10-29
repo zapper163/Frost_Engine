@@ -31,7 +31,6 @@ public:
 	const char* tex = "Assets/Baker_house.png";
 
 	const char* filepath = "Assets/BakerHouse.fbx";
-	MeshInfo houseMesh;
 
 private:
     // Texture
