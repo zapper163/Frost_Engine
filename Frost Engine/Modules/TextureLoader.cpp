@@ -16,7 +16,6 @@ GLuint TextureLoader::LoadTextureFromFile(const char* path)
     iluInit();
     ilutInit();
 
-    // -------------------------------------- Loading Image
     if (ilLoadImage(path))
     {
 		ilEnable(IL_FILE_OVERWRITE);
@@ -27,21 +26,11 @@ GLuint TextureLoader::LoadTextureFromFile(const char* path)
 		ilBindImage(ImgId);
 
 		ilLoadImage(path);
-		/////
-		BYTE* data = ilGetData();
-
-		ILuint imgWidth, imgHeight;
-		imgWidth = ilGetInteger(IL_IMAGE_WIDTH);
-		imgHeight = ilGetInteger(IL_IMAGE_HEIGHT);
-		int const type = ilGetInteger(IL_IMAGE_TYPE);
-		int const format = ilGetInteger(IL_IMAGE_FORMAT);
-
+		
 		ImgId = ilutGLBindTexImage();
-
+		
 		ilBindImage(0);
 		ilDeleteImages(1, &ImgId);
-
-		//info.LOGC("TEX ID: %d", ImgId);
 
 		return ImgId;
     }
