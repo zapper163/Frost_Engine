@@ -140,7 +140,12 @@ update_status ModuleInput::PreUpdate(float dt)
 					App->editorGui->console.AddLog(__FILE__, __LINE__, "Fbx Loaded");
 				}
 				else if(fn.substr(fn.find_last_of(".") + 1) == "png") {
-					TextureLoader::LoadTextureFromFile(dropped_filedir);
+
+					for (int i = 0; i < MeshLoader::meshList.size();  i++)
+					{
+						MeshLoader::meshList[i]->texture_id = TextureLoader::LoadTextureFromFile(dropped_filedir);
+					}
+					
 					App->editorGui->console.AddLog(__FILE__, __LINE__, "Png Loaded");
 				}
 
