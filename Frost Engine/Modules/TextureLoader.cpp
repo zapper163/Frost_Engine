@@ -8,13 +8,14 @@
 #include <gl/GL.h>
 #include <gl/GLU.h>
 
-
+std::map<std::string, uint> TextureLoader::loaded_textures;
 
 GLuint TextureLoader::LoadTextureFromFile(const char* path)
 {
-    ilInit();
-    iluInit();
-    ilutInit();
+	if (loaded_textures.find(path) != loaded_textures.end())
+	{
+		return loaded_textures[path];
+	}
 
     if (ilLoadImage(path))
     {
@@ -31,6 +32,8 @@ GLuint TextureLoader::LoadTextureFromFile(const char* path)
 		
 		ilBindImage(0);
 		ilDeleteImages(1, &ImgId);
+		
+		loaded_textures[path] = ImgId;
 
 		return ImgId;
     }

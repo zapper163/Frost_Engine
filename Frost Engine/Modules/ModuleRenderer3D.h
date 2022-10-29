@@ -28,6 +28,7 @@ public:
 
     void InitFrameBuffer();
     void RefreshBuffer();
+    void ResizeBuffer(int width,int height);
 
    
 
@@ -39,8 +40,6 @@ public:
 	SDL_GLContext context;
 	mat3x3 NormalMatrix;
 	mat4x4 ModelMatrix, ViewMatrix, ProjectionMatrix;
-
-    
 
     unsigned int textureColorbuffer;
     unsigned int framebuffer;

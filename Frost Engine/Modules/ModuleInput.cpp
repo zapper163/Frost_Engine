@@ -7,7 +7,6 @@
 #include "ImGui/imgui_impl_sdl.h"
 
 #include <iostream>
-#include <filesystem>
 
 
 #define MAX_KEYS 300
@@ -132,7 +131,8 @@ update_status ModuleInput::PreUpdate(float dt)
 			}
 
 			case (SDL_DROPFILE): 
-			{      // In case if dropped file
+			{   
+
 				dropped_filedir = e.drop.file;
 				std::string fn = e.drop.file;
 				if (fn.substr(fn.find_last_of(".") + 1) == "fbx") {

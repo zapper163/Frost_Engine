@@ -29,24 +29,24 @@ void MeshLoader::LoadFile(const char* file_path, MeshInfo* ourMesh)
 	{
 		for (uint i = 0; i < scene->mNumMeshes; i++)
 		{
-			MeshInfo* ourMesh = new MeshInfo();
+			MeshInfo* mesh = new MeshInfo();
 			// copy vertices
-			ourMesh->num_vertex = scene->mMeshes[i]->mNumVertices;
-			ourMesh->vertex = new float[ourMesh->num_vertex * VERTEX_FEATURES];
+			mesh->num_vertex = scene->mMeshes[i]->mNumVertices;
+			mesh->vertex = new float[mesh->num_vertex * VERTEX_FEATURES];
 			//memcpy(ourMesh->vertex, scene->mMeshes[i]->mVertices, sizeof(float) * ourMesh->num_vertex * 3);
-			App->editorGui->console.AddLog(__FILE__, __LINE__, "New mesh with %d vertices", ourMesh->num_vertex);
+			App->editorGui->console.AddLog(__FILE__, __LINE__, "New mesh with %d vertices", mesh->num_vertex);
 
-			for (int v = 0; v < ourMesh->num_vertex; v++) {
+			for (int v = 0; v < mesh->num_vertex; v++) {
 				// Vertex
-				ourMesh->vertex[v * VERTEX_FEATURES] = scene->mMeshes[i]->mVertices[v].x;
-				ourMesh->vertex[v * VERTEX_FEATURES + 1] = scene->mMeshes[i]->mVertices[v].y;
-				ourMesh->vertex[v * VERTEX_FEATURES + 2] = scene->mMeshes[i]->mVertices[v].z;
+				mesh->vertex[v * VERTEX_FEATURES] = scene->mMeshes[i]->mVertices[v].x;
+				mesh->vertex[v * VERTEX_FEATURES + 1] = scene->mMeshes[i]->mVertices[v].y;
+				mesh->vertex[v * VERTEX_FEATURES + 2] = scene->mMeshes[i]->mVertices[v].z;
 
 				if (scene->mMeshes[i]->HasTextureCoords(0))
 				{
 					// UVs
-					ourMesh->vertex[v * VERTEX_FEATURES + 3] = scene->mMeshes[i]->mTextureCoords[0][v].x;
-					ourMesh->vertex[v * VERTEX_FEATURES + 4] = scene->mMeshes[i]->mTextureCoords[0][v].y;
+					mesh->vertex[v * VERTEX_FEATURES + 3] = scene->mMeshes[i]->mTextureCoords[0][v].x;
+					mesh->vertex[v * VERTEX_FEATURES + 4] = scene->mMeshes[i]->mTextureCoords[0][v].y;
 				}
 				// -------------------------------------------------------------------------------------- In a future
 				/*if (scene->mMeshes[i]->HasNormals())
@@ -60,8 +60,8 @@ void MeshLoader::LoadFile(const char* file_path, MeshInfo* ourMesh)
 			// copy faces
 			if (scene->mMeshes[i]->HasFaces())
 			{
-				ourMesh->num_index = scene->mMeshes[i]->mNumFaces * 3;
-				ourMesh->index = new uint[ourMesh->num_index]; // assume each face is a triangle
+				mesh->num_index = scene->mMeshes[i]->mNumFaces * 3;
+				mesh->index = new uint[mesh->num_index]; // assume each face is a triangle
 
 				for (uint j = 0; j < scene->mMeshes[i]->mNumFaces; ++j)
 				{
@@ -71,16 +71,13 @@ void MeshLoader::LoadFile(const char* file_path, MeshInfo* ourMesh)
 					}
 					else
 					{
-						memcpy(&ourMesh->index[j * 3], scene->mMeshes[i]->mFaces[j].mIndices, 3 * sizeof(uint));
+						memcpy(&mesh->index[j * 3], scene->mMeshes[i]->mFaces[j].mIndices, 3 * sizeof(uint));
 					}
 				}
-
-				
 			}
+			mesh->texture_id = TextureLoader::LoadTextureFromFile(mesh->tex);
 
-			ourMesh->texture_id = TextureLoader::LoadTextureFromFile(ourMesh->tex);
-
-			MeshLoader::SetUpMesh(ourMesh);
+			MeshLoader::SetUpMesh(mesh);
 		}
 		
 		aiReleaseImport(scene);

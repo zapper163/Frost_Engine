@@ -82,17 +82,17 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 
 	if (show_main_window)
 	{
-		// Using a Child allow to fill all the space of the window.
-		// It also alows customization
+		
 		ImGui::Begin("GameRender", NULL, ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBringToFrontOnFocus );
-		ImGui::BeginChild("GameRender", ImVec2(SCREEN_WIDTH, SCREEN_HEIGHT));
 		ImVec2 wsize = ImGui::GetWindowSize();
-		ImGui::Image((ImTextureID)App->renderer3D->textureColorbuffer, wsize, ImVec2(0, 1), ImVec2(1, 0));
-		ImGui::EndChild();
+
+		float w = ImGui::GetContentRegionAvail().x;
+		float h = w * (9.0f / 16.0f);
+
+		ImGui::Image((ImTextureID)App->renderer3D->textureColorbuffer, ImVec2(w, h), ImVec2(0, 1), ImVec2(1, 0));
 		ImGui::End();
 
 		ImGui::Begin("Main", NULL, ImGuiWindowFlags_MenuBar);  
-		
 		
 		if (ImGui::BeginMenuBar())
 		{

@@ -11,8 +11,7 @@
 
 #include <iostream>
 #include <string>
-#include <vector>
-
+#include <map>
 
 using namespace std;
 
@@ -22,9 +21,7 @@ public:
 	
 	static GLuint LoadTextureFromFile(const char* path);
 
-
-	
-	//static bool RenderTexture();
+	static std::map<std::string, uint> loaded_textures;
 
 	void CleanUp();
 };
