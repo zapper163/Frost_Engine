@@ -14,6 +14,8 @@ ModuleSceneIntro::~ModuleSceneIntro()
 bool ModuleSceneIntro::Start()
 {
 	LOG("Loading Intro assets");
+	App->editorGui->console.AddLog(__FILE__, __LINE__, "Loading Intro assets");
+
 	bool ret = true;
 
 	App->camera->Move(vec3(1.0f, 1.0f, 0.0f));
@@ -53,6 +55,8 @@ update_status ModuleSceneIntro::PostUpdate(float dt)
 bool ModuleSceneIntro::CleanUp()
 {
 	LOG("Unloading Intro scene");
+	App->editorGui->console.AddLog(__FILE__, __LINE__, "Unloading Intro scene");
+
 
 	for (uint n = 0; n < primitives.Count(); n++)
 	{

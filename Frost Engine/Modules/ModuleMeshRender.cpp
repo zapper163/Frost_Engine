@@ -28,7 +28,9 @@ bool ModuleMeshRender::Init()
 {
 	bool ret = true;
 
-	
+	LOG("Mesh Renderer started");
+	App->editorGui->console.AddLog(__FILE__, __LINE__, "Mesh Renderer started");
+
 
 	
 	// Checker Texture
@@ -98,7 +100,9 @@ update_status ModuleMeshRender::Update(float dt)
 // Called before quitting
 bool ModuleMeshRender::CleanUp()
 {
-	LOG("Quitting SDL input event subsystem");
+	LOG("Destroying Mesh Renderer");
+	App->editorGui->console.AddLog(__FILE__, __LINE__, "Destroying Mesh Renderer");
+
 	SDL_QuitSubSystem(SDL_INIT_EVENTS);
 	return true;
 }

@@ -4,6 +4,7 @@
 #include "MeshLoader.h"
 #include "TextureLoader.h"
 
+
 #include "Glew/include/glew.h"
 #include "SDL\include\SDL_opengl.h"
 #include <gl/GL.h>
@@ -34,6 +35,8 @@ bool ModuleRenderer3D::Init()
 {
 
 	LOG("Creating 3D Renderer context");
+	App->editorGui->console.AddLog(__FILE__, __LINE__, "Creating 3D Renderer context");
+
 	bool ret = true;
 
 	//Create context
@@ -41,12 +44,16 @@ bool ModuleRenderer3D::Init()
 	if(context == NULL)
 	{
 		LOG("OpenGL context could not be created! SDL_Error: %s\n", SDL_GetError());
+		App->editorGui->console.AddLog(__FILE__, __LINE__, "OpenGL context could not be created!");
+
 		ret = false;
 	}
 	
 	//GLEW                       
 	GLenum err = glewInit();
 	LOG("Using Glew %s", glewGetString(GLEW_VERSION));
+	App->editorGui->console.AddLog(__FILE__, __LINE__, "Using Glew %s", glewGetString(GLEW_VERSION));
+
 	//Should be 2.0
 
 	SDL_GL_MakeCurrent(App->window->window, context);
@@ -56,6 +63,8 @@ bool ModuleRenderer3D::Init()
 		//Use Vsync
 		if(VSYNC && SDL_GL_SetSwapInterval(1) < 0)
 			LOG("Warning: Unable to set VSync! SDL Error: %s\n", SDL_GetError());
+			App->editorGui->console.AddLog(__FILE__, __LINE__, "Warning: Unable to set VSync! SDL Error");
+
 
 		//Initialize Projection Matrix
 		glMatrixMode(GL_PROJECTION);
@@ -66,6 +75,8 @@ bool ModuleRenderer3D::Init()
 		if(error != GL_NO_ERROR)
 		{
 			LOG("Error initializing OpenGL! %s\n", gluErrorString(error));
+			App->editorGui->console.AddLog(__FILE__, __LINE__, "Error initializing OpenGL! ");
+
 			ret = false;
 		}
 
@@ -78,6 +89,8 @@ bool ModuleRenderer3D::Init()
 		if(error != GL_NO_ERROR)
 		{
 			LOG("Error initializing OpenGL! %s\n", gluErrorString(error));
+			App->editorGui->console.AddLog(__FILE__, __LINE__, "Error initializing OpenGL! ");
+
 			ret = false;
 		}
 		
@@ -94,6 +107,8 @@ bool ModuleRenderer3D::Init()
 		if(error != GL_NO_ERROR)
 		{
 			LOG("Error initializing OpenGL! %s\n", gluErrorString(error));
+			App->editorGui->console.AddLog(__FILE__, __LINE__, "Error initializing OpenGL!");
+
 			ret = false;
 		}
 		
@@ -139,7 +154,9 @@ bool ModuleRenderer3D::Init()
 	ILenum ilError = ilGetError();
 	if (ilError != IL_NO_ERROR)
 	{
-		printf("Error initializing DevIL! %s\n", iluErrorString(ilError));
+		LOG("Error initializing DevIL! %s\n", iluErrorString(ilError));
+		App->editorGui->console.AddLog(__FILE__, __LINE__, "Error initializing DevIL!");
+
 		return false;
 	}
 	
@@ -208,6 +225,8 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 bool ModuleRenderer3D::CleanUp()
 {
 	LOG("Destroying 3D Renderer");
+	App->editorGui->console.AddLog(__FILE__, __LINE__, "Destroying 3D Renderer");
+
 
 	// Cleanup
 	SDL_GL_DeleteContext(context);

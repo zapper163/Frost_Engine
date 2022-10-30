@@ -20,6 +20,8 @@ ModuleCamera3D::~ModuleCamera3D()
 bool ModuleCamera3D::Start()
 {
 	LOG("Setting up the camera");
+	App->editorGui->console.AddLog(__FILE__, __LINE__, "Setting up the camera");
+
 	bool ret = true;
 
 	return ret;
@@ -28,6 +30,7 @@ bool ModuleCamera3D::Start()
 bool ModuleCamera3D::CleanUp()
 {
 	LOG("Cleaning camera");
+	App->editorGui->console.AddLog(__FILE__, __LINE__, "Cleaning camera");
 
 	return true;
 }

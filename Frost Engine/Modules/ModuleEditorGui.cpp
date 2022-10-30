@@ -19,6 +19,10 @@ bool ModuleEditorGui::Init()
 {
 	bool ret = true;
 
+	LOG("ImGui Module started");
+	App->editorGui->console.AddLog(__FILE__, __LINE__, "ImGui Module started");
+
+
 	// Setup Dear ImGui context
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
@@ -48,7 +52,6 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 
 	ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
-	// Start the Dear ImGui frame
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui_ImplSDL2_NewFrame(App->window->window);
 	ImGui::NewFrame();
@@ -126,8 +129,6 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 			{
 				show_console_window = true;
 				console_visible = !console_visible;
-
-				console.AddLog(__FILE__, __LINE__, "Console Started");
 
 				ImGui::EndMenu();
 			}
@@ -255,6 +256,7 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 bool ModuleEditorGui::CleanUp()
 {
 	LOG("Destroying ImGui");
+	App->editorGui->console.AddLog(__FILE__, __LINE__, "Destroying ImGui");
 
 	// Cleanup
 	ImGui_ImplOpenGL3_Shutdown();

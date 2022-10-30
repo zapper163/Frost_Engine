@@ -31,6 +31,7 @@ ModuleInput::~ModuleInput()
 bool ModuleInput::Init()
 {
 	LOG("Init SDL input event system");
+	App->editorGui->console.AddLog(__FILE__, __LINE__, "Init SDL input event system");
 	bool ret = true;
 	SDL_Init(0);
 
@@ -39,6 +40,8 @@ bool ModuleInput::Init()
 	if(SDL_InitSubSystem(SDL_INIT_EVENTS) < 0)
 	{
 		LOG("SDL_EVENTS could not initialize! SDL_Error: %s\n", SDL_GetError());
+		App->editorGui->console.AddLog(__FILE__, __LINE__, "SDL_EVENTS could not initialize! SDL_Error: %s\n", SDL_GetError());
+
 		ret = false;
 	}
 
@@ -174,6 +177,8 @@ update_status ModuleInput::Update(float dt)
 bool ModuleInput::CleanUp()
 {
 	LOG("Quitting SDL input event subsystem");
+	App->editorGui->console.AddLog(__FILE__, __LINE__, "Quitting SDL input event subsystem");
+
 	SDL_QuitSubSystem(SDL_INIT_EVENTS);
 	return true;
 }
