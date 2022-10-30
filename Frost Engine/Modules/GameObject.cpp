@@ -4,14 +4,20 @@
 #include "GameObject.h"
 #include "Component.h"
 #include "C_Transform.h"
+#include "MeshLoader.h"
 
 #include <iostream>
 #include <string>
 #include <vector>
 
+
 GameObject::GameObject(GameObject* parent, std::string name)
 {
-	id = 1;// app->engine_order->AddGameObject(this);
+	
+	App->scene_intro->gameObjects[App->meshRender->id_count] = this;
+	this->name = name;
+	id = App->meshRender->id_count;
+	App->meshRender->id_count++;
 	transform = dynamic_cast<C_Transform*>(CreateComponent(Component::TYPE::TRANSFORM));
 	if (parent != nullptr) parent->AddChild(this);
 }
@@ -34,9 +40,10 @@ Component* GameObject::CreateComponent(Component::TYPE type)
 	Component* new_component;
 	switch (type)
 	{
-	/*case Component::TYPE::TRANSFORM:
+	case Component::TYPE::TRANSFORM:
 		new_component = new C_Transform(this);
 		break;
+		/*
 	case Component::TYPE::MESH_RENDERER:
 		new_component = new C_MeshRenderer(this);
 		break;
@@ -65,8 +72,22 @@ Component* GameObject::GetComponent(Component::TYPE type)
 	return NULL; // component not find
 }
 
+vector <GameObject*> GameObject::GetChildren()
+{
+	
+	return children; // component not find
+}
+
+GameObject* GameObject::GetChild(int n)
+{
+
+	return children[n]; // component not find
+}
+
 bool GameObject::AddChild(GameObject* child)
 {
+	children.push_back(child);
+
 	return true;
 }
 

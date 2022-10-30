@@ -3,6 +3,11 @@
 #include "ModuleSceneIntro.h"
 #include "Primitive.h"
 
+
+
+std::map<uint, GameObject*> ModuleSceneIntro::gameObjects;
+
+
 ModuleSceneIntro::ModuleSceneIntro(bool start_enabled) : Module(start_enabled)
 {
 }
@@ -68,5 +73,9 @@ bool ModuleSceneIntro::CleanUp()
 }
 
 
-//GameObject* CreateGameObject()
+void ModuleSceneIntro::CreateGameObject(GameObject* parent, std::string name)
+{
+	GameObject* BakerHouse = new GameObject(parent, name);
+
+}
 

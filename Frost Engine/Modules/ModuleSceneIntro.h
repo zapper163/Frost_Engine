@@ -17,10 +17,12 @@ public:
 	update_status PostUpdate(float dt) override;
 	bool CleanUp();
 
-	//GameObject* CreateGameObject();
+	void CreateGameObject(GameObject* parent, std::string name);
+	//void Patata();
 
+	static std::map<uint, GameObject*> gameObjects;
 
 private:
 	p2DynArray<Primitive*> primitives;
-	vector<GameObject*> game_objects;
+	
 };

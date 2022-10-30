@@ -86,7 +86,7 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 	if (show_main_window)
 	{
 		
-		ImGui::Begin("GameRender", NULL, ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBringToFrontOnFocus );
+		ImGui::Begin("GameRender", NULL, ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoScrollbar);
 		ImVec2 wsize = ImGui::GetWindowSize();
 
 		float w = ImGui::GetContentRegionAvail().x;
@@ -132,6 +132,12 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 
 				ImGui::EndMenu();
 			}
+			if (ImGui::BeginMenu("GameObject"))
+			{
+				show_gameobject_window = true;
+				
+				ImGui::EndMenu();
+			}
 			if (ImGui::BeginMenu("Exit"))
 			{
 				if (ImGui::MenuItem("Exit"))
@@ -166,7 +172,7 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 
 	if (show_credits_window)
 	{
-		ImGui::Begin("Credits", &show_credits_window, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_MenuBar);                          // Create a window called "Hello, world!" and append into it.
+		ImGui::Begin("Credits", &show_credits_window, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_MenuBar); 
 		if (ImGui::BeginMenuBar())
 		{
 			if (ImGui::BeginMenu("Menu"))
@@ -244,6 +250,47 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 		ShowConsole();
 	}
 
+	if (show_gameobject_window)
+	{
+		ImGui::Begin("GameObjects", &show_gameobject_window, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_MenuBar);
+		if (ImGui::BeginMenuBar())
+		{
+			if (ImGui::BeginMenu("Menu"))
+			{
+				if (ImGui::MenuItem("Settings"))
+				{
+
+				}
+				ImGui::EndMenu();
+			}
+			ImGui::EndMenuBar();
+		}
+		ImGui::Text("GameObjects: \n");
+		DisplayGameObjects(App->scene_intro->gameObjects[0]);
+
+		ImGui::End();
+	}
+
+	if (show_components_window)
+	{
+		ImGui::Begin("Components", &show_gameobject_window, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_MenuBar);
+		if (ImGui::BeginMenuBar())
+		{
+			if (ImGui::BeginMenu("Menu"))
+			{
+				if (ImGui::MenuItem("Settings"))
+				{
+
+				}
+				ImGui::EndMenu();
+			}
+			ImGui::EndMenuBar();
+		}
+		ImGui::Text("GameObjects: \n");
+
+		ImGui::End();
+	}
+
 	// Rendering
 	ImGui::Render();
 	glViewport(0, 0, (int)io.DisplaySize.x, (int)io.DisplaySize.y);
@@ -289,5 +336,28 @@ void ModuleEditorGui::PushLog(std::vector<float>* Log, float toPush)
 	}
 	else Log->push_back(toPush);
 
+
+}
+
+void ModuleEditorGui::DisplayGameObjects(GameObject* game_object)
+{
+	ImGuiTreeNodeFlags TreeFlags = ImGuiTreeNodeFlags_OpenOnArrow;
+
+	if (game_object->GetChildren().empty())
+	{
+		TreeFlags |= ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_NoTreePushOnOpen;
+		ImGui::TreeNodeEx(game_object->name.c_str(), TreeFlags);
+	}
+	else
+	{
+		if (ImGui::TreeNodeEx(game_object->name.c_str(), TreeFlags))
+		{
+			for (size_t i = 0; i < game_object->GetChildren().size(); i++)
+			{
+				DisplayGameObjects(game_object->GetChild(i));
+			}
+			ImGui::TreePop();
+		}
+	}
 
 }

@@ -23,13 +23,12 @@ void MeshLoader::LoadFile(const char* file_path)
 {
 	
 	const aiScene* scene = aiImportFile(file_path, aiProcessPreset_TargetRealtime_MaxQuality);
-	
-
 	if (scene != nullptr && scene->HasMeshes())
 	{
 		for (uint i = 0; i < scene->mNumMeshes; i++)
 		{
 			MeshInfo* mesh = new MeshInfo();
+			
 			// copy vertices
 			mesh->num_vertex = scene->mMeshes[i]->mNumVertices;
 			mesh->vertex = new float[mesh->num_vertex * VERTEX_FEATURES];
@@ -48,13 +47,6 @@ void MeshLoader::LoadFile(const char* file_path)
 					mesh->vertex[v * VERTEX_FEATURES + 3] = scene->mMeshes[i]->mTextureCoords[0][v].x;
 					mesh->vertex[v * VERTEX_FEATURES + 4] = scene->mMeshes[i]->mTextureCoords[0][v].y;
 				}
-				// -------------------------------------------------------------------------------------- In a future
-				/*if (scene->mMeshes[i]->HasNormals())
-				{
-					ourMesh->vertex[v * VERTEX_FEATURES + 5] = scene->mMeshes[i]->mNormals[v].x;
-					ourMesh->vertex[v * VERTEX_FEATURES + 6] = scene->mMeshes[i]->mNormals[v].y;
-					ourMesh->vertex[v * VERTEX_FEATURES + 7] = scene->mMeshes[i]->mNormals[v].z;
-				}*/
 			}
 
 			// copy faces
@@ -77,13 +69,22 @@ void MeshLoader::LoadFile(const char* file_path)
 			}
 			mesh->texture_id = TextureLoader::LoadTextureFromFile(mesh->tex);
 
+			App->scene_intro->CreateGameObject(App->scene_intro->gameObjects[0], scene->mMeshes[i]->mName.C_Str());
+
 			MeshLoader::SetUpMesh(mesh);
+
+			
 		}
-		
+
 		aiReleaseImport(scene);
+
 	}
 	else
+	{
 		LOG("Error loading scene % s", file_path);
+
+	}
+		
 }
 
 void MeshInfo::RenderMesh()
@@ -152,4 +153,10 @@ void MeshLoader::SetUpMesh(MeshInfo* ourMesh)
 
 	//Add mesh to meshes vector
 	meshList.push_back(ourMesh);
+}
+
+const char* MeshLoader::GetMeshName(const char* mesh_name)
+{
+	const char* name = mesh_name;
+	return name;
 }

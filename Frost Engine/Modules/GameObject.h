@@ -7,16 +7,22 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <map>
+
+using namespace std;
 
 class GameObject
 {
 public:
-	GameObject(GameObject* parent, std::string name = "Default");
+	GameObject(GameObject* parent, std::string name);
 	~GameObject();
 
 	void Update();
 	Component* CreateComponent(Component::TYPE);
 	Component* GetComponent(Component::TYPE);
+
+	GameObject* GetChild(int n);
+	vector <GameObject*> GetChildren();
 
 	bool AddChild(GameObject* child);
 
@@ -27,8 +33,10 @@ public:
 	uint id = 0; 
 
 
-	GameObject* parent;
+	GameObject* parent = nullptr;
 
+private:
+	vector <GameObject*> children;
 	vector<Component*> components;
 	
 };

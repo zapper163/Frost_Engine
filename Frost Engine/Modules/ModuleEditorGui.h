@@ -101,6 +101,8 @@ public:
 
 	void ShowConsole();
 
+	void DisplayGameObjects(GameObject* game_object);
+
 	void PushLog(std::vector<float>* Log, float toPush);
 
 public:
@@ -112,6 +114,8 @@ public:
 	bool show_main_window = true;
 	bool show_hardware_window = false;
 	bool show_console_window = false;
+	bool show_gameobject_window = true;
+	bool show_components_window = true;
 	bool console_visible = true;
 
 	bool wireframe = false;

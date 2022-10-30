@@ -4,6 +4,7 @@
 
 #include "MeshLoader.h"
 #include "TextureLoader.h"
+#include "GameObject.h"
 
 #include <iostream>
 #include <filesystem>
@@ -62,6 +63,11 @@ bool ModuleMeshRender::Init()
 
 bool ModuleMeshRender::Start()
 {
+
+	GameObject* Root = new GameObject(NULL, "World");
+	
+	App->scene_intro->gameObjects[0] = Root;
+
 	MeshLoader::LoadFile(filepath);
 
 	if (cube)

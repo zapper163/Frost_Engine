@@ -22,6 +22,7 @@ public:
     void PrintCube();
     void PrintCubeV2();
 
+    
     uint num_vertices = 8;
     uint vboId = 0;
     uint iboId = 0;
@@ -31,6 +32,9 @@ public:
 	const char* tex = "Assets/Baker_house.png";
 
 	const char* filepath = "Assets/BakerHouse.fbx";
+
+    uint id_count = 0;
+    
 
 private:
     // Texture

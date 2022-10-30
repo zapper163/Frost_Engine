@@ -24,6 +24,8 @@ struct MeshInfo
 
 	}
 
+	
+
 	uint id_vertex = 0;
 	uint num_index = 0;
 	uint* index = nullptr;
@@ -37,6 +39,8 @@ struct MeshInfo
 	
 	const char* tex = "Assets/Baker_house.png";
 
+	const char* mesh_name;
+
 	void RenderMesh();
  };
 
@@ -44,6 +48,9 @@ class MeshLoader
 {
 public:
 	void DebugMode();
+
+	static const char* GetMeshName(const char* mesh_name);
+
 	static void LoadFile(const char* file_path);
 
 	static void Render();
@@ -52,6 +59,5 @@ public:
 	static void SetUpMesh(MeshInfo* ourMesh);
 	
 	static vector<MeshInfo*> meshList;
-
 	
 };
