@@ -1,6 +1,8 @@
 #pragma once
 #include "Globals.h"
 #include "Application.h"
+#include "GameObject.h"
+
 
 #include "DevIL/include/il.h"
 #include "DevIL/include/ilut.h"
@@ -19,6 +21,8 @@ class TextureLoader
 {
 public:
 	
+	const char path;
+
 	static GLuint LoadTextureFromFile(const char* path);
 
 	static std::map<std::string, uint> loaded_textures;

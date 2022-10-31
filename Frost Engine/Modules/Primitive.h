@@ -29,11 +29,11 @@ protected:
 	PrimitiveTypes type;
 };
 
-class Plane : public Primitive
+class Plano : public Primitive
 {
 public:
-	Plane();
-	Plane(float x, float y, float z, float d);
+	Plano();
+	Plano(float x, float y, float z, float d);
 
 protected:
 	void InnerRender() const;

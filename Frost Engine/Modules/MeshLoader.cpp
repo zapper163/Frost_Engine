@@ -2,6 +2,8 @@
 #include "MeshLoader.h"
 #include "TextureLoader.h"
 #include "Application.h"
+#include "C_Mesh.h"
+#include "C_Texture.h"
 
 #include "Assimp/include/cimport.h"
 #include "Assimp/include/scene.h"
@@ -21,7 +23,6 @@ void MeshLoader::DebugMode()
 
 void MeshLoader::LoadFile(const char* file_path)
 {
-	
 	const aiScene* scene = aiImportFile(file_path, aiProcessPreset_TargetRealtime_MaxQuality);
 	if (scene != nullptr && scene->HasMeshes())
 	{
@@ -69,7 +70,11 @@ void MeshLoader::LoadFile(const char* file_path)
 			}
 			mesh->texture_id = TextureLoader::LoadTextureFromFile(mesh->tex);
 
-			App->scene_intro->CreateGameObject(App->scene_intro->gameObjects[0], scene->mMeshes[i]->mName.C_Str());
+			uint ID = App->scene_intro->CreateGameObject(App->scene_intro->gameObjects[0], scene->mMeshes[i]->mName.C_Str());
+			dynamic_cast<C_Transform*>(App->scene_intro->gameObjects[ID]->GetComponent(Component::TYPE::TRANSFORM))->SetTransform(float3(0, 0, 0), float3(0, 0, 0), float3(1, 1, 1));
+			dynamic_cast<C_Mesh*>(App->scene_intro->gameObjects[ID]->CreateComponent(Component::TYPE::MESH))->SetMesh(mesh, scene->mMeshes[i]->mName.C_Str());
+			dynamic_cast<C_Texture*>(App->scene_intro->gameObjects[ID]->CreateComponent(Component::TYPE::MESH))->SetTexture(scene->mMeshes[i]->mName.C_Str()); //Poner aquí el nombre de la textura
+
 
 			MeshLoader::SetUpMesh(mesh);
 

@@ -3,6 +3,12 @@
 #include "Application.h"
 #include "GameObject.h"
 
+
+#include "ImGui/imgui.h"
+#include "ImGui/imgui_impl_sdl.h"
+#include "ImGui/imgui_impl_opengl3.h"
+
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -16,29 +22,20 @@ public:
 	{
 		NONE,
 		TRANSFORM,
-		MESH_RENDERER,
-		MATERIAL,
-		CAMERA,
-		NUM_OF_COMPS,
+		MESH,
+		TEXTURE,
+		//MATERIAL,
+		//CAMERA,
+		//NUM_OF_COMPS,
 	};
 
 
 	Component(GameObject* game_object, TYPE type);
 	virtual ~Component();
+
+	virtual void OnGui();
 	
 	TYPE GetType() { return type; }
-
-	//virtual void Enable();
-
-	//virtual void Update();
-
-	//virtual void Disable();
-	
-	bool active;
-
-	//GameObject owner;
-
-
 
 private:
 	TYPE type = TYPE::NONE;

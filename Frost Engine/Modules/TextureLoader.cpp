@@ -3,6 +3,7 @@
 #include "Application.h"
 #include "ModuleEditorGui.h"
 
+
 #include "Glew/include/glew.h"
 #include "SDL\include\SDL_opengl.h"
 #include <gl/GL.h>
@@ -12,6 +13,7 @@ std::map<std::string, uint> TextureLoader::loaded_textures;
 
 GLuint TextureLoader::LoadTextureFromFile(const char* path)
 {
+
 	if (loaded_textures.find(path) != loaded_textures.end())
 	{
 		return loaded_textures[path];

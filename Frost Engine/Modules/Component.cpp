@@ -15,3 +15,8 @@ Component::Component(GameObject* game_object, TYPE type) : go(game_object), type
 Component::~Component()
 {
 }
+
+void Component::OnGui()
+{
+
+}

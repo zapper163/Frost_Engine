@@ -58,6 +58,8 @@ public:
 
 	static void SetUpMesh(MeshInfo* ourMesh);
 	
+
+
 	static vector<MeshInfo*> meshList;
 	
 };

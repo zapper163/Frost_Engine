@@ -274,19 +274,13 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 	if (show_components_window)
 	{
 		ImGui::Begin("Components", &show_gameobject_window, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_MenuBar);
-		if (ImGui::BeginMenuBar())
+		if (App->scene_intro->gameobject_selected != NULL)
 		{
-			if (ImGui::BeginMenu("Menu"))
+			for (size_t i = 0; i < App->scene_intro->gameobject_selected->GetComponents().size(); i++)
 			{
-				if (ImGui::MenuItem("Settings"))
-				{
-
-				}
-				ImGui::EndMenu();
+				App->scene_intro->gameobject_selected->GetComponentByNum(i)->OnGui();
 			}
-			ImGui::EndMenuBar();
 		}
-		ImGui::Text("GameObjects: \n");
 
 		ImGui::End();
 	}
@@ -342,16 +336,29 @@ void ModuleEditorGui::PushLog(std::vector<float>* Log, float toPush)
 void ModuleEditorGui::DisplayGameObjects(GameObject* game_object)
 {
 	ImGuiTreeNodeFlags TreeFlags = ImGuiTreeNodeFlags_OpenOnArrow;
-
+	if (game_object == App->scene_intro->gameobject_selected)
+	{
+		TreeFlags |= ImGuiTreeNodeFlags_Selected;
+	}
 	if (game_object->GetChildren().empty())
 	{
 		TreeFlags |= ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_NoTreePushOnOpen;
 		ImGui::TreeNodeEx(game_object->name.c_str(), TreeFlags);
+
+		if (ImGui::IsItemHovered() && App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_DOWN)
+		{
+			App->scene_intro->gameobject_selected = game_object;
+		}
+
 	}
 	else
 	{
 		if (ImGui::TreeNodeEx(game_object->name.c_str(), TreeFlags))
 		{
+			if (ImGui::IsItemHovered() && App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_DOWN)
+			{
+				App->scene_intro->gameobject_selected = game_object;
+			}
 			for (size_t i = 0; i < game_object->GetChildren().size(); i++)
 			{
 				DisplayGameObjects(game_object->GetChild(i));

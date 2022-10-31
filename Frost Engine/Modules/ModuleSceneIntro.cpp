@@ -32,7 +32,7 @@ bool ModuleSceneIntro::Start()
 // Update
 update_status ModuleSceneIntro::Update(float dt)
 {
-	Plane p(0, 1, 0, 0);
+	Plano p(0, 1, 0, 0);
 	p.axis = true;
 	p.Render();
 
@@ -73,9 +73,10 @@ bool ModuleSceneIntro::CleanUp()
 }
 
 
-void ModuleSceneIntro::CreateGameObject(GameObject* parent, std::string name)
+uint ModuleSceneIntro::CreateGameObject(GameObject* parent, std::string name)
 {
 	GameObject* BakerHouse = new GameObject(parent, name);
 
+	return BakerHouse->id;
 }
 

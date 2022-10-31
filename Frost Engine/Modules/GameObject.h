@@ -21,6 +21,13 @@ public:
 	Component* CreateComponent(Component::TYPE);
 	Component* GetComponent(Component::TYPE);
 
+	Component* GetComponentByNum(int i)
+	{
+		return components[i];
+	}
+	vector <Component*> GetComponents();
+
+
 	GameObject* GetChild(int n);
 	vector <GameObject*> GetChildren();
 
