@@ -138,12 +138,12 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 					console_visible = !console_visible;
 
 				}
-				if (ImGui::MenuItem("GameObject"))
+				if (ImGui::MenuItem("Hierarchy"))
 				{
 					show_gameobject_window = true;
 
 				}
-				if (ImGui::MenuItem("Components"))
+				if (ImGui::MenuItem("Inspector"))
 				{
 					show_components_window = true;
 				}
@@ -312,7 +312,7 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 	//GAMEOBJECTS WINDOW
 	if (show_gameobject_window)
 	{
-		ImGui::Begin("GameObjects", &show_gameobject_window, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_MenuBar);
+		ImGui::Begin("Hierarchy", &show_gameobject_window, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_MenuBar);
 		if (ImGui::BeginMenuBar())
 		{
 			if (ImGui::BeginMenu("Menu"))
@@ -335,7 +335,7 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 	//COMPONENTS WINDOW
 	if (show_components_window)
 	{
-		ImGui::Begin("Components", &show_components_window, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_MenuBar);
+		ImGui::Begin("Inspector", &show_components_window, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_MenuBar);
 		if (App->scene_intro->gameobject_selected != NULL)
 		{
 			for (size_t i = 0; i < App->scene_intro->gameobject_selected->GetComponents().size(); i++)

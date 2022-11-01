@@ -3,6 +3,22 @@ A 3D Game Engine made by Alejandro Giralt at UPC's CITM
 
 Github: [zapper163](https://github.com/zapper163)
 
+##Features:
+
+FBX & Texture loader
+Drag & Drop of FBX and PNG
+Unity-like Camera
+GameObject structure & Hierarchy
+Each GameObject has three components: Transform, Mesh & Texture
+
+
+##Controls:
+- While Right clicking, “WASD” for fps-like movement and free look around.
+- Mouse wheel for zoom in and out.
+- Alt + Left click orbits the object.
+- F to focus the camera around the geometry.
+- Holding SHIFT duplicates movement speed.
+
 ## Third party Libraries Used:
 * [SDL](https://github.com/libsdl-org/SDLS) 2.24.0.0
 * [Glew](https://github.com/nigels-com/glew) 2.1.0.0
