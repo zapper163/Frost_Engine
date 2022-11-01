@@ -121,4 +121,8 @@ public:
 	std::vector<float> fpsLog;
 	std::vector<float> timeLog;
 	
+	const char* cube_filepath = "Basic_Shapes/cube.fbx";
+	const char* cone_filepath = "Basic_Shapes/cone.fbx";
+	const char* sphere_filepath = "Basic_Shapes/sphere.fbx";
+
 };

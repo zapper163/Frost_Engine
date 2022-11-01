@@ -69,7 +69,7 @@ void C_Transform::OnGui()
 		ImGui::SameLine();
 
 		ImGui::Text(std::to_string(transform.scale.z).c_str());
-		ImGui::SameLine();
+
 	}
 	
 }

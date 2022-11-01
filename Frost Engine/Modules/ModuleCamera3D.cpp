@@ -44,10 +44,10 @@ update_status ModuleCamera3D::Update(float dt)
 		speed = 8.0f * dt;
 
 	//Focus On 
-	/*if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN)
+	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN)
 	{
 		LookAt(vec3(0, 0, 0));
-	}*/
+	}
 
 	//While Right Click, "WASD" movement
 
@@ -60,11 +60,9 @@ update_status ModuleCamera3D::Update(float dt)
 	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && App->input->GetMouseButton(SDL_BUTTON_RIGHT) == KEY_REPEAT) newPos += X * speed;
 
 
-
 	//Zoom-in/out
-	if(App->input->GetKey(SDL_SCANCODE_R) == KEY_REPEAT) newPos -= Z * speed;
-	if(App->input->GetKey(SDL_SCANCODE_F) == KEY_REPEAT) newPos += Z * speed;
-
+	if(App->input->GetMouseZ() != 0) newPos -= Z * speed * App->input->GetMouseZ();
+	
 	
 	Position += newPos;
 	Reference += newPos;

@@ -16,11 +16,15 @@ public:
 	C_Mesh(GameObject* gameObject);
 	~C_Mesh();
 
-	void SetMesh(MeshInfo* mesh, const char* mesh_name);
+	void SetMesh(MeshInfo* mesh, std::string mesh_name);
 
 	void OnGui();
 
+	MeshInfo* GetMesh()
+	{
+		return mesh;
+	}
 
-	const char* name;
+	std::string name;
 	MeshInfo* mesh;
 };

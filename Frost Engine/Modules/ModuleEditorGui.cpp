@@ -109,7 +109,7 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 			{
 				ImGui::EndMenu();
 			}
-			if (ImGui::BeginMenu("Help"))
+			if (ImGui::BeginMenu("Info"))
 			{
 				
 				if (ImGui::MenuItem("Documentation"))
@@ -163,11 +163,21 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 
 		//Main Window
 		ImGui::Text("Basic Geometric Forms:\n");
-		ImGui::Checkbox("Cube", &App->meshRender->cube);
+		if (ImGui::Button("Cube"))
+		{
+			MeshLoader::LoadFile(cube_filepath);
+		}
 		ImGui::SameLine();
-		ImGui::Checkbox("Cone", &App->meshRender->cone);
+		if (ImGui::Button("Cone"))
+		{
+			MeshLoader::LoadFile(cone_filepath);
+		}
 		ImGui::SameLine();
-		ImGui::Checkbox("Sphere", &App->meshRender->sphere);
+		if (ImGui::Button("Sphere"))
+		{
+			MeshLoader::LoadFile(sphere_filepath);
+		}
+		
 		ImGui::Text("\n");
 
 		ImGui::Text("Render Settings:\n");
@@ -184,7 +194,11 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 		{
 			MeshLoader::CleanUp();
 			TextureLoader::loaded_textures.clear();
-			//App->scene_intro->gameObjects.clear();
+			/*App->scene_intro->gameobject_selected = NULL;
+			for (size_t i = 1; i < App->scene_intro->gameObjects.size(); i++)
+			{
+				App->scene_intro->gameObjects[i]->parent->
+			}*/
 		}
 		ImGui::Text("\n\n");
 
@@ -234,6 +248,11 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 		if (ImGui::Button("Assimp")) {
 
 			::ShellExecuteA(NULL, "open", "https://github.com/assimp/assimp", NULL, NULL, SW_SHOWDEFAULT);
+		}
+		ImGui::SameLine();
+		if (ImGui::Button("DevIL")) {
+
+			::ShellExecuteA(NULL, "open", "https://github.com/DentonW/DevIL", NULL, NULL, SW_SHOWDEFAULT);
 		}
 		ImGui::SameLine();
 		ImGui::Text("\n\n");

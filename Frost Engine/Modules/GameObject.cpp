@@ -5,6 +5,7 @@
 #include "Component.h"
 #include "C_Transform.h"
 #include "C_Mesh.h"
+#include "C_Texture.h"
 #include "MeshLoader.h"
 
 #include <iostream>
@@ -48,9 +49,10 @@ Component* GameObject::CreateComponent(Component::TYPE type)
 	case Component::TYPE::MESH:
 		new_component = new C_Mesh(this);
 		break;
-	/*case Component::TYPE::MATERIAL:
+	case Component::TYPE::TEXTURE:
+		new_component = new C_Texture(this);
 		break;
-	case Component::TYPE::CAMERA:
+	/*case Component::TYPE::CAMERA:
 		new_component = new C_Camera(this);
 		break;*/
 	default:

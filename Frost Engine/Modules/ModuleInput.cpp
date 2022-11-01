@@ -3,6 +3,8 @@
 #include "ModuleInput.h"
 #include "MeshLoader.h"
 #include "TextureLoader.h"
+#include "C_Texture.h"
+#include "C_Mesh.h"
 
 #include "ImGui/imgui_impl_sdl.h"
 
@@ -135,7 +137,6 @@ update_status ModuleInput::PreUpdate(float dt)
 
 			case (SDL_DROPFILE): 
 			{   
-
 				dropped_filedir = e.drop.file;
 				std::string fn = e.drop.file;
 				if (fn.substr(fn.find_last_of(".") + 1) == "fbx") {
@@ -144,10 +145,10 @@ update_status ModuleInput::PreUpdate(float dt)
 				}
 				else if(fn.substr(fn.find_last_of(".") + 1) == "png") {
 
-					for (int i = 0; i < MeshLoader::meshList.size();  i++)
-					{
-						MeshLoader::meshList[i]->texture_id = TextureLoader::LoadTextureFromFile(dropped_filedir);
-					}
+					C_Mesh* mesh = dynamic_cast<C_Mesh*>(App->scene_intro->gameobject_selected->GetComponent(Component::TYPE::MESH));
+					mesh->GetMesh()->texture_id = TextureLoader::LoadTextureFromFile(dropped_filedir);
+					dynamic_cast<C_Texture*>(App->scene_intro->gameobject_selected->GetComponent(Component::TYPE::TEXTURE))->SetTexture(dropped_filedir);
+
 					
 					App->editorGui->console.AddLog(__FILE__, __LINE__, "Png Loaded");
 				}

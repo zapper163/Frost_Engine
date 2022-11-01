@@ -70,21 +70,6 @@ bool ModuleMeshRender::Start()
 
 	MeshLoader::LoadFile(filepath);
 
-	if (cube)
-	{
-		MeshLoader::LoadFile(cube_filepath);
-	}
-
-	if (cone)
-	{
-		MeshLoader::LoadFile(cone_filepath);
-	}
-
-	if (sphere)
-	{
-		MeshLoader::LoadFile(sphere_filepath);
-	}
-
 
 	return true;
 }
@@ -93,6 +78,7 @@ bool ModuleMeshRender::Start()
 update_status ModuleMeshRender::PreUpdate(float dt)
 {
 	
+
 	return UPDATE_CONTINUE;
 }
 

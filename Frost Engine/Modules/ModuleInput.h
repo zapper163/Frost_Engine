@@ -27,6 +27,8 @@ public:
 	bool CleanUp();
 
 	char* dropped_filedir = NULL;
+
+
 	
 	KEY_STATE GetKey(int id) const
 	{

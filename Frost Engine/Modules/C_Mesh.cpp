@@ -19,7 +19,7 @@ C_Mesh::~C_Mesh()
 
 }
 
-void C_Mesh::SetMesh(MeshInfo* mesh, const char* mesh_name) 
+void C_Mesh::SetMesh(MeshInfo* mesh,std::string mesh_name) 
 {
 	this->mesh = mesh;
 	name = mesh_name;
@@ -34,11 +34,7 @@ void C_Mesh::OnGui()
 		ImGui::Text("Mesh Name:");
 		ImGui::SameLine();
 
-		ImGui::Text(name);
-		ImGui::SameLine();
-
-		//ImGui::Text(std::to_string().c_str());
-		ImGui::SameLine();
+		ImGui::Text(name.c_str());
 
 	}
 

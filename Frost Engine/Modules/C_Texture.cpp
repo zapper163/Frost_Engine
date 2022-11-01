@@ -30,11 +30,9 @@ void C_Texture::OnGui()
 
 	if (ImGui::CollapsingHeader("Texture"))
 	{
-		ImGui::Text("texture");
+		ImGui::Text("Texture path:");
 		ImGui::SameLine();
-
 		ImGui::Text(name);
-		ImGui::SameLine();
 
 	}
 
