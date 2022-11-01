@@ -21,7 +21,7 @@ C_Texture::~C_Texture()
 
 void C_Texture::SetTexture(const char* texture_name)
 {
-
+	name = texture_name;
 }
 
 
@@ -35,9 +35,6 @@ void C_Texture::OnGui()
 
 		ImGui::Text(name);
 		ImGui::SameLine();
-
-		//ImGui::Text(std::to_string().c_str());
-		//ImGui::SameLine();
 
 	}
 

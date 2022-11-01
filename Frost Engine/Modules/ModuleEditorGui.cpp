@@ -156,19 +156,28 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 			}
 			ImGui::EndMenuBar();
 		}
-		ImGui::Text("Main Window");
+		ImGui::Text("Basic Geometric Forms:\n");
 		ImGui::Checkbox("Cube", &App->meshRender->cube);
 		ImGui::SameLine();
 		ImGui::Checkbox("Cone", &App->meshRender->cone);
 		ImGui::SameLine();
 		ImGui::Checkbox("Sphere", &App->meshRender->sphere);
+		ImGui::Text("\n");
+
+		ImGui::Text("Render Settings:\n");
+		ImGui::Checkbox("Wireframe Mode", &wireframe);  
+		ImGui::Text("\n");
 
 
-		ImGui::Checkbox("Wireframe Mode", &wireframe);     
-		
-		//ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
-		//ImGui::ColorEdit3("clear color", (float*)&clear_color); // Edit 3 floats representing a color
-		
+		if (ImGui::Button("Clear screen"))
+		{
+			MeshLoader::CleanUp();
+			TextureLoader::loaded_textures.clear();
+			//App->scene_intro->gameObjects.clear();
+		}
+		ImGui::Text("\n\n");
+
+
 		if (ImGui::CollapsingHeader("FRAMERATE"))
 		{
 			ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);

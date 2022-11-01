@@ -40,8 +40,7 @@ public:
 
 	const char* filepath = "Assets/BakerHouse.fbx";
 
-
-
+   
     uint id_count = 0;
     
 
