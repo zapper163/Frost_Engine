@@ -72,8 +72,19 @@ bool ModuleMeshRender::Start()
 
 	if (cube)
 	{
-		//InitCube();
+		MeshLoader::LoadFile(cube_filepath);
 	}
+
+	if (cone)
+	{
+		MeshLoader::LoadFile(cone_filepath);
+	}
+
+	if (sphere)
+	{
+		MeshLoader::LoadFile(sphere_filepath);
+	}
+
 
 	return true;
 }
@@ -81,11 +92,7 @@ bool ModuleMeshRender::Start()
 // Called every draw update
 update_status ModuleMeshRender::PreUpdate(float dt)
 {
-	if (cube)
-	{
-		//RefreshCube();
-	}
-
+	
 	return UPDATE_CONTINUE;
 }
 
@@ -95,7 +102,7 @@ update_status ModuleMeshRender::Update(float dt)
 
 	if (cube)
 	{
-		PrintCubeV2();
+		//PrintCubeV2();
 	}
 
 	return UPDATE_CONTINUE;

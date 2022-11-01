@@ -31,9 +31,16 @@ public:
     bool cone = false;
     bool sphere = false;
 
+    const char* cube_filepath = "Basic_Shapes/cube.fbx";
+    const char* cone_filepath = "Basic_Shapes/cone.fbx";
+    const char* sphere_filepath = "Basic_Shapes/sphere.fbx";
+
+
 	const char* tex = "Assets/Baker_house.png";
 
 	const char* filepath = "Assets/BakerHouse.fbx";
+
+
 
     uint id_count = 0;
     

@@ -161,9 +161,9 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 		ImGui::Text("Main Window");
 		ImGui::Checkbox("Cube", &App->meshRender->cube);
 		ImGui::SameLine();
-		ImGui::Checkbox("Cone", &App->meshRender->cube);
+		ImGui::Checkbox("Cone", &App->meshRender->cone);
 		ImGui::SameLine();
-		ImGui::Checkbox("Sphere", &App->meshRender->cube);
+		ImGui::Checkbox("Sphere", &App->meshRender->sphere);
 
 
 		ImGui::Checkbox("Wireframe Mode", &wireframe);     
