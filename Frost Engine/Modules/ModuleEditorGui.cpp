@@ -132,15 +132,13 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 					show_console_window = true;
 					console_visible = !console_visible;
 
-					ImGui::EndMenu();
 				}
 				if (ImGui::MenuItem("GameObject"))
 				{
 					show_gameobject_window = true;
 
-					ImGui::EndMenu();
 				}
-				if (ImGui::MenuItem("GameObject"))
+				if (ImGui::MenuItem("Components"))
 				{
 					show_components_window = true;
 				}
