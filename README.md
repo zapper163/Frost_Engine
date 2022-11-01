@@ -9,6 +9,8 @@ Github: [zapper163](https://github.com/zapper163)
 * [ImGui](https://github.com/ocornut/imgui) 1.88
 * [JSON Parser](https://github.com/json-parser/json-parser) 1.1.0
 * [MathGeoLib](https://github.com/juj/MathGeoLib) 1.15
+* [Assimp](https://assimp-docs.readthedocs.io/en/v5.1.0) 5.1.0
+* [DevIL](https://openil.sourceforge.net)
 
 ## MIT License
 
