@@ -28,6 +28,8 @@ public:
     uint iboId = 0;
 
     bool cube = false;
+    bool cone = false;
+    bool sphere = false;
 
 	const char* tex = "Assets/Baker_house.png";
 

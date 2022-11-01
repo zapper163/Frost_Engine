@@ -72,8 +72,7 @@ bool ModuleMeshRender::Start()
 
 	if (cube)
 	{
-		//Cube
-		InitCube();
+		//InitCube();
 	}
 
 	return true;
@@ -84,7 +83,7 @@ update_status ModuleMeshRender::PreUpdate(float dt)
 {
 	if (cube)
 	{
-		RefreshCube();
+		//RefreshCube();
 	}
 
 	return UPDATE_CONTINUE;
@@ -96,8 +95,7 @@ update_status ModuleMeshRender::Update(float dt)
 
 	if (cube)
 	{
-		//PrintCube(); //With Buffers, doesn't work
-		PrintCubeV2(); //With direct mode
+		PrintCubeV2();
 	}
 
 	return UPDATE_CONTINUE;

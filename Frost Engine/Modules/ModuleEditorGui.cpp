@@ -125,19 +125,29 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 				}
 				ImGui::EndMenu();
 			}
-			if (ImGui::BeginMenu("Console"))
+			if (ImGui::BeginMenu("View"))
 			{
-				show_console_window = true;
-				console_visible = !console_visible;
+				if (ImGui::MenuItem("Console"))
+				{
+					show_console_window = true;
+					console_visible = !console_visible;
 
+					ImGui::EndMenu();
+				}
+				if (ImGui::MenuItem("GameObject"))
+				{
+					show_gameobject_window = true;
+
+					ImGui::EndMenu();
+				}
+				if (ImGui::MenuItem("GameObject"))
+				{
+					show_components_window = true;
+				}
 				ImGui::EndMenu();
 			}
-			if (ImGui::BeginMenu("GameObject"))
-			{
-				show_gameobject_window = true;
-				
-				ImGui::EndMenu();
-			}
+			
+			
 			if (ImGui::BeginMenu("Exit"))
 			{
 				if (ImGui::MenuItem("Exit"))
@@ -150,8 +160,13 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 		}
 		ImGui::Text("Main Window");
 		ImGui::Checkbox("Cube", &App->meshRender->cube);
-		ImGui::Checkbox("Wireframe Mode", &wireframe);
-		ImGui::Checkbox("Color", &color);      
+		ImGui::SameLine();
+		ImGui::Checkbox("Cone", &App->meshRender->cube);
+		ImGui::SameLine();
+		ImGui::Checkbox("Sphere", &App->meshRender->cube);
+
+
+		ImGui::Checkbox("Wireframe Mode", &wireframe);     
 		
 		//ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
 		//ImGui::ColorEdit3("clear color", (float*)&clear_color); // Edit 3 floats representing a color

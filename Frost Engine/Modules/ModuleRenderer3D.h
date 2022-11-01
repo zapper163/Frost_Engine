@@ -48,13 +48,11 @@ public:
     int width = SCREEN_WIDTH;
     int height = SCREEN_HEIGHT;
 
-    bool cube = false;
+    bool checker_texture = false;
 
     float x = 0;
     float y = 0;
     float z = 0;
-
-   
 };
 
 

@@ -113,7 +113,7 @@ public:
 	bool show_credits_window = false;
 	bool show_main_window = true;
 	bool show_hardware_window = false;
-	bool show_console_window = false;
+	bool show_console_window = true;
 	bool show_gameobject_window = true;
 	bool show_components_window = true;
 	bool console_visible = true;

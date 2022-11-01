@@ -68,17 +68,15 @@ void MeshLoader::LoadFile(const char* file_path)
 					}
 				}
 			}
-			mesh->texture_id = TextureLoader::LoadTextureFromFile(mesh->tex);
-
 			uint ID = App->scene_intro->CreateGameObject(App->scene_intro->gameObjects[0], scene->mMeshes[i]->mName.C_Str());
 			dynamic_cast<C_Transform*>(App->scene_intro->gameObjects[ID]->GetComponent(Component::TYPE::TRANSFORM))->SetTransform(float3(0, 0, 0), float3(0, 0, 0), float3(1, 1, 1));
 			dynamic_cast<C_Mesh*>(App->scene_intro->gameObjects[ID]->CreateComponent(Component::TYPE::MESH))->SetMesh(mesh, scene->mMeshes[i]->mName.C_Str());
-			dynamic_cast<C_Texture*>(App->scene_intro->gameObjects[ID]->CreateComponent(Component::TYPE::MESH))->SetTexture(scene->mMeshes[i]->mName.C_Str()); //Poner aquí el nombre de la textura
+			//dynamic_cast<C_Texture*>(App->scene_intro->gameObjects[ID]->CreateComponent(Component::TYPE::TEXTURE))->SetTexture(scene->mMeshes[i]->mName.C_Str()); //Poner aquí el nombre de la textura
+
+			mesh->texture_id = TextureLoader::LoadTextureFromFile(mesh->tex);
 
 
 			MeshLoader::SetUpMesh(mesh);
-
-			
 		}
 
 		aiReleaseImport(scene);

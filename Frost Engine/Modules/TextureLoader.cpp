@@ -2,6 +2,7 @@
 #include "TextureLoader.h"
 #include "Application.h"
 #include "ModuleEditorGui.h"
+#include "C_Texture.h"
 
 
 #include "Glew/include/glew.h"
@@ -13,6 +14,12 @@ std::map<std::string, uint> TextureLoader::loaded_textures;
 
 GLuint TextureLoader::LoadTextureFromFile(const char* path)
 {
+	/*for (size_t i = 0; i < App->scene_intro->gameObjects.size(); i++)
+	{
+		dynamic_cast<C_Texture*>(App->scene_intro->gameObjects[i]->CreateComponent(Component::TYPE::TEXTURE))->SetTexture(path); 
+
+	}*/
+	
 
 	if (loaded_textures.find(path) != loaded_textures.end())
 	{
