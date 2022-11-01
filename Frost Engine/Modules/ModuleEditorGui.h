@@ -118,9 +118,6 @@ public:
 	bool show_components_window = true;
 	bool console_visible = true;
 
-	bool wireframe = false;
-	bool color = false;
-
 	std::vector<float> fpsLog;
 	std::vector<float> timeLog;
 	

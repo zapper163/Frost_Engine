@@ -48,7 +48,12 @@ public:
     int width = SCREEN_WIDTH;
     int height = SCREEN_HEIGHT;
 
-    bool checker_texture = false;
+    bool wireframe = false;
+    bool lights_active = true;
+    bool depth_test_active = true;
+    bool cull_face_active = true;
+
+    
 
     float x = 0;
     float y = 0;

@@ -202,10 +202,28 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 update_status ModuleRenderer3D::Update(float dt)
 {
 	//Wireframe mode
-	if (App->editorGui->wireframe)
+	if (wireframe)
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	else
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+	//Enable/Disable lights
+	if (lights_active == false)
+		glDisable(GL_LIGHTING);
+	else 
+		glEnable(GL_LIGHTING);
+
+	//Enable/Disable depth test
+	if (depth_test_active == false)
+		glDisable(GL_DEPTH_TEST);
+	else
+		glEnable(GL_DEPTH_TEST);
+
+	//Enable/Disable cull face
+	if (cull_face_active == false)
+		glDisable(GL_CULL_FACE);
+	else
+		glEnable(GL_CULL_FACE);
 
 	//FrameBuffer
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);

@@ -147,10 +147,9 @@ void ModuleMeshRender::PrintCube()
 	// enable vertex arrays
 	glEnableClientState(GL_NORMAL_ARRAY);
 
-	if (App->editorGui->color)
-	{
-		glEnableClientState(GL_COLOR_ARRAY);
-	}
+	
+	glEnableClientState(GL_COLOR_ARRAY);
+	
 
 	glEnableClientState(GL_VERTEX_ARRAY);
 

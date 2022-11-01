@@ -43,8 +43,8 @@ update_status ModuleCamera3D::Update(float dt)
 	if(App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT)
 		speed = 8.0f * dt;
 
-/*
-	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN)
+	//Focus On 
+	/*if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN)
 	{
 		LookAt(vec3(0, 0, 0));
 	}*/

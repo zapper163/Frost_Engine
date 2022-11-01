@@ -83,9 +83,11 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 	ImGui::End();
 
 
+	
 	if (show_main_window)
 	{
-		
+		//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+		//SCREEN
 		ImGui::Begin("GameRender", NULL, ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoScrollbar);
 		ImVec2 wsize = ImGui::GetWindowSize();
 
@@ -95,15 +97,18 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 		ImGui::Image((ImTextureID)App->renderer3D->textureColorbuffer, ImVec2(w, h), ImVec2(0, 1), ImVec2(1, 0));
 		ImGui::End();
 
+
+		//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+		//MAIN WINDOW
 		ImGui::Begin("Main", NULL, ImGuiWindowFlags_MenuBar);  
 		
+		//Menus
 		if (ImGui::BeginMenuBar())
 		{
 			if (ImGui::BeginMenu("Main"))
 			{
 				ImGui::EndMenu();
 			}
-		
 			if (ImGui::BeginMenu("Help"))
 			{
 				
@@ -144,8 +149,7 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 				}
 				ImGui::EndMenu();
 			}
-			
-			
+
 			if (ImGui::BeginMenu("Exit"))
 			{
 				if (ImGui::MenuItem("Exit"))
@@ -156,6 +160,8 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 			}
 			ImGui::EndMenuBar();
 		}
+
+		//Main Window
 		ImGui::Text("Basic Geometric Forms:\n");
 		ImGui::Checkbox("Cube", &App->meshRender->cube);
 		ImGui::SameLine();
@@ -165,9 +171,14 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 		ImGui::Text("\n");
 
 		ImGui::Text("Render Settings:\n");
-		ImGui::Checkbox("Wireframe Mode", &wireframe);  
-		ImGui::Text("\n");
+		ImGui::Checkbox("Wireframe Mode", &App->renderer3D->wireframe); 
+		ImGui::SameLine();
+		ImGui::Checkbox("Lights", &App->renderer3D->lights_active);
 
+		ImGui::Checkbox("Depth Test", &App->renderer3D->depth_test_active);
+		ImGui::SameLine();
+		ImGui::Checkbox("Cull Face", &App->renderer3D->cull_face_active);
+		ImGui::Text("\n");
 
 		if (ImGui::Button("Clear screen"))
 		{
@@ -177,7 +188,6 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 		}
 		ImGui::Text("\n\n");
 
-
 		if (ImGui::CollapsingHeader("FRAMERATE"))
 		{
 			ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
@@ -186,15 +196,17 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 			ImGui::PlotHistogram("##framerate", &fpsLog[0], fpsLog.size(), 0, title, 0.0f, 100.0f, ImVec2(310, 100));
 			sprintf_s(title, 25, "Milliseconds %0.f", timeLog[timeLog.size() - 1]);
 			ImGui::PlotHistogram("##milliseconds", &timeLog[0], timeLog.size(), 0, title, 0.0f, 100.0f, ImVec2(310, 100));
-
 		}
 		ImGui::End();
 	}
 
 
+	//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	//ABOUT WINDOW
+
 	if (show_credits_window)
 	{
-		ImGui::Begin("Credits", &show_credits_window, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_MenuBar); 
+		ImGui::Begin("About", &show_credits_window, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_MenuBar); 
 		if (ImGui::BeginMenuBar())
 		{
 			if (ImGui::BeginMenu("Menu"))
@@ -243,6 +255,9 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 		ImGui::End();
 	}
 
+
+	//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	//HARDWARE WINDOW
 	if (show_hardware_window)
 	{
 		ImGui::Begin("Hardware", &show_hardware_window, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_MenuBar);
@@ -267,11 +282,15 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 		ImGui::End();
 	}
 
+	//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	//CONSOLE WINDOW
 	if (console_visible)
 	{
 		ShowConsole();
 	}
 
+	//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	//GAMEOBJECTS WINDOW
 	if (show_gameobject_window)
 	{
 		ImGui::Begin("GameObjects", &show_gameobject_window, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_MenuBar);
@@ -293,9 +312,11 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 		ImGui::End();
 	}
 
+	//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	//COMPONENTS WINDOW
 	if (show_components_window)
 	{
-		ImGui::Begin("Components", &show_gameobject_window, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_MenuBar);
+		ImGui::Begin("Components", &show_components_window, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_MenuBar);
 		if (App->scene_intro->gameobject_selected != NULL)
 		{
 			for (size_t i = 0; i < App->scene_intro->gameobject_selected->GetComponents().size(); i++)
