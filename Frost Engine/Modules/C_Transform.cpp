@@ -19,7 +19,7 @@ C_Transform::~C_Transform()
 
 }
 
-void C_Transform::SetTransform(float3 position, float3 rotation, float3 scale)
+void C_Transform::SetTransform(float3 position, Quat rotation, float3 scale)
 {
 	transform.position = position;
 

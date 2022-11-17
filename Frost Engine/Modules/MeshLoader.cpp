@@ -26,6 +26,9 @@ void MeshLoader::LoadFile(const char* file_path)
 	const aiScene* scene = aiImportFile(file_path, aiProcessPreset_TargetRealtime_MaxQuality);
 	if (scene != nullptr && scene->HasMeshes())
 	{
+
+		GameObject* FbxGameObject = new GameObject(App->scene_intro->gameObjects[0], file_path);
+
 		for (uint i = 0; i < scene->mNumMeshes; i++)
 		{
 			MeshInfo* mesh = new MeshInfo();
@@ -68,8 +71,12 @@ void MeshLoader::LoadFile(const char* file_path)
 					}
 				}
 			}
-			uint ID = App->scene_intro->CreateGameObject(App->scene_intro->gameObjects[0], scene->mMeshes[i]->mName.C_Str());
-			dynamic_cast<C_Transform*>(App->scene_intro->gameObjects[ID]->GetComponent(Component::TYPE::TRANSFORM))->SetTransform(float3(0, 0, 0), float3(0, 0, 0), float3(1, 1, 1));
+
+			GetNodeInfo(scene, scene->mRootNode, FbxGameObject);
+
+
+			uint ID = App->scene_intro->CreateGameObject(FbxGameObject, scene->mMeshes[i]->mName.C_Str());
+			//dynamic_cast<C_Transform*>(App->scene_intro->gameObjects[ID]->GetComponent(Component::TYPE::TRANSFORM))->SetTransform(float3(0, 0, 0), float3(0, 0, 0), float3(1, 1, 1));
 			dynamic_cast<C_Mesh*>(App->scene_intro->gameObjects[ID]->CreateComponent(Component::TYPE::MESH))->SetMesh(mesh, scene->mMeshes[i]->mName.C_Str());
 			
 			mesh->texture_id = TextureLoader::LoadTextureFromFile(mesh->tex);
@@ -77,6 +84,8 @@ void MeshLoader::LoadFile(const char* file_path)
 			dynamic_cast<C_Texture*>(App->scene_intro->gameObjects[ID]->CreateComponent(Component::TYPE::TEXTURE))->SetTexture(mesh->tex); 
 
 			MeshLoader::SetUpMesh(mesh);
+
+
 		}
 
 		aiReleaseImport(scene);
@@ -162,4 +171,27 @@ const char* MeshLoader::GetMeshName(const char* mesh_name)
 {
 	const char* name = mesh_name;
 	return name;
+}
+
+
+void MeshLoader::GetNodeInfo(const aiScene* rootScene, aiNode* rootNode, GameObject* goParent)
+{
+	aiVector3D translation, scaling;
+	aiQuaternion quatRot;
+	rootNode->mTransformation.Decompose(scaling, quatRot, translation);
+
+	float3 pos(translation.x, translation.y, translation.z);
+	float3 scale(scaling.x, scaling.y, scaling.z);
+	Quat rot(quatRot.x, quatRot.y, quatRot.z, quatRot.w);
+
+	goParent->transform->SetTransform(pos, rot, scale);
+
+	// We make it recursive for its children
+	if (rootNode->mNumChildren > 0)
+	{
+		for (int n = 0; n < rootNode->mNumChildren; n++)
+		{
+			GetNodeInfo(rootScene, rootNode->mChildren[n], goParent);
+		}
+	}
 }

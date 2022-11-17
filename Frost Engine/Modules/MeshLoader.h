@@ -57,6 +57,8 @@ public:
 	static void CleanUp();
 
 	static void SetUpMesh(MeshInfo* ourMesh);
+
+	static void GetNodeInfo(const aiScene* rootScene, aiNode* rootNode, GameObject* GameObgectFather);
 	
 
 

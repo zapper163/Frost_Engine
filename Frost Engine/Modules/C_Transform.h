@@ -14,7 +14,7 @@ struct Transform
 {
 	float3 position;
 
-	float3 rotation;
+	Quat rotation;
 
 	float3 scale;
 };
@@ -25,7 +25,7 @@ public:
 	C_Transform(GameObject* gameObject);
 	~C_Transform();
 
-	void SetTransform(float3 position, float3 rotation, float3 scale);
+	void SetTransform(float3 position, Quat rotation, float3 scale);
 
 	void OnGui();
 
