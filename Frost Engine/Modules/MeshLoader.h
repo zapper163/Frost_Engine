@@ -6,12 +6,19 @@
 #include <gl/GL.h>
 #include <gl/GLU.h>
 
+#include "Assimp/include/cimport.h"
+#include "Assimp/include/scene.h"
+#include "Assimp/include/postprocess.h"
+
+
 #include <vector>
 
 
 using namespace std;
 
 #define VERTEX_FEATURES 5
+
+class GameObject;
 
 struct MeshInfo
 {
@@ -58,7 +65,7 @@ public:
 
 	static void SetUpMesh(MeshInfo* ourMesh);
 
-	//static void GetNodeInfo(const aiScene* rootScene, aiNode* rootNode, GameObject* GameObgectFather);
+	static void GetNodeInfo(const aiScene* rootScene, aiNode* rootNode, GameObject* GameObgectFather);
 	
 
 

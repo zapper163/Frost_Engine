@@ -5,10 +5,6 @@
 #include "C_Mesh.h"
 #include "C_Texture.h"
 
-#include "Assimp/include/cimport.h"
-#include "Assimp/include/scene.h"
-#include "Assimp/include/postprocess.h"
-
 #pragma comment (lib, "Assimp/libx86/assimp.lib")
 
 vector<MeshInfo*> MeshLoader::meshList;
@@ -72,11 +68,11 @@ void MeshLoader::LoadFile(const char* file_path)
 				}
 			}
 
-			//GetNodeInfo(scene, scene->mRootNode, FbxGameObject);
+			GetNodeInfo(scene, scene->mRootNode, FbxGameObject);
 
 
 			uint ID = App->scene_intro->CreateGameObject(FbxGameObject, scene->mMeshes[i]->mName.C_Str());
-			//dynamic_cast<C_Transform*>(App->scene_intro->gameObjects[ID]->GetComponent(Component::TYPE::TRANSFORM))->SetTransform(float3(0, 0, 0), float3(0, 0, 0), float3(1, 1, 1));
+			//dynamic_cast<C_Transform*>(App->scene_intro->gameObjects[ID]->GetComponent(Component::TYPE::TRANSFORM))->SetTransform(float3(0, 0, 0), Quat(0, 0, 0), float3(1, 1, 1));
 			dynamic_cast<C_Mesh*>(App->scene_intro->gameObjects[ID]->CreateComponent(Component::TYPE::MESH))->SetMesh(mesh, scene->mMeshes[i]->mName.C_Str());
 			
 			mesh->texture_id = TextureLoader::LoadTextureFromFile(mesh->tex);
@@ -174,7 +170,7 @@ const char* MeshLoader::GetMeshName(const char* mesh_name)
 }
 
 
-/*void MeshLoader::GetNodeInfo(const aiScene* rootScene, aiNode* rootNode, GameObject* goParent)
+void MeshLoader::GetNodeInfo(const aiScene* rootScene, aiNode* rootNode, GameObject* goParent)
 {
 	aiVector3D translation, scaling;
 	aiQuaternion quatRot;
@@ -194,4 +190,4 @@ const char* MeshLoader::GetMeshName(const char* mesh_name)
 			GetNodeInfo(rootScene, rootNode->mChildren[n], goParent);
 		}
 	}
-}*/
+}

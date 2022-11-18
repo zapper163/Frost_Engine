@@ -21,11 +21,11 @@ C_Transform::~C_Transform()
 
 void C_Transform::SetTransform(float3 position, Quat rotation, float3 scale)
 {
-	transform.position = position;
+	/*transform.position = position;
 
 	transform.rotation = rotation;
 
-	transform.scale = scale;
+	transform.scale = scale;*/
 }
 
 void C_Transform::OnGui()
