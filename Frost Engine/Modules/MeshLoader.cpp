@@ -72,7 +72,7 @@ void MeshLoader::LoadFile(const char* file_path)
 				}
 			}
 
-			GetNodeInfo(scene, scene->mRootNode, FbxGameObject);
+			//GetNodeInfo(scene, scene->mRootNode, FbxGameObject);
 
 
 			uint ID = App->scene_intro->CreateGameObject(FbxGameObject, scene->mMeshes[i]->mName.C_Str());
@@ -174,7 +174,7 @@ const char* MeshLoader::GetMeshName(const char* mesh_name)
 }
 
 
-void MeshLoader::GetNodeInfo(const aiScene* rootScene, aiNode* rootNode, GameObject* goParent)
+/*void MeshLoader::GetNodeInfo(const aiScene* rootScene, aiNode* rootNode, GameObject* goParent)
 {
 	aiVector3D translation, scaling;
 	aiQuaternion quatRot;
@@ -194,4 +194,4 @@ void MeshLoader::GetNodeInfo(const aiScene* rootScene, aiNode* rootNode, GameObj
 			GetNodeInfo(rootScene, rootNode->mChildren[n], goParent);
 		}
 	}
-}
+}*/
