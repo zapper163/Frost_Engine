@@ -70,11 +70,13 @@ void MeshLoader::LoadFile(const char* file_path)
 
 			uint ID = App->scene_intro->CreateGameObject(FbxGameObject, scene->mMeshes[i]->mName.C_Str());
 
-			GetNodeInfo(scene, scene->mRootNode, FbxGameObject);
+			
 
-			//dynamic_cast<C_Transform*>(App->scene_intro->gameObjects[ID]->GetComponent(Component::TYPE::TRANSFORM))->SetTransform(float3(0, 0, 0), Quat(0, 0, 0), float3(1, 1, 1));
+			dynamic_cast<C_Transform*>(App->scene_intro->gameObjects[ID]->GetComponent(Component::TYPE::TRANSFORM))->SetTransform(float3(0, 0, 0), Quat(0, 0, 0, 1), float3(1, 1, 1));
 			dynamic_cast<C_Mesh*>(App->scene_intro->gameObjects[ID]->CreateComponent(Component::TYPE::MESH))->SetMesh(mesh, scene->mMeshes[i]->mName.C_Str());
 			
+			GetNodeInfo(scene, scene->mRootNode, FbxGameObject);
+
 			mesh->texture_id = TextureLoader::LoadTextureFromFile(mesh->tex);
 
 			dynamic_cast<C_Texture*>(App->scene_intro->gameObjects[ID]->CreateComponent(Component::TYPE::TEXTURE))->SetTexture(mesh->tex); 
@@ -180,7 +182,8 @@ void MeshLoader::GetNodeInfo(const aiScene* rootScene, aiNode* rootNode, GameObj
 	float3 scale(scaling.x, scaling.y, scaling.z);
 	Quat rot(quatRot.x, quatRot.y, quatRot.z, quatRot.w);
 
-	goParent->transform->SetTransform(pos, rot, scale);
+	dynamic_cast<C_Transform*>(goParent->GetComponent(Component::TYPE::TRANSFORM))->SetTransform(pos, rot, scale);
+
 
 	// We make it recursive for its children
 	if (rootNode->mNumChildren > 0)
