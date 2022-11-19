@@ -68,10 +68,10 @@ void MeshLoader::LoadFile(const char* file_path)
 				}
 			}
 
+			uint ID = App->scene_intro->CreateGameObject(FbxGameObject, scene->mMeshes[i]->mName.C_Str());
+
 			GetNodeInfo(scene, scene->mRootNode, FbxGameObject);
 
-
-			uint ID = App->scene_intro->CreateGameObject(FbxGameObject, scene->mMeshes[i]->mName.C_Str());
 			//dynamic_cast<C_Transform*>(App->scene_intro->gameObjects[ID]->GetComponent(Component::TYPE::TRANSFORM))->SetTransform(float3(0, 0, 0), Quat(0, 0, 0), float3(1, 1, 1));
 			dynamic_cast<C_Mesh*>(App->scene_intro->gameObjects[ID]->CreateComponent(Component::TYPE::MESH))->SetMesh(mesh, scene->mMeshes[i]->mName.C_Str());
 			
