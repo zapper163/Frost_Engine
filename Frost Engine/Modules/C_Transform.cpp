@@ -11,7 +11,15 @@
 
 C_Transform::C_Transform(GameObject* gameObject) : Component(gameObject, TYPE::TRANSFORM)
 {
-	
+	transform.globalPos.SetIdentity();
+	transform.localPos.SetIdentity();
+
+	transform.localPos.Decompose(transform.position, transform.quatRotation, transform.scale);
+	transform.quatRotation.Normalize();
+
+	transform.eulRotation = transform.quatRotation.ToEulerXYZ();
+
+	transform.transGlobalPos = transform.globalPos.Transposed();
 }
 
 C_Transform::~C_Transform()
@@ -26,50 +34,33 @@ void C_Transform::SetTransform(float3 position, Quat rotation, float3 scale)
 	transform.rotation = rotation;
 
 	transform.scale = scale;
+
+	transform.eulRotation = transform.quatRotation.ToEulerXYZ() * RADTODEG;
+
+	transform.localPos = float4x4::FromTRS(transform.position, transform.quatRotation, transform.scale);
+
+	if (go->parent->transform != nullptr) {
+		transform.globalPos = go->parent->transform->transform.globalPos * transform.localPos;
+	}
+	transform.transGlobalPos = transform.globalPos.Transposed();
 }
 
 void C_Transform::OnGui()
 {
 	
-	if (ImGui::CollapsingHeader("Transform"))
+	if (ImGui::CollapsingHeader("Transform", ImGuiTreeNodeFlags_DefaultOpen))
 	{
-		ImGui::Text("Position:");
+		ImGui::Text("Position: ");
 		ImGui::SameLine();
+		ImGui::DragFloat3("##Pos", &transform.position[0], 0.1f);
 
-		ImGui::Text(std::to_string(transform.position.x).c_str());
+		ImGui::Text("Rotation: ");
 		ImGui::SameLine();
-
-		ImGui::Text(std::to_string(transform.position.y).c_str());
-		ImGui::SameLine();
-
-		ImGui::Text(std::to_string(transform.position.z).c_str());
-		
-
-
-		ImGui::Text("Rotation:");
-		ImGui::SameLine();
-
-		ImGui::Text(std::to_string(transform.rotation.x).c_str());
-		ImGui::SameLine();
-
-		ImGui::Text(std::to_string(transform.rotation.y).c_str());
-		ImGui::SameLine();
-
-		ImGui::Text(std::to_string(transform.rotation.z).c_str());
-		
-
+		ImGui::DragFloat3("##Rot", &transform.eulRotation[0], 0.1f);
 
 		ImGui::Text("Scale:");
 		ImGui::SameLine();
-
-		ImGui::Text(std::to_string(transform.scale.x).c_str());
-		ImGui::SameLine();
-
-		ImGui::Text(std::to_string(transform.scale.y).c_str());
-		ImGui::SameLine();
-
-		ImGui::Text(std::to_string(transform.scale.z).c_str());
-
+		ImGui::DragFloat3("##Sca", &transform.scale[0], 0.1f);
 	}
 	
 }

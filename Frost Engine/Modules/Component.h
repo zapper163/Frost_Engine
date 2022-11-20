@@ -37,7 +37,7 @@ public:
 	
 	TYPE GetType() { return type; }
 
-private:
+protected:
 	TYPE type = TYPE::NONE;
 	GameObject* go = nullptr;
 };

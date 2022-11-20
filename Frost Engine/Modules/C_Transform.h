@@ -12,6 +12,14 @@
 
 struct Transform
 {
+	float3 eulRotation;
+	Quat quatRotation;
+
+	float4x4 globalPos;
+	float4x4 localPos;
+
+	float4x4 transGlobalPos;
+
 	float3 position;
 
 	Quat rotation;

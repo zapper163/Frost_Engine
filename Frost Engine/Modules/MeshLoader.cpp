@@ -185,6 +185,8 @@ void MeshLoader::GetNodeInfo(const aiScene* rootScene, aiNode* rootNode, GameObj
 	dynamic_cast<C_Transform*>(goParent->GetComponent(Component::TYPE::TRANSFORM))->SetTransform(pos, rot, scale);
 
 
+
+
 	// We make it recursive for its children
 	if (rootNode->mNumChildren > 0)
 	{
