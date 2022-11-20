@@ -39,10 +39,10 @@ void C_Transform::SetTransform(float3 position, Quat rotation, float3 scale)
 
 	transform.localPos = float4x4::FromTRS(transform.position, transform.quatRotation, transform.scale);
 
-	if (go->parent->transform != nullptr) {
+	/*if (go->parent->transform != nullptr) {
 		transform.globalPos = go->parent->transform->transform.globalPos * transform.localPos;
 	}
-	transform.transGlobalPos = transform.globalPos.Transposed();
+	transform.transGlobalPos = transform.globalPos.Transposed();*/
 }
 
 void C_Transform::OnGui()
