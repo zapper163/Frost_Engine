@@ -34,6 +34,7 @@ public:
 	~C_Transform();
 
 	void SetTransform(float3 position, Quat rotation, float3 scale);
+	void UpdateTransform();
 
 	void OnGui();
 
