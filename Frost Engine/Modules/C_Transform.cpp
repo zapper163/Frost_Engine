@@ -11,15 +11,17 @@
 
 C_Transform::C_Transform(GameObject* gameObject) : Component(gameObject, TYPE::TRANSFORM)
 {
+
 	transform.globalPos.SetIdentity();
 	transform.localPos.SetIdentity();
+	transform.transGlobalPos.SetIdentity();
 
 	transform.localPos.Decompose(transform.position, transform.quatRotation, transform.scale);
 	transform.quatRotation.Normalize();
 
 	transform.eulRotation = transform.quatRotation.ToEulerXYZ();
 
-	transform.transGlobalPos = transform.globalPos.Transposed();
+	//transform.transGlobalPos = transform.globalPos.Transposed();
 }
 
 C_Transform::~C_Transform()
@@ -41,13 +43,13 @@ void C_Transform::SetTransform(float3 position, Quat rotation, float3 scale)
 
 	/*if (go->parent->transform != nullptr && go->parent != nullptr) {
 		transform.globalPos = go->parent->transform->transform.globalPos * transform.localPos;
-	}
-	transform.transGlobalPos = transform.globalPos.Transposed();*/
+	}*/
+	//transform.transGlobalPos = transform.globalPos.Transposed();
 }
 
 void C_Transform::UpdateTransform()
 {
-	/*// ---------------------------------------------------------------------------------------------------------------------------- Define rotation (QUAT from EULER)
+	// ---------------------------------------------------------------------------------------------------------------------------- Define rotation (QUAT from EULER)
 	transform.quatRotation = Quat::FromEulerXYZ(transform.eulRotation.x * DEGTORAD, transform.eulRotation.y * DEGTORAD, transform.eulRotation.z * DEGTORAD);
 	transform.quatRotation.Normalize();
 
@@ -60,9 +62,9 @@ void C_Transform::UpdateTransform()
 		{
 			// We apply the posicion formula
 			this->transform.globalPos = this->go->parent->transform->transform.globalPos * this->transform.localPos;
-			this->transform.transGlobalPos = this->transform.globalPos.Transposed();
+			//this->transform.transGlobalPos = this->transform.globalPos.Transposed();
 		}
-	}*/
+	}
 }
 
 void C_Transform::OnGui()
