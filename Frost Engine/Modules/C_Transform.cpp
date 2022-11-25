@@ -33,21 +33,25 @@ void C_Transform::SetTransform(float3 position, Quat rotation, float3 scale)
 {
 	transform.position = position;
 
-	transform.rotation = rotation;
+	transform.rotation = rotation.Normalized();
 
 	transform.scale = scale;
 
 	transform.eulRotation = transform.quatRotation.ToEulerXYZ() * RADTODEG;
 
 	transform.localPos = float4x4::FromTRS(transform.position, transform.quatRotation, transform.scale);
-
-	/*if (go->parent->transform != nullptr && go->parent != nullptr) {
-		transform.globalPos = go->parent->transform->transform.globalPos * transform.localPos;
-	}*/
+	
+	if (this->go->parent != nullptr)
+	{
+		if (this->go->parent->transform != nullptr)
+		{
+			transform.globalPos = go->parent->transform->transform.globalPos * transform.localPos;
+		}
+	}
 	transform.transGlobalPos = transform.globalPos.Transposed();
 }
 
-void C_Transform::UpdateTransform()
+void C_Transform::Update()
 {
 	// ---------------------------------------------------------------------------------------------------------------------------- Define rotation (QUAT from EULER)
 	transform.quatRotation = Quat::FromEulerXYZ(transform.eulRotation.x * DEGTORAD, transform.eulRotation.y * DEGTORAD, transform.eulRotation.z * DEGTORAD);
@@ -62,10 +66,16 @@ void C_Transform::UpdateTransform()
 		{
 			// We apply the posicion formula
 			this->transform.globalPos = this->go->parent->transform->transform.globalPos * this->transform.localPos;
-			//this->transform.transGlobalPos = this->transform.globalPos.Transposed();
+			this->transform.transGlobalPos = this->transform.globalPos.Transposed();
 		}
 	}
 }
+
+float* C_Transform::GetGlobalTransposed()
+{
+	return transform.transGlobalPos.ptr();
+}
+
 
 void C_Transform::OnGui()
 {
@@ -84,5 +94,4 @@ void C_Transform::OnGui()
 		ImGui::SameLine();
 		ImGui::DragFloat3("##Sca", &transform.scale[0], 0.1f);
 	}
-	
 }

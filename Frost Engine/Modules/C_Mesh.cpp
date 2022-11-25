@@ -25,7 +25,6 @@ void C_Mesh::SetMesh(MeshInfo* mesh,std::string mesh_name)
 	name = mesh_name;
 }
 
-
 void C_Mesh::OnGui()
 {
 

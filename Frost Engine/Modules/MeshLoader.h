@@ -67,7 +67,7 @@ public:
 
 	static void GetNodeInfo(const aiScene* rootScene, aiNode* rootNode, GameObject* GameObgectFather);
 	
-
+	float* transGlobalPos;
 
 	static vector<MeshInfo*> meshList;
 	

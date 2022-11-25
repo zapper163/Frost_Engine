@@ -20,3 +20,8 @@ void Component::OnGui()
 {
 
 }
+
+void Component::Update()
+{
+
+}
