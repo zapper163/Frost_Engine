@@ -1230,6 +1230,7 @@ float4x4 &float4x4::operator =(const Quat &rhs)
 	*this = rhs.ToFloat4x4();
 	return *this;
 }
+
 float4x4 &float4x4::operator =(const TranslateOp &rhs)
 {
 	Set(1.f,   0,   0, rhs.x,

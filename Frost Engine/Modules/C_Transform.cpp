@@ -41,20 +41,16 @@ void C_Transform::SetTransform(float3 position, Quat rotation, float3 scale)
 
 	transform.localPos = float4x4::FromTRS(transform.position, transform.quatRotation, transform.scale);
 
-	if (go->parent != nullptr)
-	{
-		if (go->parent->transform != nullptr) {
-			transform.globalPos = go->parent->transform->transform.globalPos * transform.localPos;
-		}
-	}
-	
-	transform.transGlobalPos = transform.globalPos.Transposed();
+	/*if (go->parent->transform != nullptr && go->parent != nullptr) {
+		transform.globalPos = go->parent->transform->transform.globalPos * transform.localPos;
+	}*/
+	//transform.transGlobalPos = transform.globalPos.Transposed();
 }
 
 void C_Transform::UpdateTransform()
 {
 	// ---------------------------------------------------------------------------------------------------------------------------- Define rotation (QUAT from EULER)
-	/*transform.quatRotation = Quat::FromEulerXYZ(transform.eulRotation.x * DEGTORAD, transform.eulRotation.y * DEGTORAD, transform.eulRotation.z * DEGTORAD);
+	transform.quatRotation = Quat::FromEulerXYZ(transform.eulRotation.x * DEGTORAD, transform.eulRotation.y * DEGTORAD, transform.eulRotation.z * DEGTORAD);
 	transform.quatRotation.Normalize();
 
 	// -------------------------------------------------------------------------------------------------------------- Define the Local Position
@@ -68,7 +64,7 @@ void C_Transform::UpdateTransform()
 			this->transform.globalPos = this->go->parent->transform->transform.globalPos * this->transform.localPos;
 			//this->transform.transGlobalPos = this->transform.globalPos.Transposed();
 		}
-	}*/
+	}
 }
 
 void C_Transform::OnGui()
