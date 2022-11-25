@@ -21,7 +21,7 @@ C_Transform::C_Transform(GameObject* gameObject) : Component(gameObject, TYPE::T
 
 	transform.eulRotation = transform.quatRotation.ToEulerXYZ();
 
-	//transform.transGlobalPos = transform.globalPos.Transposed();
+	transform.transGlobalPos = transform.globalPos.Transposed();
 }
 
 C_Transform::~C_Transform()
@@ -44,7 +44,7 @@ void C_Transform::SetTransform(float3 position, Quat rotation, float3 scale)
 	/*if (go->parent->transform != nullptr && go->parent != nullptr) {
 		transform.globalPos = go->parent->transform->transform.globalPos * transform.localPos;
 	}*/
-	//transform.transGlobalPos = transform.globalPos.Transposed();
+	transform.transGlobalPos = transform.globalPos.Transposed();
 }
 
 void C_Transform::UpdateTransform()
