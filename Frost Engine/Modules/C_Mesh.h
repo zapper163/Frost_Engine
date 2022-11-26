@@ -20,6 +20,8 @@ public:
 
 	void OnGui();
 
+	void Update();
+
 	MeshInfo* GetMesh()
 	{
 		return mesh;

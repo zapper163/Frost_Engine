@@ -91,6 +91,23 @@ update_status ModuleMeshRender::Update(float dt)
 		//PrintCubeV2();
 	}
 
+
+	
+	for (size_t i = 0; i < App->scene_intro->gameObjects.size(); i++)
+	{
+		if (App->scene_intro->gameObjects[i]->GetComponent(Component::TYPE::TRANSFORM)!=nullptr)
+		{
+			App->scene_intro->gameObjects[i]->GetComponent(Component::TYPE::TRANSFORM)->Update();
+
+		}
+
+		if (App->scene_intro->gameObjects[i]->GetComponent(Component::TYPE::MESH) != nullptr)
+		{
+			App->scene_intro->gameObjects[i]->GetComponent(Component::TYPE::MESH)->Update();
+
+		}
+	}
+
 	return UPDATE_CONTINUE;
 }
 

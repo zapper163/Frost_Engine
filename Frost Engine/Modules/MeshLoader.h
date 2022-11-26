@@ -48,7 +48,7 @@ struct MeshInfo
 
 	const char* mesh_name;
 
-	void RenderMesh();
+	void RenderMesh(const float* globalTransform);
  };
 
 class MeshLoader

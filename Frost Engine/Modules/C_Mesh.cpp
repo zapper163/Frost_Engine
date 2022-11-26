@@ -38,3 +38,8 @@ void C_Mesh::OnGui()
 	}
 
 }
+
+void C_Mesh::Update()
+{
+	mesh->RenderMesh(go->transform->GetGlobalTransposed());
+}

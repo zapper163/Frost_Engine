@@ -94,7 +94,7 @@ void MeshLoader::LoadFile(const char* file_path)
 		
 }
 
-void MeshInfo::RenderMesh()
+void MeshInfo::RenderMesh(const float* globalTransform)
 {
 	// Bind Buffers
 	glBindBuffer(GL_ARRAY_BUFFER, id_vertex);
@@ -113,10 +113,15 @@ void MeshInfo::RenderMesh()
 	glNormalPointer(GL_FLOAT, sizeof(float) * VERTEX_FEATURES, NULL);
 	
 
+	glPushMatrix();
+	//glMultMatrixf(globalTransform); //NO PUEDE ACCEDER A LA MEMORIA
+
 	// Draw
 	glDrawElements(GL_TRIANGLES, num_index, GL_UNSIGNED_INT, NULL);
 
 	glClientActiveTexture(GL_TEXTURE0);
+
+	glPopMatrix();
 
 	// Unbind buffers
 	glBindTexture(GL_TEXTURE_2D, 0);
@@ -128,7 +133,7 @@ void MeshInfo::RenderMesh()
 void MeshLoader::Render()
 {
 	for (size_t i = 0; i < meshList.size(); i++) {
-		meshList[i]->RenderMesh();
+		//meshList[i]->RenderMesh();
 	}
 }
 
