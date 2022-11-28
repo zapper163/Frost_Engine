@@ -4,6 +4,7 @@
 #include "Application.h"
 #include "C_Mesh.h"
 #include "C_Texture.h"
+#include "C_Camera.h"
 
 #pragma comment (lib, "Assimp/libx86/assimp.lib")
 
@@ -70,13 +71,16 @@ void MeshLoader::LoadFile(const char* file_path)
 
 			uint ID = App->scene_intro->CreateGameObject(FbxGameObject, scene->mMeshes[i]->mName.C_Str());
 
+			//Mesh
 			dynamic_cast<C_Mesh*>(App->scene_intro->gameObjects[ID]->CreateComponent(Component::TYPE::MESH))->SetMesh(mesh, scene->mMeshes[i]->mName.C_Str());
-			
 			GetNodeInfo(scene, scene->mRootNode, FbxGameObject);
 
+			//Texture
 			mesh->texture_id = TextureLoader::LoadTextureFromFile(mesh->tex);
-
 			dynamic_cast<C_Texture*>(App->scene_intro->gameObjects[ID]->CreateComponent(Component::TYPE::TEXTURE))->SetTexture(mesh->tex); 
+
+			//Camera
+			dynamic_cast<C_Camera*>(App->scene_intro->gameObjects[ID]->CreateComponent(Component::TYPE::CAMERA));
 
 			MeshLoader::SetUpMesh(mesh);
 

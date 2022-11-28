@@ -347,6 +347,8 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 		ImGui::End();
 	}
 
+	
+
 	// Rendering
 	ImGui::Render();
 	glViewport(0, 0, (int)io.DisplaySize.x, (int)io.DisplaySize.y);

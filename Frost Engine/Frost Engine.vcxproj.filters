@@ -336,6 +336,9 @@
     <ClInclude Include="Modules\MemLeaks.h">
       <Filter>Sources\Tools</Filter>
     </ClInclude>
+    <ClInclude Include="Modules\C_Camera.h">
+      <Filter>Sources\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Modules\Application.cpp">
@@ -522,6 +525,9 @@
       <Filter>Sources\Components</Filter>
     </ClCompile>
     <ClCompile Include="Modules\C_Texture.cpp">
+      <Filter>Sources\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\C_Camera.cpp">
       <Filter>Sources\Components</Filter>
     </ClCompile>
   </ItemGroup>

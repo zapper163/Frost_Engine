@@ -96,6 +96,7 @@
     <ClInclude Include="Modules\Application.h" />
     <ClInclude Include="Modules\Color.h" />
     <ClInclude Include="Modules\Component.h" />
+    <ClInclude Include="Modules\C_Camera.h" />
     <ClInclude Include="Modules\C_Mesh.h" />
     <ClInclude Include="Modules\C_Texture.h" />
     <ClInclude Include="Modules\C_Transform.h" />
@@ -194,6 +195,7 @@
     <ClCompile Include="Modules\Application.cpp" />
     <ClCompile Include="Modules\Color.cpp" />
     <ClCompile Include="Modules\Component.cpp" />
+    <ClCompile Include="Modules\C_Camera.cpp" />
     <ClCompile Include="Modules\C_Mesh.cpp" />
     <ClCompile Include="Modules\C_Texture.cpp" />
     <ClCompile Include="Modules\C_Transform.cpp" />

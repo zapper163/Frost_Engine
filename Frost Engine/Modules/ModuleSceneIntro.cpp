@@ -82,8 +82,8 @@ bool ModuleSceneIntro::CleanUp()
 
 uint ModuleSceneIntro::CreateGameObject(GameObject* parent, std::string name)
 {
-	GameObject* BakerHouse = new GameObject(parent, name);
+	GameObject* Go = new GameObject(parent, name);
 
-	return BakerHouse->id;
+	return Go->id;
 }
 

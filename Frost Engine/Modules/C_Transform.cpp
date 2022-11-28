@@ -60,15 +60,22 @@ void C_Transform::Update()
 	// -------------------------------------------------------------------------------------------------------------- Define the Local Position
 	transform.localPos = float4x4::FromTRS(transform.position, transform.quatRotation, transform.scale);
 
-	if (this->go->parent != nullptr)
+	
+
+	if (this->go->id > 1)
 	{
-		if (this->go->parent->transform != nullptr)
+		if (this->go->parent != nullptr)
 		{
-			// We apply the posicion formula
-			this->transform.globalPos = this->go->parent->transform->transform.globalPos * this->transform.localPos;
-			this->transform.transGlobalPos = this->transform.globalPos.Transposed();
+			if (this->go->parent->transform != nullptr)
+			{
+				// We apply the posicion formula
+				this->transform.globalPos = this->go->parent->transform->transform.globalPos * this->transform.localPos;
+				this->transform.transGlobalPos = this->transform.globalPos.Transposed();
+			}
 		}
 	}
+
+
 }
 
 float* C_Transform::GetGlobalTransposed()

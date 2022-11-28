@@ -25,7 +25,7 @@ public:
 		MESH,
 		TEXTURE,
 		//MATERIAL,
-		//CAMERA,
+		CAMERA,
 		//NUM_OF_COMPS,
 	};
 

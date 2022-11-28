@@ -6,6 +6,7 @@
 #include "C_Transform.h"
 #include "C_Mesh.h"
 #include "C_Texture.h"
+#include "C_Camera.h"
 #include "MeshLoader.h"
 
 #include <iostream>
@@ -52,9 +53,9 @@ Component* GameObject::CreateComponent(Component::TYPE type)
 	case Component::TYPE::TEXTURE:
 		new_component = new C_Texture(this);
 		break;
-	/*case Component::TYPE::CAMERA:
+	case Component::TYPE::CAMERA:
 		new_component = new C_Camera(this);
-		break;*/
+		break;
 	default:
 		LOG("component type error");
 		break;
