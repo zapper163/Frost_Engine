@@ -140,23 +140,9 @@ void C_Camera::OnGui()
 		ImGui::DragFloat3("##Cam", &nearPlaneDistance, 0.1f);
 
 
-		//SCREEN
-		ImGui::Begin("Camera", NULL, ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoScrollbar);
-
-		ImGui::Image((ImTextureID)textureColorbuffer_mini, ImVec2(200, 100), ImVec2(0, 1), ImVec2(1, 0));
-		ImGui::End();
+		
 
 	}
-
-	/*//SCREEN
-	ImGui::Begin("Camera", NULL, ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoScrollbar);
-	ImVec2 wsize = ImGui::GetWindowSize();
-
-	float w = ImGui::GetContentRegionAvail().x;
-	float h = w * (9.0f / 16.0f);
-
-	ImGui::Image((ImTextureID)textureColorbuffer_mini, ImVec2(w, h), ImVec2(0, 1), ImVec2(1, 0));
-	//ImGui::End();*/
 
 }
 

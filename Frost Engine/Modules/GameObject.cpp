@@ -18,6 +18,8 @@ GameObject::GameObject(GameObject* parent, std::string name)
 {
 	
 	App->scene_intro->gameObjects[App->meshRender->id_count] = this;
+
+	this->parent = parent;
 	this->name = name;
 	id = App->meshRender->id_count;
 	App->meshRender->id_count++;

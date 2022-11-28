@@ -40,7 +40,7 @@ public:
 	uint id = 0; 
 
 
-	GameObject* parent = nullptr;
+	GameObject* parent;
 
 private:
 	vector <GameObject*> children;

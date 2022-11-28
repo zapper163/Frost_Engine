@@ -341,12 +341,14 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 			for (size_t i = 0; i < App->scene_intro->gameobject_selected->GetComponents().size(); i++)
 			{
 				App->scene_intro->gameobject_selected->GetComponentByNum(i)->OnGui();
+
 			}
 		}
 
 		ImGui::End();
-	}
 
+
+	}
 	
 
 	// Rendering
