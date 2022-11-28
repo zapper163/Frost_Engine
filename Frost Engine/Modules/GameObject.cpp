@@ -96,7 +96,10 @@ bool GameObject::AddChild(GameObject* child)
 
 void GameObject::Update()
 {
-
+	for (int i = 0; i < components.size(); i++)
+	{
+		components[i]->Update();
+	}
 }
 
 vector <Component*> GameObject::GetComponents()

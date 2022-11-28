@@ -42,6 +42,13 @@ update_status ModuleSceneIntro::Update(float dt)
 		primitives[n]->Update();
 	}
 
+
+	//GameObject's Components Updated
+	for (auto& gameObject : gameObjects)
+	{
+		gameObject.second->Update();
+	}
+
 	return UPDATE_CONTINUE;
 }
 
