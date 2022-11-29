@@ -8,7 +8,7 @@ ModuleCamera3D::ModuleCamera3D(bool start_enabled) : Module(start_enabled)
 
 	frustum.type = PerspectiveFrustum;
 	frustum.nearPlaneDistance = 0.1f;
-	frustum.farPlaneDistance = 500.f;
+	frustum.farPlaneDistance = 600.f;
 	frustum.front = float3::unitZ;
 	frustum.up = float3::unitY;
 	frustum.verticalFov = 60.0f * DEGTORAD;
