@@ -23,7 +23,8 @@ GameObject::GameObject(GameObject* parent, std::string name)
 	this->name = name;
 	id = App->meshRender->id_count;
 	App->meshRender->id_count++;
-	dynamic_cast<C_Transform*>(CreateComponent(Component::TYPE::TRANSFORM));
+	transform = dynamic_cast<C_Transform*>(CreateComponent(Component::TYPE::TRANSFORM));
+
 	if (parent != nullptr) parent->AddChild(this);
 }
 

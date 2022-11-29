@@ -63,10 +63,16 @@ bool ModuleMeshRender::Init()
 
 bool ModuleMeshRender::Start()
 {
+	float3 pos(0,0,0);
+	float3 scale(1,1,1);
+	Quat rot(0,0,0,0);
 
 	GameObject* Root = new GameObject(NULL, "World");
 	
+	
 	App->scene_intro->gameObjects[0] = Root;
+	dynamic_cast<C_Transform*>(Root->GetComponent(Component::TYPE::TRANSFORM))->SetTransform(pos, rot, scale);
+
 
 	MeshLoader::LoadFile(filepath);
 
