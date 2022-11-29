@@ -35,7 +35,7 @@ public:
 
 	const char* tex = "Assets/Baker_house.png";
 
-	const char* filepath = "Assets/BakerHouse.fbx";
+	const char* filepath = "Assets/Street environment_V01.fbx";
 
    
     uint id_count = 0;

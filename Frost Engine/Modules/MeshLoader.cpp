@@ -100,6 +100,9 @@ void MeshLoader::LoadFile(const char* file_path)
 
 void MeshInfo::RenderMesh(const float* globalTransform)
 {
+
+	glEnable(GL_DEPTH_TEST);
+
 	// Bind Buffers
 	glBindBuffer(GL_ARRAY_BUFFER, id_vertex);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, id_index);
