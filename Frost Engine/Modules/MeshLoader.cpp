@@ -118,7 +118,7 @@ void MeshInfo::RenderMesh(const float* globalTransform)
 	
 
 	glPushMatrix();
-	glMultMatrixf(globalTransform); //NO PUEDE ACCEDER A LA MEMORIA
+	glMultMatrixf(globalTransform); 
 
 	// Draw
 	glDrawElements(GL_TRIANGLES, num_index, GL_UNSIGNED_INT, NULL);
