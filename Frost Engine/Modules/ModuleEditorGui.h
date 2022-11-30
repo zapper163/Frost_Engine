@@ -118,6 +118,8 @@ public:
 	bool show_components_window = true;
 	bool console_visible = true;
 
+	int textureColorbuffer_mini;
+
 	std::vector<float> fpsLog;
 	std::vector<float> timeLog;
 	

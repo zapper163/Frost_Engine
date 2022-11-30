@@ -1,6 +1,7 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleEditorGui.h"
+#include "C_Camera.h"
 
 
 #include <Windows.h>
@@ -41,6 +42,9 @@ update_status ModuleEditorGui::Update(float dt)
 
 	PushLog(&fpsLog, FPS);
 	PushLog(&timeLog, MS);
+
+	//textureColorbuffer_mini = dynamic_cast<C_Camera*>(App->scene_intro->gameObjects[1]->GetComponent(Component::TYPE::CAMERA))->framebuffer_mini;
+
 
 	return UPDATE_CONTINUE;
 }
@@ -347,9 +351,16 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 
 		ImGui::End();
 
-
 	}
+
+
+	ImGui::Begin("Camera", NULL, ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoScrollbar);
+	float w2 = ImGui::GetContentRegionAvail().x;
+	float h2 = w2 * (9.0f / 16.0f);
 	
+	ImGui::Image((ImTextureID)textureColorbuffer_mini, ImVec2(w2, h2), ImVec2(0, 1), ImVec2(1, 0));
+	ImGui::End();
+
 
 	// Rendering
 	ImGui::Render();
@@ -402,6 +413,7 @@ void ModuleEditorGui::PushLog(std::vector<float>* Log, float toPush)
 void ModuleEditorGui::DisplayGameObjects(GameObject* game_object)
 {
 	ImGuiTreeNodeFlags TreeFlags = ImGuiTreeNodeFlags_OpenOnArrow;
+	TreeFlags |= ImGuiTreeNodeFlags_DefaultOpen;
 	if (game_object == App->scene_intro->gameobject_selected)
 	{
 		TreeFlags |= ImGuiTreeNodeFlags_Selected;
@@ -415,7 +427,6 @@ void ModuleEditorGui::DisplayGameObjects(GameObject* game_object)
 		{
 			App->scene_intro->gameobject_selected = game_object;
 		}
-
 	}
 	else
 	{

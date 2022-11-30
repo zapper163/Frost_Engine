@@ -15,11 +15,11 @@ Application::Application() : debug(false)
 	AddModule(camera);
 	AddModule(input);
 
-	//ImGui
-	AddModule(editorGui);
-
 	//Mesh Render
 	AddModule(meshRender);
+
+	//ImGui
+	AddModule(editorGui);
 
 	// Scenes
 	AddModule(scene_intro);

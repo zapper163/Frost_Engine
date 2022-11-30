@@ -5,6 +5,7 @@
 #include "MeshLoader.h"
 #include "TextureLoader.h"
 #include "GameObject.h"
+#include "C_Camera.h"
 
 #include <iostream>
 #include <filesystem>
@@ -72,6 +73,12 @@ bool ModuleMeshRender::Start()
 	
 	App->scene_intro->gameObjects[0] = Root;
 	dynamic_cast<C_Transform*>(Root->GetComponent(Component::TYPE::TRANSFORM))->SetTransform(pos, rot, scale);
+
+	
+	GameObject* Camera = new GameObject(Root, "Camera");
+
+	App->scene_intro->gameObjects[1] = Camera;
+	dynamic_cast<C_Camera*>(App->scene_intro->gameObjects[1]->CreateComponent(Component::TYPE::CAMERA));
 
 
 	MeshLoader::LoadFile(filepath);

@@ -78,9 +78,7 @@ void MeshLoader::LoadFile(const char* file_path)
 			//Texture
 			mesh->texture_id = TextureLoader::LoadTextureFromFile(mesh->tex);
 			dynamic_cast<C_Texture*>(App->scene_intro->gameObjects[ID]->CreateComponent(Component::TYPE::TEXTURE))->SetTexture(mesh->tex); 
-
-			//Camera
-			dynamic_cast<C_Camera*>(App->scene_intro->gameObjects[ID]->CreateComponent(Component::TYPE::CAMERA));
+			
 
 			MeshLoader::SetUpMesh(mesh);
 
