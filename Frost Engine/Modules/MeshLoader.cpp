@@ -96,7 +96,7 @@ void MeshLoader::LoadFile(const char* file_path)
 		
 }
 
-void MeshInfo::RenderMesh(const float* globalTransform)
+void MeshInfo::RenderMesh(const GLfloat* globalTransform)
 {
 
 	glEnable(GL_DEPTH_TEST);
@@ -119,14 +119,16 @@ void MeshInfo::RenderMesh(const float* globalTransform)
 	
 
 	glPushMatrix();
-	glMultMatrixf(globalTransform); 
+	//glMultMatrixf(globalTransform); 
 
 	// Draw
 	glDrawElements(GL_TRIANGLES, num_index, GL_UNSIGNED_INT, NULL);
 
+	glPopMatrix();
+
 	glClientActiveTexture(GL_TEXTURE0);
 
-	glPopMatrix();
+	
 
 	// Unbind buffers
 	glBindTexture(GL_TEXTURE_2D, 0);

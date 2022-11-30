@@ -32,10 +32,7 @@ public:
     bool sphere = false;
 
    
-
-	const char* tex = "Assets/Baker_house.png";
-
-	const char* filepath = "Assets/Street environment_V01.fbx";
+	const char* filepath = "Assets/street.fbx";
 
    
     uint id_count = 0;

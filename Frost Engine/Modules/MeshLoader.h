@@ -44,11 +44,11 @@ struct MeshInfo
 	uint num_vertex = 0;
 	float* vertex = nullptr;
 	
-	const char* tex = "Assets/Baker_house.png";
+	const char* tex = "Assets/building 06_ c.tga";
 
 	const char* mesh_name;
 
-	void RenderMesh(const float* globalTransform);
+	void RenderMesh(const GLfloat* globalTransform);
  };
 
 class MeshLoader
