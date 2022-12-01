@@ -41,6 +41,7 @@ Application::~Application()
 
 bool Application::Init()
 {
+	//_CrtSetBreakAlloc(184);
 	bool ret = true;
 
 	App = this;

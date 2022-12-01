@@ -147,7 +147,7 @@ void MeshLoader::Render()
 
 void MeshLoader::CleanUp()
 {
-
+	
 	meshList.clear();
 
 	// detach log stream

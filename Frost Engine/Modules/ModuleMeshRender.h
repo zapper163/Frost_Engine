@@ -34,7 +34,9 @@ public:
    
 	const char* filepath = "Assets/street.fbx";
 
-   
+    GameObject* Root;
+    GameObject* Camera;
+
     uint id_count = 0;
     
 

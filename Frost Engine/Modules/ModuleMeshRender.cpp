@@ -68,14 +68,14 @@ bool ModuleMeshRender::Start()
 	float3 scale(1,1,1);
 	Quat rot(0,0,0,0);
 
-	GameObject* Root = new GameObject(NULL, "World");
+	Root = new GameObject(NULL, "World");
 	
 	
 	App->scene_intro->gameObjects[0] = Root;
 	dynamic_cast<C_Transform*>(Root->GetComponent(Component::TYPE::TRANSFORM))->SetTransform(pos, rot, scale);
 
 	
-	GameObject* Camera = new GameObject(Root, "Camera");
+	Camera = new GameObject(Root, "Camera");
 
 	App->scene_intro->gameObjects[1] = Camera;
 	dynamic_cast<C_Camera*>(App->scene_intro->gameObjects[1]->CreateComponent(Component::TYPE::CAMERA));
@@ -112,6 +112,16 @@ bool ModuleMeshRender::CleanUp()
 	LOG("Destroying Mesh Renderer");
 	App->editorGui->console.AddLog(__FILE__, __LINE__, "Destroying Mesh Renderer");
 
+	delete Root;
+	Root = nullptr;
+
+	delete Camera;
+	Camera = nullptr;
+
+	for (int i = 0; i < App->scene_intro->gameObjects.size(); i++)
+	{
+		
+	}
 	SDL_QuitSubSystem(SDL_INIT_EVENTS);
 	return true;
 }

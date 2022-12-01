@@ -26,9 +26,12 @@ struct MeshInfo
 	MeshInfo() {}
 
 	~MeshInfo() {
-		delete[num_vertex]  vertex;
-		delete[num_index]  index;
 
+		delete vertex;
+		vertex = nullptr;
+
+		delete index;
+		index = nullptr;
 	}
 
 	
@@ -70,5 +73,6 @@ public:
 	float* transGlobalPos;
 
 	static vector<MeshInfo*> meshList;
+
 	
 };
