@@ -24,7 +24,7 @@ public:
 
 
 	void InitFrameBuffer();
-	void RefreshBuffer();
+	void BindBuffer(int textureBuffer);
 	void ResizeBuffer(int width, int height);
 
 

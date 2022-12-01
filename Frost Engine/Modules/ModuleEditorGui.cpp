@@ -33,6 +33,8 @@ bool ModuleEditorGui::Init()
 	
 	ImGui::StyleColorsDark();
 
+	
+
 	return ret;
 }
 update_status ModuleEditorGui::Update(float dt)
@@ -43,8 +45,22 @@ update_status ModuleEditorGui::Update(float dt)
 	PushLog(&fpsLog, FPS);
 	PushLog(&timeLog, MS);
 
-	//textureColorbuffer_mini = dynamic_cast<C_Camera*>(App->scene_intro->gameObjects[1]->GetComponent(Component::TYPE::CAMERA))->framebuffer_mini;
+	this->textureColorbuffer_mini = dynamic_cast<C_Camera*>(App->scene_intro->gameObjects[1]->GetComponent(Component::TYPE::CAMERA))->textureColorbuffer_mini;
+	
+	
+	if (show_camera_window == true)
+	{
+		glBindFramebuffer(GL_FRAMEBUFFER, textureColorbuffer_mini);
+	}
+	else {
+		glBindFramebuffer(GL_FRAMEBUFFER, App->renderer3D->textureColorbuffer);
+	}
 
+	if (App->scene_intro->gameobject_selected != nullptr && App->scene_intro->gameobject_selected->id == 1 )
+	{
+		show_camera_window = true;
+	}
+	
 
 	return UPDATE_CONTINUE;
 }
@@ -353,14 +369,21 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 
 	}
 
+	//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	//CAMERA WINDOW
 
-	ImGui::Begin("Camera", NULL, ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoScrollbar);
-	float w2 = ImGui::GetContentRegionAvail().x;
-	float h2 = w2 * (9.0f / 16.0f);
 	
-	ImGui::Image((ImTextureID)textureColorbuffer_mini, ImVec2(w2, h2), ImVec2(0, 1), ImVec2(1, 0));
-	ImGui::End();
+	if (show_camera_window)
+	{
+		ImGui::Begin("Camera", &show_camera_window, ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoScrollbar);
+		float w2 = ImGui::GetContentRegionAvail().x;
+		float h2 = w2 * (9.0f / 16.0f);
 
+		ImGui::Image((ImTextureID)textureColorbuffer_mini, ImVec2(w2, h2), ImVec2(0, 1), ImVec2(1, 0));
+		ImGui::End();
+
+	}
+	
 
 	// Rendering
 	ImGui::Render();

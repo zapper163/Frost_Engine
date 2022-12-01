@@ -116,6 +116,7 @@ public:
 	bool show_console_window = true;
 	bool show_gameobject_window = true;
 	bool show_components_window = true;
+	bool show_camera_window = false;
 	bool console_visible = true;
 
 	int textureColorbuffer_mini;

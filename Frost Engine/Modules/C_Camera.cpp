@@ -9,7 +9,7 @@
 #include <string>
 #include <vector>
 
-C_Camera::C_Camera(GameObject* gameObject) : Component(gameObject, TYPE::TEXTURE)
+C_Camera::C_Camera(GameObject* gameObject) : Component(gameObject, TYPE::CAMERA)
 {
 	//CalculateViewMatrix();
 	viewMatrix = frustum.ViewMatrix();
@@ -27,29 +27,8 @@ C_Camera::C_Camera(GameObject* gameObject) : Component(gameObject, TYPE::TEXTURE
 
 	Move(float3(1.0f, 1.0f, 0.0f));
 
-
-	//Framebuffer--------------------------------------------------------------------------------------
-	glGenFramebuffers(1, &framebuffer_mini);
-	glBindFramebuffer(GL_FRAMEBUFFER, framebuffer_mini);
-
-	// generate texture
-	glGenTextures(1, &textureColorbuffer_mini);
-	glBindTexture(GL_TEXTURE_2D, textureColorbuffer_mini);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glBindTexture(GL_TEXTURE_2D, 0);
-
-	// attach it to currently bound framebuffer object
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, textureColorbuffer_mini, 0);
-	// create render buffer object
-	glGenRenderbuffers(1, &renderbuffer_mini);
-	glBindRenderbuffer(GL_RENDERBUFFER, renderbuffer_mini);
-	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, 1280, 720); //Size of the screen printed
-	glBindRenderbuffer(GL_RENDERBUFFER, 0);
-
-	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, renderbuffer_mini);
-
+	InitFrameBuffer();
+	
 }
 
 C_Camera::~C_Camera()
@@ -59,6 +38,8 @@ C_Camera::~C_Camera()
 
 void C_Camera::Update()
 {
+	//Movement Disabled
+	/*
 	vec3 newPos(0, 0, 0);
 	Quat direction = Quat::identity;
 
@@ -128,6 +109,7 @@ void C_Camera::Update()
 	//CalculateViewMatrix();
 	viewMatrix = frustum.ViewMatrix();
 	viewMatrix.Transpose();
+	*/
 }
 
 void C_Camera::OnGui()
@@ -146,6 +128,32 @@ void C_Camera::OnGui()
 
 }
 
+void C_Camera::InitFrameBuffer()
+{
+	//Framebuffer--------------------------------------------------------------------------------------
+	glGenFramebuffers(1, &framebuffer_mini);
+	glBindFramebuffer(GL_FRAMEBUFFER, framebuffer_mini);
+
+	// generate texture
+	glGenTextures(1, &textureColorbuffer_mini);
+	glBindTexture(GL_TEXTURE_2D, textureColorbuffer_mini);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glBindTexture(GL_TEXTURE_2D, 0);
+
+	// attach it to currently bound framebuffer object
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, textureColorbuffer_mini, 0);
+	// create render buffer object
+	glGenRenderbuffers(1, &renderbuffer_mini);
+	glBindRenderbuffer(GL_RENDERBUFFER, renderbuffer_mini);
+	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, 1280, 720); //Size of the screen printed
+	glBindRenderbuffer(GL_RENDERBUFFER, 0);
+
+	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, renderbuffer_mini);
+
+}
+
 
 void C_Camera::Move(const float3& Movement)
 {
@@ -153,13 +161,11 @@ void C_Camera::Move(const float3& Movement)
 }
 
 
-
-/*
-void RefreshBuffer()
+void BindBuffer(int textureBuffer)
 {
-
+	glBindFramebuffer(GL_FRAMEBUFFER, textureBuffer);
 }
-
+/*
 void ResizeBuffer(int width, int height)
 {
 
