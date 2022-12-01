@@ -76,6 +76,8 @@ bool ModuleSceneIntro::CleanUp()
 	}
 	primitives.Clear();
 
+	RELEASE(App->meshRender->Root);
+
 	return true;
 }
 

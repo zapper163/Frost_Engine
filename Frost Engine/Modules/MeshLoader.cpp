@@ -82,7 +82,7 @@ void MeshLoader::LoadFile(const char* file_path)
 
 			MeshLoader::SetUpMesh(mesh);
 
-
+			
 		}
 
 		aiReleaseImport(scene);
