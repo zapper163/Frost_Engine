@@ -119,7 +119,7 @@ void MeshInfo::RenderMesh(const GLfloat* globalTransform)
 	
 
 	glPushMatrix();
-	//glMultMatrixf(globalTransform); 
+	glMultMatrixf(globalTransform); 
 
 	// Draw
 	glDrawElements(GL_TRIANGLES, num_index, GL_UNSIGNED_INT, NULL);
@@ -204,4 +204,9 @@ void MeshLoader::GetNodeInfo(const aiScene* rootScene, aiNode* rootNode, GameObj
 			GetNodeInfo(rootScene, rootNode->mChildren[n], goParent);
 		}
 	}
+}
+
+void MeshInfo::InitAABB()
+{
+	//AABB_box.SetFrom((float3*)vertices, num_vertices / 3);
 }

@@ -51,6 +51,10 @@ struct MeshInfo
 
 	const char* mesh_name;
 
+	//AABB AABB_box;
+
+	void InitAABB();
+
 	void RenderMesh(const GLfloat* globalTransform);
  };
 
