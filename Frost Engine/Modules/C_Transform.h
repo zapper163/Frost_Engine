@@ -36,7 +36,7 @@ public:
 	void SetTransform(float3 position, Quat rotation, float3 scale);
 	void Update() override;
 
-	float4x4 GetGlobalTransposed();
+	float* GetGlobalTransposed();
 
 	void OnGui();
 

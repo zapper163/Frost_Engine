@@ -103,9 +103,6 @@ public:
 
 	void DisplayGameObjects(GameObject* game_object);
 
-	
-	ImVec2 NormMousePos(float x, float y, float w, float h, ImVec2 p);
-
 	void PushLog(std::vector<float>* Log, float toPush);
 
 public:

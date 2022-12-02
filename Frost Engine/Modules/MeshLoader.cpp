@@ -69,8 +69,6 @@ void MeshLoader::LoadFile(const char* file_path)
 				}
 			}
 
-			MeshInfo::InitAABB();
-
 			uint ID = App->scene_intro->CreateGameObject(FbxGameObject, scene->mMeshes[i]->mName.C_Str());
 
 			//Mesh
@@ -121,7 +119,7 @@ void MeshInfo::RenderMesh(const GLfloat* globalTransform)
 	
 
 	glPushMatrix();
-	glMultMatrixf(globalTransform); 
+	//glMultMatrixf(globalTransform); 
 
 	// Draw
 	glDrawElements(GL_TRIANGLES, num_index, GL_UNSIGNED_INT, NULL);
@@ -149,6 +147,7 @@ void MeshLoader::Render()
 
 void MeshLoader::CleanUp()
 {
+	
 	meshList.clear();
 
 	// detach log stream
@@ -194,6 +193,9 @@ void MeshLoader::GetNodeInfo(const aiScene* rootScene, aiNode* rootNode, GameObj
 
 	dynamic_cast<C_Transform*>(goParent->GetComponent(Component::TYPE::TRANSFORM))->SetTransform(pos, rot, scale);
 
+
+
+
 	// We make it recursive for its children
 	if (rootNode->mNumChildren > 0)
 	{
@@ -202,9 +204,4 @@ void MeshLoader::GetNodeInfo(const aiScene* rootScene, aiNode* rootNode, GameObj
 			GetNodeInfo(rootScene, rootNode->mChildren[n], goParent);
 		}
 	}
-}
-
-void MeshInfo::InitAABB()
-{
-	AABB_box.SetFrom((float3*)vertex, num_vertex / 3);
 }

@@ -32,7 +32,7 @@ public:
     bool sphere = false;
 
    
-	const char* filepath = "Assets/BakerHouse.fbx";
+	const char* filepath = "Assets/street.fbx";
 
     GameObject* Root;
     GameObject* Camera;
