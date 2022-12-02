@@ -14,7 +14,7 @@ ModuleCamera3D::ModuleCamera3D(bool start_enabled) : Module(start_enabled)
 	frustum.verticalFov = 60.0f * DEGTORAD;
 	frustum.horizontalFov = 2.0f * atanf(tanf(frustum.verticalFov / 2.0f) * (16.f / 9.f));
 
-	frustum.pos = float3(0, 0, -5);
+	frustum.pos = float3(0, 5, -20);
 }
 
 ModuleCamera3D::~ModuleCamera3D()

@@ -10,6 +10,9 @@
 #include "Assimp/include/scene.h"
 #include "Assimp/include/postprocess.h"
 
+#include "External_Libraries/MathGeoLib/include/MathGeoLib.h"
+
+
 
 #include <vector>
 
@@ -50,6 +53,10 @@ struct MeshInfo
 	const char* tex = "Assets/building 06_ c.tga";
 
 	const char* mesh_name;
+
+	AABB localAABB;
+
+	void GenerateBoundingBox();
 
 	void RenderMesh(const GLfloat* globalTransform);
  };

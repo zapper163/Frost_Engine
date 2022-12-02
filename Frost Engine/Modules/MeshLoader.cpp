@@ -228,3 +228,10 @@ void MeshLoader::GetNodeInfo(const aiScene* rootScene, aiNode* rootNode, GameObj
 		}
 	}
 }
+
+void MeshInfo::GenerateBoundingBox()
+{
+	localAABB.SetNegativeInfinity();
+	localAABB.Enclose((float3*)vertex, num_vertex);
+	
+}
