@@ -69,6 +69,8 @@ void MeshLoader::LoadFile(const char* file_path)
 				}
 			}
 
+			MeshInfo::InitAABB();
+
 			uint ID = App->scene_intro->CreateGameObject(FbxGameObject, scene->mMeshes[i]->mName.C_Str());
 
 			//Mesh
@@ -147,7 +149,6 @@ void MeshLoader::Render()
 
 void MeshLoader::CleanUp()
 {
-	
 	meshList.clear();
 
 	// detach log stream
@@ -193,9 +194,6 @@ void MeshLoader::GetNodeInfo(const aiScene* rootScene, aiNode* rootNode, GameObj
 
 	dynamic_cast<C_Transform*>(goParent->GetComponent(Component::TYPE::TRANSFORM))->SetTransform(pos, rot, scale);
 
-
-
-
 	// We make it recursive for its children
 	if (rootNode->mNumChildren > 0)
 	{
@@ -208,5 +206,5 @@ void MeshLoader::GetNodeInfo(const aiScene* rootScene, aiNode* rootNode, GameObj
 
 void MeshInfo::InitAABB()
 {
-	//AABB_box.SetFrom((float3*)vertices, num_vertices / 3);
+	AABB_box.SetFrom((float3*)vertex, num_vertex / 3);
 }

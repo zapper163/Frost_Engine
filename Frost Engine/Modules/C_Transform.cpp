@@ -81,9 +81,9 @@ void C_Transform::Update()
 
 }
 
-float* C_Transform::GetGlobalTransposed()
+float4x4 C_Transform::GetGlobalTransposed()
 {
-	return transform.transGlobalPos.ptr();
+	return transform.transGlobalPos;
 }
 
 

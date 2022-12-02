@@ -41,5 +41,11 @@ void C_Mesh::OnGui()
 
 void C_Mesh::Update()
 {
-	mesh->RenderMesh(go->transform->GetGlobalTransposed());
+	mesh->RenderMesh(go->transform->GetGlobalTransposed().ptr());
+
+	mesh->OBB_box = mesh->AABB_box;
+	mesh->OBB_box.Transform(go->parent->transform->GetGlobalTransposed());
+	mesh->Global_AABB_box.SetNegativeInfinity();
+	mesh->Global_AABB_box.Enclose(mesh->OBB_box);
+
 }

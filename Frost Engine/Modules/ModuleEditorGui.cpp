@@ -1,6 +1,7 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleEditorGui.h"
+#include "MeshLoader.h"
 #include "C_Camera.h"
 
 
@@ -115,6 +116,30 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 		float h = w * (9.0f / 16.0f);
 
 		ImGui::Image((ImTextureID)App->renderer3D->textureColorbuffer, ImVec2(w, h), ImVec2(0, 1), ImVec2(1, 0));
+
+		//MOUSE PICKING
+		if (!App->input->GetKey(SDL_SCANCODE_LALT) == KEY_DOWN && ImGui::IsMouseClicked(0) && ImGui::IsWindowHovered())
+		{
+			ImVec2 mousePos = ImGui::GetMousePos();
+
+			ImVec2 norm = NormMousePos(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y,
+				ImGui::GetWindowWidth(), ImGui::GetWindowHeight(), mousePos);
+
+			//LOG("%f, %f", norm.x, norm.y);
+
+			LineSegment picking = App->camera->frustum.UnProjectLineSegment(norm.x, norm.y);
+
+			for (size_t i = 0; i < MeshLoader::meshList.size(); i++)
+			{
+				if (picking.Intersects(MeshLoader::meshList[i]->AABB_box))
+				{
+					LOG("patata");
+						//app->hierarchy->SetGameObjectSelected(app->hierarchy->GOscene[i]);
+				}
+			}
+
+		}
+
 		ImGui::End();
 
 
@@ -467,4 +492,13 @@ void ModuleEditorGui::DisplayGameObjects(GameObject* game_object)
 		}
 	}
 
+}
+
+ImVec2 ModuleEditorGui::NormMousePos(float x, float y, float w, float h, ImVec2 p)
+{
+	ImVec2 normP;
+
+	normP.x = -1.0 + 2.0 * ((p.x - x) / w);
+	normP.y = 1.0 - 2.0 * ((p.y - y) / h);
+	return normP;
 }

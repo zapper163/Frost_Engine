@@ -26,7 +26,6 @@ public:
 	
 	vec3 X, Y, Z, Position, Reference;
 
-private:
 	Frustum frustum;
 	float4x4 viewMatrix;
 	float4x4 projectionMatrix;

@@ -10,8 +10,10 @@
 #include "Assimp/include/scene.h"
 #include "Assimp/include/postprocess.h"
 
+#include "External_Libraries/MathGeoLib/include/MathGeoLib.h"
 
 #include <vector>
+#include <string>
 
 
 using namespace std;
@@ -23,7 +25,11 @@ class GameObject;
 struct MeshInfo
 {
 
-	MeshInfo() {}
+	MeshInfo() {
+		vertex = nullptr;
+		num_vertex = 0;
+
+	}
 
 	~MeshInfo() {
 
@@ -41,19 +47,22 @@ struct MeshInfo
 	uint* index = nullptr;
 
 	float* texture_vertex = nullptr;
-	GLuint texture_id;
+	GLuint texture_id = 0;
 
 	uint id_index = 0;
-	uint num_vertex = 0;
-	float* vertex = nullptr;
+	static uint num_vertex;
+	static float* vertex;
 	
 	const char* tex = "Assets/building 06_ c.tga";
 
-	const char* mesh_name;
+	const char* mesh_name = "Default";
 
-	//AABB AABB_box;
+	static AABB AABB_box;
+	
+	OBB OBB_box;
+	AABB Global_AABB_box;
 
-	void InitAABB();
+	static void InitAABB();
 
 	void RenderMesh(const GLfloat* globalTransform);
  };
