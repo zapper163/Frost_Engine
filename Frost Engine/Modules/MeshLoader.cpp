@@ -99,7 +99,30 @@ void MeshLoader::LoadFile(const char* file_path)
 void MeshInfo::RenderMesh(const GLfloat* globalTransform)
 {
 
-	glEnable(GL_DEPTH_TEST);
+	//Wireframe mode
+	if (App->editorGui->wireframe)
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	else
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+	//Enable/Disable lights
+	if (App->editorGui->lights_active == false)
+		glDisable(GL_LIGHTING);
+	else
+		glEnable(GL_LIGHTING);
+
+	//Enable/Disable depth test
+	if (App->editorGui->depth_test_active == false)
+		glDisable(GL_DEPTH_TEST);
+	else
+		glEnable(GL_DEPTH_TEST);
+
+	//Enable/Disable cull face
+	if (App->editorGui->cull_face_active == false)
+		glDisable(GL_CULL_FACE);
+	else
+		glEnable(GL_CULL_FACE);
+
 
 	// Bind Buffers
 	glBindBuffer(GL_ARRAY_BUFFER, id_vertex);

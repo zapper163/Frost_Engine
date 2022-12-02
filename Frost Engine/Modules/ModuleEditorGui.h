@@ -119,6 +119,11 @@ public:
 	bool show_camera_window = false;
 	bool console_visible = true;
 
+	bool wireframe = false;
+	bool lights_active = true;
+	bool depth_test_active = true;
+	bool cull_face_active = true;
+
 	int textureColorbuffer_mini;
 
 	std::vector<float> fpsLog;

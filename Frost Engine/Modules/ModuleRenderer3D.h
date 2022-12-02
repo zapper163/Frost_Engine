@@ -48,10 +48,10 @@ public:
     int width = SCREEN_WIDTH;
     int height = SCREEN_HEIGHT;
 
-    bool wireframe = false;
+  /*  bool wireframe = false;
     bool lights_active = true;
     bool depth_test_active = true;
-    bool cull_face_active = true;
+    bool cull_face_active = true;*/
 
     
 

@@ -201,25 +201,15 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 		ImGui::Text("\n");
 
 		ImGui::Text("Render Settings:\n");
-		ImGui::Checkbox("Wireframe Mode", &App->renderer3D->wireframe); 
+		ImGui::Checkbox("Wireframe Mode", &wireframe); 
 		ImGui::SameLine();
-		ImGui::Checkbox("Lights", &App->renderer3D->lights_active);
+		ImGui::Checkbox("Lights", &lights_active);
 
-		ImGui::Checkbox("Depth Test", &App->renderer3D->depth_test_active);
+		ImGui::Checkbox("Depth Test", &depth_test_active);
 		ImGui::SameLine();
-		ImGui::Checkbox("Cull Face", &App->renderer3D->cull_face_active);
+		ImGui::Checkbox("Cull Face", &cull_face_active);
 		ImGui::Text("\n");
 
-		if (ImGui::Button("Clear screen"))
-		{
-			MeshLoader::CleanUp();
-			TextureLoader::loaded_textures.clear();
-			/*App->scene_intro->gameobject_selected = NULL;
-			for (size_t i = 1; i < App->scene_intro->gameObjects.size(); i++)
-			{
-				App->scene_intro->gameObjects[i]->parent->
-			}*/
-		}
 		ImGui::Text("\n\n");
 
 		if (ImGui::CollapsingHeader("FRAMERATE"))
