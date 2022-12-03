@@ -37,6 +37,7 @@ public:
 	void Update() override;
 
 	float* GetGlobalTransposed();
+	float4x4 GetGlobalMatrix();
 
 	void OnGui();
 

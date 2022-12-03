@@ -41,5 +41,34 @@ void C_Mesh::OnGui()
 
 void C_Mesh::Update()
 {
-	mesh->RenderMesh(go->transform->GetGlobalTransposed());
+	//if (CheckInFrustrum())
+	{
+		mesh->RenderMesh(go->transform->GetGlobalTransposed());
+	}
+	
+}
+
+bool C_Mesh::CheckInFrustrum()
+{
+	float3 vCorner[8];
+	mesh->globalAABB.GetCornerPoints(vCorner); // get the corners of the box into the vCorner array
+	// test all 8 corners against the 6 sides
+	// if all points are behind 1 specific plane, we are out
+	// if we are in with all points, then we are fully in
+	for (int p = 0; p < 6; ++p) {
+		int iInCount = 8;
+		int iPtIn = 1;
+		for (int i = 0; i < 8; ++i) {
+			// test this point against the planes
+			if (App->camera->frustum.GetPlane(p).IsOnPositiveSide(vCorner[i])) { //<-- “IsOnPositiveSide” from MathGeoLib
+				iPtIn = 0;
+				--iInCount;
+			}
+		}
+		// were all the points outside of plane p?
+		if(iInCount == 0)
+			return false;
+	}
+	
+	return true;
 }

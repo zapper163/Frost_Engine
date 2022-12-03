@@ -176,14 +176,22 @@ bool ModuleRenderer3D::Start()
 update_status ModuleRenderer3D::PreUpdate(float dt)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	//glLoadIdentity();
+
+	//glMatrixMode(GL_MODELVIEW);
+	//glLoadMatrixf(App->camera->GetOpenGLViewMatrix());
+
+	//glMatrixMode(GL_PROJECTION);
+	//ProjectionMatrix = perspective(60.0f, (float)width / (float)height, 0.125f, 512.0f);
+	//glLoadMatrixf(&ProjectionMatrix);
+
 	glLoadIdentity();
+	glMatrixMode(GL_PROJECTION);
+	glLoadMatrixf((GLfloat*)App->camera->frustum.ProjectionMatrix().Transposed().v);
 
 	glMatrixMode(GL_MODELVIEW);
-	glLoadMatrixf(App->camera->GetOpenGLViewMatrix());
-
-	glMatrixMode(GL_PROJECTION);
-	ProjectionMatrix = perspective(60.0f, (float)width / (float)height, 0.125f, 512.0f);
-	glLoadMatrixf(&ProjectionMatrix);
+	float4x4 mat = App->camera->frustum.ViewMatrix();
+	glLoadMatrixf((GLfloat*)mat.Transposed().v);
 
 	// light 0 on cam pos
 	lights[0].SetPos(App->camera->Position.x, App->camera->Position.y, App->camera->Position.z);

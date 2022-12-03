@@ -22,6 +22,8 @@ public:
 
 	void Update();
 
+	bool CheckInFrustrum();
+
 	MeshInfo* GetMesh()
 	{
 		return mesh;

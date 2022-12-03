@@ -36,6 +36,8 @@ update_status ModuleSceneIntro::Update(float dt)
 	p.axis = true;
 	p.Render();
 
+
+
 	//primitives updated
 	for (uint n = 0; n < primitives.Count(); n++)
 	{

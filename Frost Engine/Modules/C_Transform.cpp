@@ -4,6 +4,7 @@
 #include "GameObject.h"
 #include "Component.h"
 #include "C_Transform.h"
+#include "C_Mesh.h"
 
 #include <iostream>
 #include <string>
@@ -56,6 +57,13 @@ void C_Transform::SetTransform(float3 position, Quat rotation, float3 scale)
 
 void C_Transform::Update()
 {
+
+	C_Mesh* Cmesh = dynamic_cast<C_Mesh*>(go->GetComponent(Component::TYPE::MESH)); 
+	if (Cmesh != nullptr && Cmesh->mesh->localAABB_init)
+	{
+		Cmesh->mesh->GenerateGlobalBoundingBox();
+	}
+
 	// ---------------------------------------------------------------------------------------------------------------------------- Define rotation (QUAT from EULER)
 	transform.quatRotation = Quat::FromEulerXYZ(transform.eulRotation.x * DEGTORAD, transform.eulRotation.y * DEGTORAD, transform.eulRotation.z * DEGTORAD);
 	transform.quatRotation.Normalize();
@@ -84,6 +92,11 @@ void C_Transform::Update()
 float* C_Transform::GetGlobalTransposed()
 {
 	return transform.transGlobalPos.ptr();
+}
+
+float4x4 C_Transform::GetGlobalMatrix()
+{
+	return transform.globalPos;
 }
 
 

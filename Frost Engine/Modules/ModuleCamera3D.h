@@ -18,6 +18,8 @@ public:
 	void Move(const float3&Movement);
 	float* GetOpenGLViewMatrix();
 
+	
+
 private:
 
 	void CalculateViewMatrix();
@@ -26,7 +28,6 @@ public:
 	
 	vec3 X, Y, Z, Position, Reference;
 
-private:
 	Frustum frustum;
 	float4x4 viewMatrix;
 	float4x4 projectionMatrix;

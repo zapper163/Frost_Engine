@@ -25,7 +25,8 @@ void MeshLoader::LoadFile(const char* file_path)
 	{
 
 		GameObject* FbxGameObject = new GameObject(App->scene_intro->gameObjects[0], file_path);
-
+		GetNodeInfo(scene, scene->mRootNode, FbxGameObject);
+		
 		for (uint i = 0; i < scene->mNumMeshes; i++)
 		{
 			MeshInfo* mesh = new MeshInfo();
@@ -69,16 +70,19 @@ void MeshLoader::LoadFile(const char* file_path)
 				}
 			}
 
-			uint ID = App->scene_intro->CreateGameObject(FbxGameObject, scene->mMeshes[i]->mName.C_Str());
+			mesh->ID = App->scene_intro->CreateGameObject(FbxGameObject, scene->mMeshes[i]->mName.C_Str());
 
 			//Mesh
-			dynamic_cast<C_Mesh*>(App->scene_intro->gameObjects[ID]->CreateComponent(Component::TYPE::MESH))->SetMesh(mesh, scene->mMeshes[i]->mName.C_Str());
-			GetNodeInfo(scene, scene->mRootNode, FbxGameObject);
+			dynamic_cast<C_Mesh*>(App->scene_intro->gameObjects[mesh->ID]->CreateComponent(Component::TYPE::MESH))->SetMesh(mesh, scene->mMeshes[i]->mName.C_Str());
+			GetNodeInfo(scene, scene->mRootNode->mChildren[i], App->scene_intro->gameObjects[mesh->ID]);
 
 			//Texture
 			mesh->texture_id = TextureLoader::LoadTextureFromFile(mesh->tex);
-			dynamic_cast<C_Texture*>(App->scene_intro->gameObjects[ID]->CreateComponent(Component::TYPE::TEXTURE))->SetTexture(mesh->tex); 
+			dynamic_cast<C_Texture*>(App->scene_intro->gameObjects[mesh->ID]->CreateComponent(Component::TYPE::TEXTURE))->SetTexture(mesh->tex);
 
+
+			mesh->GenerateLocalBoundingBox();
+			
 
 			MeshLoader::SetUpMesh(mesh);
 
@@ -142,7 +146,7 @@ void MeshInfo::RenderMesh(const GLfloat* globalTransform)
 	
 
 	glPushMatrix();
-	//glMultMatrixf(globalTransform); 
+	glMultMatrixf(globalTransform); 
 
 	// Draw
 	glDrawElements(GL_TRIANGLES, num_index, GL_UNSIGNED_INT, NULL);
@@ -204,7 +208,7 @@ const char* MeshLoader::GetMeshName(const char* mesh_name)
 }
 
 
-void MeshLoader::GetNodeInfo(const aiScene* rootScene, aiNode* rootNode, GameObject* goParent)
+void MeshLoader::GetNodeInfo(const aiScene* rootScene, aiNode* rootNode, GameObject* go)
 {
 	aiVector3D translation, scaling;
 	aiQuaternion quatRot;
@@ -214,7 +218,7 @@ void MeshLoader::GetNodeInfo(const aiScene* rootScene, aiNode* rootNode, GameObj
 	float3 scale(scaling.x, scaling.y, scaling.z);
 	Quat rot(quatRot.x, quatRot.y, quatRot.z, quatRot.w);
 
-	dynamic_cast<C_Transform*>(goParent->GetComponent(Component::TYPE::TRANSFORM))->SetTransform(pos, rot, scale);
+	dynamic_cast<C_Transform*>(go->GetComponent(Component::TYPE::TRANSFORM))->SetTransform(pos/100, rot, scale/100);
 
 
 
@@ -224,14 +228,25 @@ void MeshLoader::GetNodeInfo(const aiScene* rootScene, aiNode* rootNode, GameObj
 	{
 		for (int n = 0; n < rootNode->mNumChildren; n++)
 		{
-			GetNodeInfo(rootScene, rootNode->mChildren[n], goParent);
+			GetNodeInfo(rootScene, rootNode->mChildren[n], go);
 		}
 	}
 }
 
-void MeshInfo::GenerateBoundingBox()
+void MeshInfo::GenerateLocalBoundingBox()
 {
 	localAABB.SetNegativeInfinity();
 	localAABB.Enclose((float3*)vertex, num_vertex);
+	localAABB_init = true;
 	
+}
+
+void MeshInfo::GenerateGlobalBoundingBox()
+{
+	globalOBB = localAABB;
+	globalOBB.Transform(App->scene_intro->gameObjects[ID]->transform->GetGlobalMatrix());
+	
+	// Generate global AABB
+	globalAABB.SetNegativeInfinity();
+	globalAABB.Enclose(globalOBB);
 }

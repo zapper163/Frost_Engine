@@ -54,9 +54,16 @@ struct MeshInfo
 
 	const char* mesh_name;
 
-	AABB localAABB;
 
-	void GenerateBoundingBox();
+	bool localAABB_init = false;
+	AABB localAABB;
+	AABB globalAABB;
+	OBB globalOBB;
+
+	uint ID;
+
+	void GenerateGlobalBoundingBox();
+	void GenerateLocalBoundingBox();
 
 	void RenderMesh(const GLfloat* globalTransform);
  };
