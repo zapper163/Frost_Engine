@@ -82,6 +82,15 @@ bool ModuleMeshRender::Start()
 	
 	MeshLoader::LoadFile(filepath2);
 
+	textures[0] = "Assets/Street2/Building_V02_C.png";
+	textures[1] = "Assets/Street2/Building_V01_C.png";
+	textures[3] = "Assets/Street2/building05-_c.png";
+	textures[4] = "Assets/Street2/building03_c.png";
+	textures[5] = "Assets/Street2/building_025_c.png";
+	textures[6] = "Assets/Street2/building_016_c.png";
+	textures[7] = "Assets/Street2/building-06_-c.png";
+	textures[8] = "Assets/Street2/building-06_-c-.png";
+	textures[9] = "Assets/Street2/building-01_c.png";
 
 	return true;
 }
@@ -96,13 +105,6 @@ update_status ModuleMeshRender::PreUpdate(float dt)
 
 update_status ModuleMeshRender::Update(float dt)
 {
-	MeshLoader::Render();
-
-	if (cube)
-	{
-		//PrintCubeV2();
-	}
-
 	return UPDATE_CONTINUE;
 }
 

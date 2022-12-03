@@ -50,7 +50,7 @@ struct MeshInfo
 	uint num_vertex = 0;
 	float* vertex = nullptr;
 	
-	const char* tex = "Assets/building 06_ c.tga";
+	const char* tex = "Assets/building 06_ c.png";
 
 	const char* mesh_name;
 
@@ -65,7 +65,7 @@ struct MeshInfo
 	void GenerateGlobalBoundingBox();
 	void GenerateLocalBoundingBox();
 
-	void RenderMesh(const GLfloat* globalTransform);
+	void RenderMesh(const GLfloat* globalTransform, uint texID);
 	void RenderAABB();
  };
 
@@ -78,7 +78,7 @@ public:
 
 	static void LoadFile(const char* file_path);
 
-	static void Render();
+	
 	static void CleanUp();
 
 	static void SetUpMesh(MeshInfo* ourMesh);

@@ -41,9 +41,9 @@ void C_Mesh::OnGui()
 
 void C_Mesh::Update()
 {
-	//if (CheckInFrustrum())
+	if (CheckInFrustrum())
 	{
-		mesh->RenderMesh(go->transform->GetGlobalTransposed());
+		mesh->RenderMesh(go->transform->GetGlobalTransposed(), mesh->texture_id);
 	}
 	
 }

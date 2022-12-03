@@ -100,7 +100,7 @@ void MeshLoader::LoadFile(const char* file_path)
 		
 }
 
-void MeshInfo::RenderMesh(const GLfloat* globalTransform)
+void MeshInfo::RenderMesh(const GLfloat* globalTransform, uint texID)
 {
 
 	//Wireframe mode
@@ -133,7 +133,7 @@ void MeshInfo::RenderMesh(const GLfloat* globalTransform)
 	glBindBuffer(GL_ARRAY_BUFFER, id_vertex);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, id_index);
 
-	glBindTexture(GL_TEXTURE_2D, texture_id);
+	glBindTexture(GL_TEXTURE_2D, texID);
 
 
 	glEnableClientState(GL_VERTEX_ARRAY);
@@ -156,20 +156,11 @@ void MeshInfo::RenderMesh(const GLfloat* globalTransform)
 
 	glClientActiveTexture(GL_TEXTURE0);
 
-	
-
 	// Unbind buffers
 	glBindTexture(GL_TEXTURE_2D, 0);
 	glDisableClientState(GL_VERTEX_ARRAY);
 	glDisable(GL_TEXTURE_COORD_ARRAY);
 
-}
-
-void MeshLoader::Render()
-{
-	for (size_t i = 0; i < meshList.size(); i++) {
-		//meshList[i]->RenderMesh();
-	}
 }
 
 
@@ -227,17 +218,6 @@ void MeshLoader::GetNodeInfo(const aiScene* rootScene, aiNode* rootNode, GameObj
 
 	dynamic_cast<C_Transform*>(go->GetComponent(Component::TYPE::TRANSFORM))->SetTransform(pos/100, rot, scale/100);
 
-
-
-
-	// We make it recursive for its children
-	/*if (rootNode->mNumChildren > 0)
-	{
-		for (int n = 0; n < rootNode->mNumChildren; n++)
-		{
-			GetNodeInfo(rootScene, rootNode->mChildren[n], go);
-		}
-	}*/
 }
 
 void MeshInfo::GenerateLocalBoundingBox()
