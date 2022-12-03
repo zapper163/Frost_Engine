@@ -66,6 +66,7 @@ struct MeshInfo
 	void GenerateLocalBoundingBox();
 
 	void RenderMesh(const GLfloat* globalTransform);
+	void RenderAABB();
  };
 
 class MeshLoader

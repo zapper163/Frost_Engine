@@ -118,6 +118,48 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 		ImGui::End();
 
 
+		//Mouse Picking
+		if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_DOWN)
+		{
+
+			ImVec2 position = ImGui::GetMousePos();
+			ImVec2 normal = App->camera->Normalize(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y + ImGui::GetFrameHeight(), ImGui::GetWindowSize().x, ImGui::GetWindowSize().y - ImGui::GetFrameHeight(), position);
+			normal.x = (normal.x - 0.5f) / 0.5f;
+			normal.y = -((normal.y - 0.5f) / 0.5f);
+
+			LineSegment picking = App->camera->frustum.UnProjectLineSegment(normal.x, normal.y);
+
+
+			for (size_t i = 0; i < MeshLoader::meshList.size(); i++)
+			{
+				if (picking.Intersects(MeshLoader::meshList[i]->globalOBB))
+				{
+					LOG("Picked");
+					App->editorGui->console.AddLog(__FILE__, __LINE__, "Picked");
+					MeshInfo* mesh = MeshLoader::meshList[i];
+					
+					for (uint z = 0; z < mesh->num_index; z += 3)
+					{
+						float3 pA(&mesh->vertex[mesh->index[z] * VERTEX_FEATURES]);
+						float3 pB(&mesh->vertex[mesh->index[z + 1] * VERTEX_FEATURES]);
+						float3 pC(&mesh->vertex[mesh->index[z + 2] * VERTEX_FEATURES]);
+
+						Triangle triangle(pA, pB, pC);
+
+						float dist = 0;
+						if (picking.Intersects(triangle, &dist, nullptr))
+						{
+							LOG("Triangle Picked");
+							App->editorGui->console.AddLog(__FILE__, __LINE__, "Triangle Picked");
+						}
+							
+
+					}
+				}
+			}
+			//bool hit = ray_local_space.Intersects(tri, &distance, &hit_point); // ray vs. triangle
+		}
+
 		//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		//MAIN WINDOW
 		ImGui::Begin("Main", NULL, ImGuiWindowFlags_MenuBar);  

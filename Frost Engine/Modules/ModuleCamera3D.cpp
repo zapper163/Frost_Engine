@@ -8,7 +8,7 @@ ModuleCamera3D::ModuleCamera3D(bool start_enabled) : Module(start_enabled)
 
 	frustum.type = PerspectiveFrustum;
 	frustum.nearPlaneDistance = 0.1f;
-	frustum.farPlaneDistance = 500.f;
+	frustum.farPlaneDistance = 400.f; //To try Frustrum Culling, set this to 40~50
 	frustum.front = float3::unitZ;
 	frustum.up = float3::unitY;
 	frustum.verticalFov = 60.0f * DEGTORAD;
@@ -105,6 +105,7 @@ update_status ModuleCamera3D::Update(float dt)
 		frustum.SetWorldMatrix(rm.Float3x4Part());
 	}
 
+
 	CalculateViewMatrix();
 
 	return UPDATE_CONTINUE;
@@ -146,4 +147,16 @@ void ModuleCamera3D::CalculateViewMatrix()
 {
 	viewMatrix = frustum.ViewMatrix();
 	viewMatrix.Transpose();
+}
+
+ImVec2 ModuleCamera3D::Normalize(float x, float y, float w, float h, ImVec2 point)
+{
+	ImVec2 normalizedPoint;
+
+	/*normalizedPoint.x = (point.x - x) / ((x + w) - x);
+	normalizedPoint.y = (point.y - y) / ((y + h) - y);*/
+	normalizedPoint.x = -1.0 + 2.0 * ((point.x - x) / w);
+	normalizedPoint.y = 1.0 - 2.0 * ((point.y - y) / h);
+
+	return normalizedPoint;
 }

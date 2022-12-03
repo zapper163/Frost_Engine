@@ -176,14 +176,6 @@ bool ModuleRenderer3D::Start()
 update_status ModuleRenderer3D::PreUpdate(float dt)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	//glLoadIdentity();
-
-	//glMatrixMode(GL_MODELVIEW);
-	//glLoadMatrixf(App->camera->GetOpenGLViewMatrix());
-
-	//glMatrixMode(GL_PROJECTION);
-	//ProjectionMatrix = perspective(60.0f, (float)width / (float)height, 0.125f, 512.0f);
-	//glLoadMatrixf(&ProjectionMatrix);
 
 	glLoadIdentity();
 	glMatrixMode(GL_PROJECTION);
