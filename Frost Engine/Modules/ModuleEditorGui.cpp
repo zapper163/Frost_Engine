@@ -144,24 +144,29 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 					LineSegment secondpicking = picking;
 					
 					secondpicking.Transform(App->scene_intro->gameObjects[i]->transform->GetGlobalMatrix().Inverted());
-					for (uint z = 0; z < Cmesh->mesh->num_index; z += 3)
+					
+					if (Cmesh->mesh->num_vertex >= 9) //TODO: Had to do this to avoid squared meshes crash
 					{
-						float3 pA(&Cmesh->mesh->vertex[Cmesh->mesh->index[z] * VERTEX_FEATURES]);
-						float3 pB(&Cmesh->mesh->vertex[Cmesh->mesh->index[z + 1] * VERTEX_FEATURES]);
-						float3 pC(&Cmesh->mesh->vertex[Cmesh->mesh->index[z + 2] * VERTEX_FEATURES]);
-
-						Triangle triangle(pA, pB, pC);
-
-						float dist = 0;
-						if (picking.Intersects(triangle, &dist, nullptr))
+						for (uint z = 0; z < Cmesh->mesh->num_index; z += 3)
 						{
-							LOG("Triangle Picked");
-							App->editorGui->console.AddLog(__FILE__, __LINE__, "Triangle Picked");
+							float3 pA(&Cmesh->mesh->vertex[Cmesh->mesh->index[z] * VERTEX_FEATURES]);
+							float3 pB(&Cmesh->mesh->vertex[Cmesh->mesh->index[z + 1] * VERTEX_FEATURES]);
+							float3 pC(&Cmesh->mesh->vertex[Cmesh->mesh->index[z + 2] * VERTEX_FEATURES]);
 
-							gObjects[dist] = App->scene_intro->gameObjects[i];
+							Triangle triangle(pA, pB, pC);
 
+							float dist = 0;
+							if (picking.Intersects(triangle, &dist, nullptr))
+							{
+								LOG("Triangle Picked");
+								App->editorGui->console.AddLog(__FILE__, __LINE__, "Triangle Picked");
+
+								gObjects[dist] = App->scene_intro->gameObjects[i];
+
+							}
 						}
 					}
+					
 				}
 			}
 			GameObject* selectedGO = nullptr;
