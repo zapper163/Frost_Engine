@@ -72,8 +72,8 @@ static const float vertices[] = {
     -.5f,-.5f,-.5f,   .5f,-.5f,-.5f,   .5f,-.5f, .5f, -.5f,-.5f, .5f,   // v7,v4,v3,v2 (bottom)
      .5f,-.5f,-.5f,  -.5f,-.5f,-.5f,  -.5f, .5f,-.5f,  .5f, .5f,-.5f    // v4,v7,v6,v5 (back)
 };
-
-// normal array
+//
+//// normal array
 static const float normals[] = {
      0, 0, 1,   0, 0, 1,   0, 0, 1,   0, 0, 1,  // v0,v1,v2,v3 (front)
      1, 0, 0,   1, 0, 0,   1, 0, 0,   1, 0, 0,  // v0,v3,v4,v5 (right)
@@ -82,8 +82,8 @@ static const float normals[] = {
      0,-1, 0,   0,-1, 0,   0,-1, 0,   0,-1, 0,  // v7,v4,v3,v2 (bottom)
      0, 0,-1,   0, 0,-1,   0, 0,-1,   0, 0,-1   // v4,v7,v6,v5 (back)
 };
-
-// color array
+//
+//// color array
 static const float colors[] = {
      1, 1, 1,   1, 1, 0,   1, 0, 0,   1, 0, 1,  // v0,v1,v2,v3 (front)
      1, 1, 1,   1, 0, 1,   0, 0, 1,   0, 1, 1,  // v0,v3,v4,v5 (right)
@@ -92,9 +92,9 @@ static const float colors[] = {
      0, 0, 0,   0, 0, 1,   1, 0, 1,   1, 0, 0,  // v7,v4,v3,v2 (bottom)
      0, 0, 1,   0, 0, 0,   0, 1, 0,   0, 1, 1   // v4,v7,v6,v5 (back)
 };
-
-// index array for glDrawElements() ===========================================
-// A cube has 36 indices = 6 sides * 2 tris * 3 verts
+//
+//// index array for glDrawElements() ===========================================
+//// A cube has 36 indices = 6 sides * 2 tris * 3 verts
 static const uint indices[] = {
      0, 1, 2,   2, 3, 0,    // v0-v1-v2, v2-v3-v0 (front)
      4, 5, 6,   6, 7, 4,    // v0-v3-v4, v4-v5-v0 (right)

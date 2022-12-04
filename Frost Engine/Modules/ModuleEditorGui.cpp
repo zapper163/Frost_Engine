@@ -149,11 +149,11 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 					{
 						for (uint z = 0; z < Cmesh->mesh->num_index; z += 3)
 						{
-							float3 pA(&Cmesh->mesh->vertex[Cmesh->mesh->index[z] * VERTEX_FEATURES]);
-							float3 pB(&Cmesh->mesh->vertex[Cmesh->mesh->index[z + 1] * VERTEX_FEATURES]);
-							float3 pC(&Cmesh->mesh->vertex[Cmesh->mesh->index[z + 2] * VERTEX_FEATURES]);
+							float3 vertex1(&Cmesh->mesh->vertex[Cmesh->mesh->index[z] * VERTEX_FEATURES]);
+							float3 vertex2(&Cmesh->mesh->vertex[Cmesh->mesh->index[z + 1] * VERTEX_FEATURES]);
+							float3 vertex3(&Cmesh->mesh->vertex[Cmesh->mesh->index[z + 2] * VERTEX_FEATURES]);
 
-							Triangle triangle(pA, pB, pC);
+							Triangle triangle(vertex1, vertex2, vertex3);
 
 							float dist = 0;
 							if (picking.Intersects(triangle, &dist, nullptr))
@@ -276,6 +276,10 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 		ImGui::Checkbox("Depth Test", &depth_test_active);
 		ImGui::SameLine();
 		ImGui::Checkbox("Cull Face", &cull_face_active);
+
+		ImGui::Checkbox("Show AABB", &show_AABB);
+		ImGui::SameLine();
+		ImGui::Checkbox("Show Mouse Ray", &show_mouse_ray);
 		ImGui::Text("\n");
 
 		ImGui::Text("\n\n");

@@ -105,7 +105,7 @@ update_status ModuleMeshRender::PreUpdate(float dt)
 
 update_status ModuleMeshRender::Update(float dt)
 {
-	/*if (App->editorGui->show_mouse_ray)
+	if (App->editorGui->show_mouse_ray)
 	{
 		glBegin(GL_LINES);
 
@@ -113,7 +113,7 @@ update_status ModuleMeshRender::Update(float dt)
 		glVertex3f(Origin.x, Origin.y, Origin.z);
 
 		glEnd();
-	}*/
+	}
 	
 	return UPDATE_CONTINUE;
 }

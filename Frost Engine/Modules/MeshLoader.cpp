@@ -228,8 +228,18 @@ void MeshLoader::GetNodeInfo(const aiScene* rootScene, aiNode* rootNode, GameObj
 
 void MeshInfo::GenerateLocalBoundingBox()
 {
+
+	//TODO: Should this be here?
+	float* vertex_positions = new float[num_vertex * 3];
+	for (size_t i = 0; i < num_vertex; i++)
+	{
+		vertex_positions[i * 3] = vertex[i * VERTEX_FEATURES];
+		vertex_positions[i * 3 + 1] = vertex[i * VERTEX_FEATURES + 1];
+		vertex_positions[i * 3 + 2] = vertex[i * VERTEX_FEATURES + 2];
+	}
+
 	localAABB.SetNegativeInfinity();
-	localAABB.Enclose((float3*)vertex, num_vertex);
+	localAABB.Enclose((float3*)vertex_positions, num_vertex);
 	localAABB_init = true;
 	
 }
@@ -251,33 +261,39 @@ void MeshInfo::RenderAABB()
 
 	globalAABB.GetCornerPoints(vertexAABB);
 
-	glBegin(GL_LINES);
-	glVertex3f(vertexAABB[0].x, vertexAABB[0].y, vertexAABB[0].z);
-	glVertex3f(vertexAABB[1].x, vertexAABB[1].y, vertexAABB[1].z);
-	glVertex3f(vertexAABB[0].x, vertexAABB[0].y, vertexAABB[0].z);
-	glVertex3f(vertexAABB[4].x, vertexAABB[4].y, vertexAABB[4].z);
-	glVertex3f(vertexAABB[1].x, vertexAABB[1].y, vertexAABB[1].z);
-	glVertex3f(vertexAABB[5].x, vertexAABB[5].y, vertexAABB[5].z);
-	glVertex3f(vertexAABB[4].x, vertexAABB[4].y, vertexAABB[4].z);
-	glVertex3f(vertexAABB[5].x, vertexAABB[5].y, vertexAABB[5].z);
 
-	glVertex3f(vertexAABB[2].x, vertexAABB[2].y, vertexAABB[2].z);
-	glVertex3f(vertexAABB[3].x, vertexAABB[3].y, vertexAABB[3].z);
-	glVertex3f(vertexAABB[2].x, vertexAABB[2].y, vertexAABB[2].z);
-	glVertex3f(vertexAABB[6].x, vertexAABB[6].y, vertexAABB[6].z);
-	glVertex3f(vertexAABB[6].x, vertexAABB[6].y, vertexAABB[6].z);
-	glVertex3f(vertexAABB[7].x, vertexAABB[7].y, vertexAABB[7].z);
-	glVertex3f(vertexAABB[3].x, vertexAABB[3].y, vertexAABB[3].z);
-	glVertex3f(vertexAABB[7].x, vertexAABB[7].y, vertexAABB[7].z);
+	if (App->editorGui->show_AABB)
+	{
+		glBegin(GL_LINES);
+		glVertex3f(vertexAABB[0].x, vertexAABB[0].y, vertexAABB[0].z);
+		glVertex3f(vertexAABB[1].x, vertexAABB[1].y, vertexAABB[1].z);
+		glVertex3f(vertexAABB[0].x, vertexAABB[0].y, vertexAABB[0].z);
+		glVertex3f(vertexAABB[4].x, vertexAABB[4].y, vertexAABB[4].z);
+		glVertex3f(vertexAABB[1].x, vertexAABB[1].y, vertexAABB[1].z);
+		glVertex3f(vertexAABB[5].x, vertexAABB[5].y, vertexAABB[5].z);
+		glVertex3f(vertexAABB[4].x, vertexAABB[4].y, vertexAABB[4].z);
+		glVertex3f(vertexAABB[5].x, vertexAABB[5].y, vertexAABB[5].z);
 
-	glVertex3f(vertexAABB[0].x, vertexAABB[0].y, vertexAABB[0].z);
-	glVertex3f(vertexAABB[2].x, vertexAABB[2].y, vertexAABB[2].z);
-	glVertex3f(vertexAABB[1].x, vertexAABB[1].y, vertexAABB[1].z);
-	glVertex3f(vertexAABB[3].x, vertexAABB[3].y, vertexAABB[3].z);
-	glVertex3f(vertexAABB[4].x, vertexAABB[4].y, vertexAABB[4].z);
-	glVertex3f(vertexAABB[6].x, vertexAABB[6].y, vertexAABB[6].z);
-	glVertex3f(vertexAABB[5].x, vertexAABB[5].y, vertexAABB[5].z);
-	glVertex3f(vertexAABB[7].x, vertexAABB[7].y, vertexAABB[7].z);
-	glEnd();
+		glVertex3f(vertexAABB[2].x, vertexAABB[2].y, vertexAABB[2].z);
+		glVertex3f(vertexAABB[3].x, vertexAABB[3].y, vertexAABB[3].z);
+		glVertex3f(vertexAABB[2].x, vertexAABB[2].y, vertexAABB[2].z);
+		glVertex3f(vertexAABB[6].x, vertexAABB[6].y, vertexAABB[6].z);
+		glVertex3f(vertexAABB[6].x, vertexAABB[6].y, vertexAABB[6].z);
+		glVertex3f(vertexAABB[7].x, vertexAABB[7].y, vertexAABB[7].z);
+		glVertex3f(vertexAABB[3].x, vertexAABB[3].y, vertexAABB[3].z);
+		glVertex3f(vertexAABB[7].x, vertexAABB[7].y, vertexAABB[7].z);
+
+		glVertex3f(vertexAABB[0].x, vertexAABB[0].y, vertexAABB[0].z);
+		glVertex3f(vertexAABB[2].x, vertexAABB[2].y, vertexAABB[2].z);
+		glVertex3f(vertexAABB[1].x, vertexAABB[1].y, vertexAABB[1].z);
+		glVertex3f(vertexAABB[3].x, vertexAABB[3].y, vertexAABB[3].z);
+		glVertex3f(vertexAABB[4].x, vertexAABB[4].y, vertexAABB[4].z);
+		glVertex3f(vertexAABB[6].x, vertexAABB[6].y, vertexAABB[6].z);
+		glVertex3f(vertexAABB[5].x, vertexAABB[5].y, vertexAABB[5].z);
+		glVertex3f(vertexAABB[7].x, vertexAABB[7].y, vertexAABB[7].z);
+		glEnd();
+	}
+	
+	
 }
 
