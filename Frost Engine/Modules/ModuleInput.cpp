@@ -147,7 +147,7 @@ update_status ModuleInput::PreUpdate(float dt)
 
 					C_Mesh* mesh = dynamic_cast<C_Mesh*>(App->scene_intro->gameobject_selected->GetComponent(Component::TYPE::MESH));
 					mesh->GetMesh()->texture_id = TextureLoader::LoadTextureFromFile(dropped_filedir);
-					dynamic_cast<C_Texture*>(App->scene_intro->gameobject_selected->GetComponent(Component::TYPE::TEXTURE))->SetTexture(dropped_filedir);
+					dynamic_cast<C_Texture*>(App->scene_intro->gameobject_selected->CreateComponent(Component::TYPE::TEXTURE))->SetTexture(dropped_filedir);
 
 					
 					App->editorGui->console.AddLog(__FILE__, __LINE__, "Png Loaded");
