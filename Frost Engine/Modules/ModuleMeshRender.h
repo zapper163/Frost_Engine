@@ -31,6 +31,8 @@ public:
     bool cone = false;
     bool sphere = false;
 
+    float3 Origin;
+    float3 Objetive;
    
 	const char* filepath = "Assets/street.fbx";
     const char* filepath2 = "Assets/BakerHouse.fbx";

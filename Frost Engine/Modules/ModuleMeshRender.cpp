@@ -105,6 +105,14 @@ update_status ModuleMeshRender::PreUpdate(float dt)
 
 update_status ModuleMeshRender::Update(float dt)
 {
+
+	glBegin(GL_LINES);
+
+	glVertex3f(Objetive.x, Objetive.y, Objetive.z);
+	glVertex3f(Origin.x, Origin.y, Origin.z);
+
+	glEnd();
+
 	return UPDATE_CONTINUE;
 }
 

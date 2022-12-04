@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "ModuleEditorGui.h"
 #include "C_Camera.h"
+#include "C_Mesh.h"
 
 
 #include <Windows.h>
@@ -115,11 +116,9 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 		float h = w * (9.0f / 16.0f);
 
 		ImGui::Image((ImTextureID)App->renderer3D->textureColorbuffer, ImVec2(w, h), ImVec2(0, 1), ImVec2(1, 0));
-		ImGui::End();
-
-
+		
 		//Mouse Picking
-		if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_DOWN)
+		if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_DOWN && ImGui::IsWindowHovered())
 		{
 
 			ImVec2 position = ImGui::GetMousePos();
@@ -128,21 +127,26 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 			normal.y = -((normal.y - 0.5f) / 0.5f);
 
 			LineSegment picking = App->camera->frustum.UnProjectLineSegment(normal.x, normal.y);
+			App->meshRender->Objetive = picking.a;
+			App->meshRender->Origin = picking.b;
 
-
-			for (size_t i = 0; i < MeshLoader::meshList.size(); i++)
+			for (size_t i = 0; i < App->scene_intro->gameObjects.size(); i++)
 			{
-				if (picking.Intersects(MeshLoader::meshList[i]->globalOBB))
+				C_Mesh* Cmesh = dynamic_cast<C_Mesh*>(App->scene_intro->gameObjects[i]->GetComponent(Component::TYPE::MESH));
+
+				if (Cmesh != nullptr && picking.Intersects(Cmesh->mesh->globalAABB))
 				{
 					LOG("Picked");
 					App->editorGui->console.AddLog(__FILE__, __LINE__, "Picked");
-					MeshInfo* mesh = MeshLoader::meshList[i];
+
+					LineSegment secondpicking = picking;
 					
-					for (uint z = 0; z < mesh->num_index; z += 3)
+					secondpicking.Transform(App->scene_intro->gameObjects[i]->transform->GetGlobalMatrix().Inverted());
+					for (uint z = 0; z < Cmesh->mesh->num_index; z += 3)
 					{
-						float3 pA(&mesh->vertex[mesh->index[z] * VERTEX_FEATURES]);
-						float3 pB(&mesh->vertex[mesh->index[z + 1] * VERTEX_FEATURES]);
-						float3 pC(&mesh->vertex[mesh->index[z + 2] * VERTEX_FEATURES]);
+						float3 pA(&Cmesh->mesh->vertex[Cmesh->mesh->index[z] * VERTEX_FEATURES]);
+						float3 pB(&Cmesh->mesh->vertex[Cmesh->mesh->index[z + 1] * VERTEX_FEATURES]);
+						float3 pC(&Cmesh->mesh->vertex[Cmesh->mesh->index[z + 2] * VERTEX_FEATURES]);
 
 						Triangle triangle(pA, pB, pC);
 
@@ -152,14 +156,12 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 							LOG("Triangle Picked");
 							App->editorGui->console.AddLog(__FILE__, __LINE__, "Triangle Picked");
 						}
-							
-
 					}
 				}
 			}
 			//bool hit = ray_local_space.Intersects(tri, &distance, &hit_point); // ray vs. triangle
 		}
-
+		ImGui::End();
 		//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		//MAIN WINDOW
 		ImGui::Begin("Main", NULL, ImGuiWindowFlags_MenuBar);  
