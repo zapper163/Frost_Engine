@@ -37,7 +37,7 @@ public:
 	const char* filepath = "Assets/street.fbx";
     const char* filepath2 = "Assets/BakerHouse.fbx";
 
-    const char* textures[10];
+    
 
     GameObject* Root;
     GameObject* Camera;

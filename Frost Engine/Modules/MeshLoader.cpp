@@ -20,6 +20,10 @@ void MeshLoader::DebugMode()
 
 void MeshLoader::LoadFile(const char* file_path)
 {
+
+
+
+
 	const aiScene* scene = aiImportFile(file_path, aiProcessPreset_TargetRealtime_MaxQuality);
 	if (scene != nullptr && scene->HasMeshes())
 	{
@@ -72,16 +76,81 @@ void MeshLoader::LoadFile(const char* file_path)
 				}
 			}
 
-			mesh->ID = App->scene_intro->CreateGameObject(FbxGameObject, ai_mesh->mName.C_Str());
+			mesh->textures[0] = "Assets/Street2/Building_V02_C.png";
+			mesh->textures[1] = "Assets/Street2/Building_V01_C.png";
+			mesh->textures[2] = "Assets/Street2/building05-_c.png";
+			mesh->textures[3] = "Assets/Street2/building03_c.png";
+			mesh->textures[4] = "Assets/Street2/building_025_c.png";
+			mesh->textures[5] = "Assets/Street2/building_016_c.png";
+			mesh->textures[6] = "Assets/Street2/building-06_-c.png";
+			mesh->textures[7] = "Assets/Street2/building-06_-c-.png";
+			mesh->textures[8] = "Assets/Street2/building-01_c.png";
+
+
+			mesh->ID = App->scene_intro->CreateGameObject(FbxGameObject, scene->mRootNode->mChildren[i]->mName.C_Str());
 
 			//Mesh
-			dynamic_cast<C_Mesh*>(App->scene_intro->gameObjects[mesh->ID]->CreateComponent(Component::TYPE::MESH))->SetMesh(mesh, ai_mesh->mName.C_Str());
+			dynamic_cast<C_Mesh*>(App->scene_intro->gameObjects[mesh->ID]->CreateComponent(Component::TYPE::MESH))->SetMesh(mesh, scene->mRootNode->mChildren[i]->mName.C_Str());
 			GetNodeInfo(scene, scene->mRootNode->mChildren[i], App->scene_intro->gameObjects[mesh->ID]);
 
-			//Texture
-			mesh->texture_id = TextureLoader::LoadTextureFromFile(mesh->tex);
-			dynamic_cast<C_Texture*>(App->scene_intro->gameObjects[mesh->ID]->CreateComponent(Component::TYPE::TEXTURE))->SetTexture(mesh->tex);
 
+			/*casa 40: Building_V01_C
+			casa 41 : Building_V02_C
+			casa 36 : building - 06_ - c -
+
+			casa 38, 37, 34, 26, 22 : building05 - _c
+			casa 33 : building - 06_ - c
+			casa 24 : building_025_c
+			casa 23 : building_016_c
+			casa 32, 14 : building03_c
+			casa 17 : building - 01_c*/
+
+			if (App->scene_intro->gameObjects[mesh->ID]->name == "City_building_040")
+			{
+				mesh->texture_id = TextureLoader::LoadTextureFromFile(mesh->textures[1]);
+				dynamic_cast<C_Texture*>(App->scene_intro->gameObjects[mesh->ID]->CreateComponent(Component::TYPE::TEXTURE))->SetTexture(mesh->textures[1]);
+			}
+			else if (App->scene_intro->gameObjects[mesh->ID]->name == "City_building_041")
+			{
+				mesh->texture_id = TextureLoader::LoadTextureFromFile(mesh->textures[0]);
+				dynamic_cast<C_Texture*>(App->scene_intro->gameObjects[mesh->ID]->CreateComponent(Component::TYPE::TEXTURE))->SetTexture(mesh->textures[0]);
+			}
+			else if (App->scene_intro->gameObjects[mesh->ID]->name == "City_building_036")
+			{
+				mesh->texture_id = TextureLoader::LoadTextureFromFile(mesh->textures[7]);
+				dynamic_cast<C_Texture*>(App->scene_intro->gameObjects[mesh->ID]->CreateComponent(Component::TYPE::TEXTURE))->SetTexture(mesh->textures[7]);
+			}
+			else if (App->scene_intro->gameObjects[mesh->ID]->name == "City_building_038" || App->scene_intro->gameObjects[mesh->ID]->name == "City_building_037" || App->scene_intro->gameObjects[mesh->ID]->name == "City_building_034" || App->scene_intro->gameObjects[mesh->ID]->name == "City_building_026" || App->scene_intro->gameObjects[mesh->ID]->name == "City_building_022")
+			{
+				mesh->texture_id = TextureLoader::LoadTextureFromFile(mesh->textures[2]);
+				dynamic_cast<C_Texture*>(App->scene_intro->gameObjects[mesh->ID]->CreateComponent(Component::TYPE::TEXTURE))->SetTexture(mesh->textures[2]);
+			}
+			else if (App->scene_intro->gameObjects[mesh->ID]->name == "City_building_033")
+			{
+				mesh->texture_id = TextureLoader::LoadTextureFromFile(mesh->textures[6]);
+				dynamic_cast<C_Texture*>(App->scene_intro->gameObjects[mesh->ID]->CreateComponent(Component::TYPE::TEXTURE))->SetTexture(mesh->textures[6]);
+			}
+			else if (App->scene_intro->gameObjects[mesh->ID]->name == "City_building_024")
+			{
+				mesh->texture_id = TextureLoader::LoadTextureFromFile(mesh->textures[4]);
+				dynamic_cast<C_Texture*>(App->scene_intro->gameObjects[mesh->ID]->CreateComponent(Component::TYPE::TEXTURE))->SetTexture(mesh->textures[4]);
+			}
+			else if (App->scene_intro->gameObjects[mesh->ID]->name == "City_building_023")
+			{
+				mesh->texture_id = TextureLoader::LoadTextureFromFile(mesh->textures[5]);
+				dynamic_cast<C_Texture*>(App->scene_intro->gameObjects[mesh->ID]->CreateComponent(Component::TYPE::TEXTURE))->SetTexture(mesh->textures[5]);
+			}
+			else if (App->scene_intro->gameObjects[mesh->ID]->name == "City_building_032" && App->scene_intro->gameObjects[mesh->ID]->name == "City_building_014")
+			{
+				mesh->texture_id = TextureLoader::LoadTextureFromFile(mesh->textures[3]);
+				dynamic_cast<C_Texture*>(App->scene_intro->gameObjects[mesh->ID]->CreateComponent(Component::TYPE::TEXTURE))->SetTexture(mesh->textures[3]);
+			}
+			else if (App->scene_intro->gameObjects[mesh->ID]->name == "City_building_017")
+			{
+				mesh->texture_id = TextureLoader::LoadTextureFromFile(mesh->textures[8]);
+				dynamic_cast<C_Texture*>(App->scene_intro->gameObjects[mesh->ID]->CreateComponent(Component::TYPE::TEXTURE))->SetTexture(mesh->textures[8]);
+			}
+			
 
 			mesh->GenerateLocalBoundingBox();
 			
