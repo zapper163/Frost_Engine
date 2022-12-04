@@ -20,10 +20,8 @@ public:
 
 	ImVec2 Normalize(float x, float y, float w, float h, ImVec2 point);
 	
-
-private:
-
 	void CalculateViewMatrix();
+
 
 public:
 	

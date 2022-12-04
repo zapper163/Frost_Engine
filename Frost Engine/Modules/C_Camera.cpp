@@ -11,19 +11,20 @@
 
 C_Camera::C_Camera(GameObject* gameObject) : Component(gameObject, TYPE::CAMERA)
 {
-	//CalculateViewMatrix();
-	viewMatrix = frustum.ViewMatrix();
-	viewMatrix.Transpose();
+	App->camera->CalculateViewMatrix();
 
-	frustum.type = PerspectiveFrustum;
-	frustum.nearPlaneDistance = nearPlaneDistance;
-	frustum.farPlaneDistance = farPlaneDistance;
-	frustum.front = float3::unitZ;
-	frustum.up = float3::unitY;
-	frustum.verticalFov = 60.0f * DEGTORAD;
-	frustum.horizontalFov = 2.0f * atanf(tanf(frustum.verticalFov / 2.0f) * (16.f / 9.f));
+	viewMatrix2 = frustum2.ViewMatrix();
+	viewMatrix2.Transpose();
 
-	frustum.pos = float3(0, 0, -10);
+	frustum2.type = PerspectiveFrustum;
+	frustum2.nearPlaneDistance = nearPlaneDistance2;
+	frustum2.farPlaneDistance = farPlaneDistance2;
+	frustum2.front = float3::unitZ;
+	frustum2.up = float3::unitY;
+	frustum2.verticalFov = 60.0f * DEGTORAD;
+	frustum2.horizontalFov = 2.0f * atanf(tanf(frustum2.verticalFov / 2.0f) * (16.f / 9.f));
+
+	frustum2.pos = float3(0, 0, -5);
 
 	Move(float3(1.0f, 1.0f, 0.0f));
 
@@ -37,7 +38,14 @@ C_Camera::~C_Camera()
 
 void C_Camera::Update()
 {
-	
+
+	if (App->editorGui->show_camera_window)
+	{
+		//FrameBuffer
+		glBindFramebuffer(GL_FRAMEBUFFER, textureColorbuffer_mini);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+	}
 }
 
 void C_Camera::OnGui()
@@ -46,7 +54,11 @@ void C_Camera::OnGui()
 	{
 		ImGui::Text("Near Plane Distance ");
 		ImGui::SameLine();
-		ImGui::DragFloat3("##Cam", &nearPlaneDistance, 0.1f);
+		ImGui::DragFloat("##NearPlane2", &frustum2.nearPlaneDistance, 0.1f);
+
+		ImGui::Text("Far Plane Distance ");
+		ImGui::SameLine();
+		ImGui::DragFloat("##FarPlane2", &frustum2.farPlaneDistance, 0.1f);
 	}
 }
 
@@ -79,17 +91,6 @@ void C_Camera::InitFrameBuffer()
 
 void C_Camera::Move(const float3& Movement)
 {
-	frustum.pos += Movement;
+	frustum2.pos += Movement;
 }
 
-
-void BindBuffer(int textureBuffer)
-{
-	glBindFramebuffer(GL_FRAMEBUFFER, textureBuffer);
-}
-/*
-void ResizeBuffer(int width, int height)
-{
-
-}
-*/

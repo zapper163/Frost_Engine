@@ -94,17 +94,6 @@ void MeshLoader::LoadFile(const char* file_path)
 			GetNodeInfo(scene, scene->mRootNode->mChildren[i], App->scene_intro->gameObjects[mesh->ID]);
 
 
-			/*casa 40: Building_V01_C
-			casa 41 : Building_V02_C
-			casa 36 : building - 06_ - c -
-
-			casa 38, 37, 34, 26, 22 : building05 - _c
-			casa 33 : building - 06_ - c
-			casa 24 : building_025_c
-			casa 23 : building_016_c
-			casa 32, 14 : building03_c
-			casa 17 : building - 01_c*/
-
 			if (App->scene_intro->gameObjects[mesh->ID]->name == "City_building_040" || App->scene_intro->gameObjects[mesh->ID]->name == "City_building_039" || App->scene_intro->gameObjects[mesh->ID]->name == "City_building_035" || App->scene_intro->gameObjects[mesh->ID]->name == "City_building_031" || App->scene_intro->gameObjects[mesh->ID]->name == "City_building_030" || App->scene_intro->gameObjects[mesh->ID]->name == "City_building_028")
 			{
 				mesh->texture_id = TextureLoader::LoadTextureFromFile(mesh->textures[1]);

@@ -123,7 +123,7 @@ public:
 	bool lights_active = true;
 	bool depth_test_active = true;
 	bool cull_face_active = true;
-	bool show_AABB = true;
+	bool show_AABB = false;
 	bool show_mouse_ray = false;
 
 

@@ -52,6 +52,7 @@ update_status ModuleEditorGui::Update(float dt)
 	if (show_camera_window == true)
 	{
 		glBindFramebuffer(GL_FRAMEBUFFER, textureColorbuffer_mini);
+		
 	}
 	else {
 		glBindFramebuffer(GL_FRAMEBUFFER, App->renderer3D->textureColorbuffer);
@@ -60,6 +61,9 @@ update_status ModuleEditorGui::Update(float dt)
 	if (App->scene_intro->gameobject_selected != nullptr && App->scene_intro->gameobject_selected->id == 1 )
 	{
 		show_camera_window = true;
+	}
+	else {
+		show_camera_window = false;
 	}
 	
 
@@ -276,11 +280,20 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 		ImGui::Checkbox("Depth Test", &depth_test_active);
 		ImGui::SameLine();
 		ImGui::Checkbox("Cull Face", &cull_face_active);
+		ImGui::Text("\n");
 
 		ImGui::Checkbox("Show AABB", &show_AABB);
 		ImGui::SameLine();
 		ImGui::Checkbox("Show Mouse Ray", &show_mouse_ray);
 		ImGui::Text("\n");
+
+		ImGui::Text("Near Plane Distance ");
+		ImGui::SameLine();
+		ImGui::DragFloat("##NearPlane", &App->camera->frustum.nearPlaneDistance, 0.1f);
+
+		ImGui::Text("Far Plane Distance ");
+		ImGui::SameLine();
+		ImGui::DragFloat("##FarPlane", &App->camera->frustum.farPlaneDistance, 0.1f);
 
 		ImGui::Text("\n\n");
 
@@ -437,7 +450,7 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 	
 	if (show_camera_window)
 	{
-		ImGui::Begin("Camera", &show_camera_window, ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoScrollbar);
+		ImGui::Begin("Camera", NULL, ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoScrollbar);
 		float w2 = ImGui::GetContentRegionAvail().x;
 		float h2 = w2 * (9.0f / 16.0f);
 
