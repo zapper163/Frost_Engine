@@ -130,6 +130,8 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 			App->meshRender->Objetive = picking.a;
 			App->meshRender->Origin = picking.b;
 
+			std::map<float, GameObject*> gObjects;
+
 			for (size_t i = 0; i < App->scene_intro->gameObjects.size(); i++)
 			{
 				C_Mesh* Cmesh = dynamic_cast<C_Mesh*>(App->scene_intro->gameObjects[i]->GetComponent(Component::TYPE::MESH));
@@ -155,11 +157,28 @@ update_status ModuleEditorGui::PostUpdate(float dt)
 						{
 							LOG("Triangle Picked");
 							App->editorGui->console.AddLog(__FILE__, __LINE__, "Triangle Picked");
+
+							gObjects[dist] = App->scene_intro->gameObjects[i];
+
 						}
 					}
 				}
 			}
-			//bool hit = ray_local_space.Intersects(tri, &distance, &hit_point); // ray vs. triangle
+			GameObject* selectedGO = nullptr;
+			float nearGO = 0;
+			for (auto& go : gObjects)
+			{
+				if (selectedGO == nullptr)
+				{
+					nearGO = go.first;
+					selectedGO = go.second;
+				}
+				else if(go.first<nearGO) {
+					nearGO = go.first;
+					selectedGO = go.second;
+				}
+			}
+			App->scene_intro->gameobject_selected = selectedGO;
 		}
 		ImGui::End();
 		//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------

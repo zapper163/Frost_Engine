@@ -80,7 +80,7 @@ bool ModuleMeshRender::Start()
 	App->scene_intro->gameObjects[1] = Camera;
 	dynamic_cast<C_Camera*>(App->scene_intro->gameObjects[1]->CreateComponent(Component::TYPE::CAMERA));
 	
-	MeshLoader::LoadFile(filepath2);
+	MeshLoader::LoadFile(filepath);
 
 	textures[0] = "Assets/Street2/Building_V02_C.png";
 	textures[1] = "Assets/Street2/Building_V01_C.png";
@@ -105,14 +105,16 @@ update_status ModuleMeshRender::PreUpdate(float dt)
 
 update_status ModuleMeshRender::Update(float dt)
 {
+	/*if (App->editorGui->show_mouse_ray)
+	{
+		glBegin(GL_LINES);
 
-	glBegin(GL_LINES);
+		glVertex3f(Objetive.x, Objetive.y, Objetive.z);
+		glVertex3f(Origin.x, Origin.y, Origin.z);
 
-	glVertex3f(Objetive.x, Objetive.y, Objetive.z);
-	glVertex3f(Origin.x, Origin.y, Origin.z);
-
-	glEnd();
-
+		glEnd();
+	}*/
+	
 	return UPDATE_CONTINUE;
 }
 

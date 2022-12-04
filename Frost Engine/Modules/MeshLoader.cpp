@@ -27,53 +27,55 @@ void MeshLoader::LoadFile(const char* file_path)
 		GameObject* FbxGameObject = new GameObject(App->scene_intro->gameObjects[0], file_path);
 		GetNodeInfo(scene, scene->mRootNode, FbxGameObject);
 		
-		for (uint i = 0; i < scene->mNumMeshes; i++)
+		for (uint i = 0; i < scene->mRootNode->mNumChildren; i++)
 		{
 			MeshInfo* mesh = new MeshInfo();
 			
+			aiMesh* ai_mesh = scene->mMeshes[scene->mRootNode->mChildren[i]->mMeshes[0]];
+
 			// copy vertices
-			mesh->num_vertex = scene->mMeshes[i]->mNumVertices;
+			mesh->num_vertex = ai_mesh->mNumVertices;
 			mesh->vertex = new float[mesh->num_vertex * VERTEX_FEATURES];
-			//memcpy(ourMesh->vertex, scene->mMeshes[i]->mVertices, sizeof(float) * ourMesh->num_vertex * 3);
+			
 			App->editorGui->console.AddLog(__FILE__, __LINE__, "New mesh with %d vertices", mesh->num_vertex);
 
 			for (int v = 0; v < mesh->num_vertex; v++) {
 				// Vertex
-				mesh->vertex[v * VERTEX_FEATURES] = scene->mMeshes[i]->mVertices[v].x;
-				mesh->vertex[v * VERTEX_FEATURES + 1] = scene->mMeshes[i]->mVertices[v].y;
-				mesh->vertex[v * VERTEX_FEATURES + 2] = scene->mMeshes[i]->mVertices[v].z;
+				mesh->vertex[v * VERTEX_FEATURES] = ai_mesh->mVertices[v].x;
+				mesh->vertex[v * VERTEX_FEATURES + 1] = ai_mesh->mVertices[v].y;
+				mesh->vertex[v * VERTEX_FEATURES + 2] = ai_mesh->mVertices[v].z;
 
-				if (scene->mMeshes[i]->HasTextureCoords(0))
+				if (ai_mesh->HasTextureCoords(0))
 				{
 					// UVs
-					mesh->vertex[v * VERTEX_FEATURES + 3] = scene->mMeshes[i]->mTextureCoords[0][v].x;
-					mesh->vertex[v * VERTEX_FEATURES + 4] = scene->mMeshes[i]->mTextureCoords[0][v].y;
+					mesh->vertex[v * VERTEX_FEATURES + 3] = ai_mesh->mTextureCoords[0][v].x;
+					mesh->vertex[v * VERTEX_FEATURES + 4] = ai_mesh->mTextureCoords[0][v].y;
 				}
 			}
 
 			// copy faces
-			if (scene->mMeshes[i]->HasFaces())
+			if (ai_mesh->HasFaces())
 			{
-				mesh->num_index = scene->mMeshes[i]->mNumFaces * 3;
+				mesh->num_index = ai_mesh->mNumFaces * 3;
 				mesh->index = new uint[mesh->num_index]; // assume each face is a triangle
 
-				for (uint j = 0; j < scene->mMeshes[i]->mNumFaces; ++j)
+				for (uint j = 0; j < ai_mesh->mNumFaces; ++j)
 				{
-					if (scene->mMeshes[i]->mFaces[j].mNumIndices != 3)
+					if (ai_mesh->mFaces[j].mNumIndices != 3)
 					{
 						App->editorGui->console.AddLog(__FILE__, __LINE__, "WARNING, geometry face with != 3 indices!");
 					}
 					else
 					{
-						memcpy(&mesh->index[j * 3], scene->mMeshes[i]->mFaces[j].mIndices, 3 * sizeof(uint));
+						memcpy(&mesh->index[j * 3], ai_mesh->mFaces[j].mIndices, 3 * sizeof(uint));
 					}
 				}
 			}
 
-			mesh->ID = App->scene_intro->CreateGameObject(FbxGameObject, scene->mMeshes[i]->mName.C_Str());
+			mesh->ID = App->scene_intro->CreateGameObject(FbxGameObject, ai_mesh->mName.C_Str());
 
 			//Mesh
-			dynamic_cast<C_Mesh*>(App->scene_intro->gameObjects[mesh->ID]->CreateComponent(Component::TYPE::MESH))->SetMesh(mesh, scene->mMeshes[i]->mName.C_Str());
+			dynamic_cast<C_Mesh*>(App->scene_intro->gameObjects[mesh->ID]->CreateComponent(Component::TYPE::MESH))->SetMesh(mesh, ai_mesh->mName.C_Str());
 			GetNodeInfo(scene, scene->mRootNode->mChildren[i], App->scene_intro->gameObjects[mesh->ID]);
 
 			//Texture
@@ -202,6 +204,10 @@ const char* MeshLoader::GetMeshName(const char* mesh_name)
 
 void MeshLoader::GetNodeInfo(const aiScene* rootScene, aiNode* rootNode, GameObject* go)
 {
+	if (go->name == "Mesh.025")
+	{
+		int y = 0;
+	}
 	aiVector3D translation, scaling;
 	aiQuaternion quatRot;
 	rootNode->mTransformation.Decompose(scaling, quatRot, translation);
@@ -230,6 +236,7 @@ void MeshInfo::GenerateLocalBoundingBox()
 
 void MeshInfo::GenerateGlobalBoundingBox()
 {
+	// Generate global OBB
 	globalOBB = localAABB;
 	globalOBB.Transform(App->scene_intro->gameObjects[ID]->transform->GetGlobalMatrix());
 	
@@ -242,7 +249,7 @@ void MeshInfo::RenderAABB()
 {
 	float3 vertexAABB[8];
 
-	localAABB.GetCornerPoints(vertexAABB);
+	globalAABB.GetCornerPoints(vertexAABB);
 
 	glBegin(GL_LINES);
 	glVertex3f(vertexAABB[0].x, vertexAABB[0].y, vertexAABB[0].z);

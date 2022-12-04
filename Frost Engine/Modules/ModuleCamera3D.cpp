@@ -153,10 +153,9 @@ ImVec2 ModuleCamera3D::Normalize(float x, float y, float w, float h, ImVec2 poin
 {
 	ImVec2 normalizedPoint;
 
-	/*normalizedPoint.x = (point.x - x) / ((x + w) - x);
-	normalizedPoint.y = (point.y - y) / ((y + h) - y);*/
-	normalizedPoint.x = -1.0 + 2.0 * ((point.x - x) / w);
-	normalizedPoint.y = 1.0 - 2.0 * ((point.y - y) / h);
+	normalizedPoint.x = (point.x - x) / ((x + w) - x);
+	normalizedPoint.y = (point.y - y) / ((y + h) - y);
+	
 
 	return normalizedPoint;
 }
