@@ -177,6 +177,7 @@
     <ClInclude Include="Modules\MemLeaks.h" />
     <ClInclude Include="Modules\MeshLoader.h" />
     <ClInclude Include="Modules\Module.h" />
+    <ClInclude Include="Modules\ModuleAudio.h" />
     <ClInclude Include="Modules\ModuleCamera3D.h" />
     <ClInclude Include="Modules\ModuleEditorGui.h" />
     <ClInclude Include="Modules\ModuleInput.h" />
@@ -245,6 +246,7 @@
     <ClCompile Include="Modules\log.cpp" />
     <ClCompile Include="Modules\Main.cpp" />
     <ClCompile Include="Modules\MeshLoader.cpp" />
+    <ClCompile Include="Modules\ModuleAudio.cpp" />
     <ClCompile Include="Modules\ModuleCamera3D.cpp" />
     <ClCompile Include="Modules\ModuleEditorGui.cpp" />
     <ClCompile Include="Modules\ModuleInput.cpp" />

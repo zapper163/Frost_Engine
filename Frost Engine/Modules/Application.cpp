@@ -9,6 +9,7 @@ Application::Application() : debug(false)
 	camera = new ModuleCamera3D();
 	editorGui = new ModuleEditorGui();
 	meshRender = new ModuleMeshRender();
+	audio = new ModuleAudio();
 
 	// Main Modules
 	AddModule(window);
@@ -17,6 +18,9 @@ Application::Application() : debug(false)
 
 	//Mesh Render
 	AddModule(meshRender);
+
+	//Audio (Wwise)
+	AddModule(audio);
 
 	//ImGui
 	AddModule(editorGui);

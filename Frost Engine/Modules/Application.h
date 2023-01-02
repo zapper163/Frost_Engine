@@ -11,6 +11,7 @@
 #include "ModuleCamera3D.h"
 #include "ModuleEditorGui.h"
 #include "ModuleMeshRender.h"
+#include "ModuleAudio.h"
 
 class Application
 {
@@ -22,6 +23,7 @@ public:
 	ModuleCamera3D* camera;
 	ModuleEditorGui* editorGui;
 	ModuleMeshRender* meshRender;
+	ModuleAudio* audio;
 
 	bool debug;
 private:
