@@ -39,7 +39,6 @@ the specific language governing permissions and limitations under the License.
 #include <AK/Tools/Common/AkArray.h>
 #include <AK/Tools/Common/AkString.h>
 
-
 //-----------------------------------------------------------------------------
 // AUDIO DATA FORMAT
 //-----------------------------------------------------------------------------

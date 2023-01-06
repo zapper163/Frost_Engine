@@ -28,7 +28,6 @@ the specific language governing permissions and limitations under the License.
 #define _AKARRAY_H
 
 #include <AK/Tools/Common/AkObject.h>
-
 #include <AK/Tools/Common/AkAssert.h>
 #include <AK/Tools/Common/AkPlatformFuncs.h>
 

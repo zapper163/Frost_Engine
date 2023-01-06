@@ -49,7 +49,7 @@
 #pragma comment( lib, "Wwise/XInput.lib")  // Microsoft XInput. Needed by Motion to support XInput devices (Xbox controller).
 #endif
 
-//#include <Wwise/include/AkFilePackageLowLevelIOBlocking.h>                    // Sample low-level I/O implementation
+//#include <Win32/AkFilePackageLowLevelIOBlocking.h>                     // Sample low-level I/O implementation
 
 // Include for communication between Wwise and the game -- Not needed in the release version
 #ifndef AK_OPTIMIZED
