@@ -24,9 +24,10 @@ public:
 		TRANSFORM,
 		MESH,
 		TEXTURE,
-		//MATERIAL,
 		CAMERA,
-		//NUM_OF_COMPS,
+		LISTENER,
+		AUDIOSOURCE,
+		
 	};
 
 
