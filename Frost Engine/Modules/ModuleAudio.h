@@ -75,8 +75,8 @@ public:
 	bool CleanUp();
 
 	bool InitSoundEngine();
-    
-    
+
+	void ProcessAudio();
 
 private:
     

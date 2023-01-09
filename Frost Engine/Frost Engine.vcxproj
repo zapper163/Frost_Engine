@@ -41,9 +41,9 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(ProjectDir)\Modules\External_Libraries\Wwise\include;$(IncludePath)</IncludePath>
-    <ExternalIncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);</ExternalIncludePath>
-    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);</LibraryPath>
+    <IncludePath>C:\Program Files(x86)\Windows Kits\10\Include\10.0.19041.0\ucrt;$(ProjectDir)\Modules\External_Libraries\Wwise\include;$(IncludePath)</IncludePath>
+    <ExternalIncludePath>$(VC_IncludePath);C:\Program Files(x86)\Windows Kits\10\Include\10.0.19041.0\ucrt;$(WindowsSDK_IncludePath)</ExternalIncludePath>
+    <LibraryPath>C:\Program Files(x86)\Windows Kits\10\Include\10.0.19041.0\ucrt;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IncludePath>C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\ucrt;$(IncludePath)</IncludePath>

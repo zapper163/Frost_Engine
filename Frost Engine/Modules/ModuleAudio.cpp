@@ -50,7 +50,8 @@ update_status ModuleAudio::PreUpdate(float dt)
 
 update_status ModuleAudio::Update(float dt)
 {
-	
+    ProcessAudio();
+
 	return UPDATE_CONTINUE;
 }
 
@@ -133,4 +134,11 @@ bool ModuleAudio::InitSoundEngine()
     }
 
 	return true;
+}
+
+void ModuleAudio::ProcessAudio()
+{
+    // Process bank requests, events, positions, RTPC, etc.
+
+    AK::SoundEngine::RenderAudio();
 }
