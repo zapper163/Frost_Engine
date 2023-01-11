@@ -6,7 +6,7 @@
 #include "C_Transform.h"
 #include "C_Mesh.h"
 #include "C_Texture.h"
-#include "C_Listener.h"
+#include "C_AudioListener.h"
 #include "C_AudioSource.h"
 #include "C_Camera.h"
 #include "MeshLoader.h"
@@ -61,8 +61,8 @@ Component* GameObject::CreateComponent(Component::TYPE type)
 	case Component::TYPE::CAMERA:
 		new_component = new C_Camera(this);
 		break;
-	case Component::TYPE::LISTENER:
-		new_component = new C_Listener(this);
+	case Component::TYPE::AUDIOLISTENER:
+		new_component = new C_AudioListener(this);
 		break;
 	case Component::TYPE::AUDIOSOURCE:
 		new_component = new C_AudioSource(this);

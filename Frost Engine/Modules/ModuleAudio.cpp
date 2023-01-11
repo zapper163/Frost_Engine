@@ -29,7 +29,7 @@ ModuleAudio::~ModuleAudio()
 bool ModuleAudio::Init()
 {
 	bool ret = true;
-
+    InitSoundEngine();
 
 	return ret;
 }
@@ -58,7 +58,18 @@ update_status ModuleAudio::Update(float dt)
 // Called before quitting
 bool ModuleAudio::CleanUp()
 {
-	
+    LOG("Destroying 3D Renderer");
+    App->editorGui->console.AddLog(__FILE__, __LINE__, "Destroying Module Audio");
+   
+
+    AK::MusicEngine::Term();
+    AK::SoundEngine::Term();
+
+    if (AK::IAkStreamMgr::Get())
+        AK::IAkStreamMgr::Get()->Destroy();
+
+    AK::MemoryMgr::Term();
+    
 	return true;
 }
 
@@ -139,6 +150,27 @@ bool ModuleAudio::InitSoundEngine()
 void ModuleAudio::ProcessAudio()
 {
     // Process bank requests, events, positions, RTPC, etc.
-
     AK::SoundEngine::RenderAudio();
+}
+
+
+void ModuleAudio::RegisterGameObject(unsigned int id)
+{
+    AK::SoundEngine::RegisterGameObj(id);
+
+}
+
+void ModuleAudio::UnregisterGameObject(unsigned int id)
+{
+    AK::SoundEngine::UnregisterGameObj(id);
+}
+
+void ModuleAudio::SetDefaultListener(const AkGameObjectID id)
+{
+    AK::SoundEngine::SetDefaultListeners(&id, MAX_LISTENERS);
+}
+
+void ModuleAudio::AddListeners(unsigned int emitter_id, const AkGameObjectID listener_id)
+{
+    AK::SoundEngine::SetListeners(emitter_id, &listener_id, MAX_LISTENERS);
 }

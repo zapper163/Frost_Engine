@@ -75,7 +75,7 @@ void MeshLoader::LoadFile(const char* file_path)
 					}
 				}
 			}
-
+			/*
 			mesh->textures[0] = "Assets/Street2/Building_V02_C.png";
 			mesh->textures[1] = "Assets/Street2/Building_V01_C.png";
 			mesh->textures[2] = "Assets/Street2/building05-_c.png";
@@ -84,7 +84,7 @@ void MeshLoader::LoadFile(const char* file_path)
 			mesh->textures[5] = "Assets/Street2/building_016_c.png";
 			mesh->textures[6] = "Assets/Street2/building-06_-c.png";
 			mesh->textures[7] = "Assets/Street2/building-06_-c-.png";
-			mesh->textures[8] = "Assets/Street2/building-01_c.png";
+			mesh->textures[8] = "Assets/Street2/building-01_c.png";*/
 
 
 			mesh->ID = App->scene_intro->CreateGameObject(FbxGameObject, scene->mRootNode->mChildren[i]->mName.C_Str());
@@ -93,7 +93,7 @@ void MeshLoader::LoadFile(const char* file_path)
 			dynamic_cast<C_Mesh*>(App->scene_intro->gameObjects[mesh->ID]->CreateComponent(Component::TYPE::MESH))->SetMesh(mesh, scene->mRootNode->mChildren[i]->mName.C_Str());
 			GetNodeInfo(scene, scene->mRootNode->mChildren[i], App->scene_intro->gameObjects[mesh->ID]);
 
-
+			/*
 			if (App->scene_intro->gameObjects[mesh->ID]->name == "City_building_040" || App->scene_intro->gameObjects[mesh->ID]->name == "City_building_039" || App->scene_intro->gameObjects[mesh->ID]->name == "City_building_035" || App->scene_intro->gameObjects[mesh->ID]->name == "City_building_031" || App->scene_intro->gameObjects[mesh->ID]->name == "City_building_030" || App->scene_intro->gameObjects[mesh->ID]->name == "City_building_028")
 			{
 				mesh->texture_id = TextureLoader::LoadTextureFromFile(mesh->textures[1]);
@@ -138,7 +138,7 @@ void MeshLoader::LoadFile(const char* file_path)
 			{
 				mesh->texture_id = TextureLoader::LoadTextureFromFile(mesh->textures[8]);
 				dynamic_cast<C_Texture*>(App->scene_intro->gameObjects[mesh->ID]->CreateComponent(Component::TYPE::TEXTURE))->SetTexture(mesh->textures[8]);
-			}
+			}*/
 			
 
 			mesh->GenerateLocalBoundingBox();

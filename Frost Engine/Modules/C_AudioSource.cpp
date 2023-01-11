@@ -11,7 +11,8 @@
 
 C_AudioSource::C_AudioSource(GameObject* gameObject) : Component(gameObject, TYPE::TEXTURE)
 {
-	
+	SourceGameObject = gameObject;
+	sourceID = gameObject->id;
 }
 
 C_AudioSource::~C_AudioSource()

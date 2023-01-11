@@ -25,7 +25,7 @@ public:
 		MESH,
 		TEXTURE,
 		CAMERA,
-		LISTENER,
+		AUDIOLISTENER,
 		AUDIOSOURCE,
 		
 	};

@@ -342,7 +342,7 @@
     <ClInclude Include="Modules\ModuleAudio.h">
       <Filter>Sources\Modules</Filter>
     </ClInclude>
-    <ClInclude Include="Modules\C_Listener.h">
+    <ClInclude Include="Modules\C_AudioListener.h">
       <Filter>Sources\Components</Filter>
     </ClInclude>
     <ClInclude Include="Modules\C_AudioSource.h">
@@ -542,7 +542,7 @@
     <ClCompile Include="Modules\ModuleAudio.cpp">
       <Filter>Sources\Modules</Filter>
     </ClCompile>
-    <ClCompile Include="Modules\C_Listener.cpp">
+    <ClCompile Include="Modules\C_AudioListener.cpp">
       <Filter>Sources\Components</Filter>
     </ClCompile>
     <ClCompile Include="Modules\C_AudioSource.cpp">

@@ -61,6 +61,8 @@
 //CAkFilePackageLowLevelIOBlocking g_lowLevelIO;
 
 
+#define MAX_LISTENERS 1
+
 class ModuleAudio : public Module
 {
 public:
@@ -77,6 +79,14 @@ public:
 	bool InitSoundEngine();
 
 	void ProcessAudio();
+
+	void RegisterGameObject(unsigned int id);
+	void UnregisterGameObject(unsigned int id);
+
+
+	void SetDefaultListener(const AkGameObjectID id);
+	void AddListeners(unsigned int emitter_id, const AkGameObjectID listener_id);
+	
 
 private:
     

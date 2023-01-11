@@ -16,7 +16,9 @@ public:
 	C_AudioSource(GameObject* gameObject);
 	~C_AudioSource();
 
-	
+	GameObject* SourceGameObject;
+	unsigned int sourceID;
+
 	void OnGui();
 
 

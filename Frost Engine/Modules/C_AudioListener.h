@@ -10,15 +10,17 @@
 
 
 
-class C_Listener : public Component
+class C_AudioListener : public Component
 {
 public:
-	C_Listener(GameObject* gameObject);
-	~C_Listener();
+	C_AudioListener(GameObject* gameObject);
+	~C_AudioListener();
 
 	
 	void OnGui();
 
+	GameObject* ListenerGameObject;
+	unsigned int listenerID;
 
 	const char* name;
 };
