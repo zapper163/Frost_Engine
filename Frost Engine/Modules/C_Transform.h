@@ -39,6 +39,9 @@ public:
 	float* GetGlobalTransposed();
 	float4x4 GetGlobalMatrix();
 
+	float3 GetVectorTop();
+	float3 GetVectorFront();
+
 	void OnGui();
 
 	Transform transform;

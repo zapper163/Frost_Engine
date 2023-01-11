@@ -1,7 +1,7 @@
 #pragma once
 #include "Module.h"
 #include "Globals.h"
-
+#include "AudioEvent.h"
 
 #include <Wwise/include/AK/SoundEngine/Common/AkMemoryMgr.h>                  // Memory Manager interface
 
@@ -63,6 +63,8 @@
 
 #define MAX_LISTENERS 1
 
+class AudioEvent;
+
 class ModuleAudio : public Module
 {
 public:
@@ -83,10 +85,15 @@ public:
 	void RegisterGameObject(unsigned int id);
 	void UnregisterGameObject(unsigned int id);
 
+	
+	void PostEvent(AudioEvent* event, unsigned int id);
+	void StopEvent(const AudioEvent* event, unsigned int id);
+
 
 	void SetDefaultListener(const AkGameObjectID id);
 	void AddListeners(unsigned int emitter_id, const AkGameObjectID listener_id);
-	
+	void SetListenerPos(GameObject* listener, unsigned int id);
+
 
 private:
     

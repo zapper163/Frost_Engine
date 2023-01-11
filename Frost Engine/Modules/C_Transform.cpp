@@ -99,6 +99,15 @@ float4x4 C_Transform::GetGlobalMatrix()
 	return transform.globalPos;
 }
 
+float3 C_Transform::GetVectorTop()
+{
+	return transform.globalPos.Row3(2);
+}
+
+float3 C_Transform::GetVectorFront()
+{
+	return transform.globalPos.Row3(3);
+}
 
 void C_Transform::OnGui()
 {
@@ -118,3 +127,4 @@ void C_Transform::OnGui()
 		ImGui::DragFloat3("##Sca", &transform.scale[0], 0.1f);
 	}
 }
+

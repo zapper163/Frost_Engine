@@ -174,3 +174,47 @@ void ModuleAudio::AddListeners(unsigned int emitter_id, const AkGameObjectID lis
 {
     AK::SoundEngine::SetListeners(emitter_id, &listener_id, MAX_LISTENERS);
 }
+
+
+void ModuleAudio::SetListenerPos(GameObject* listener, unsigned int id)
+{
+    //Orientation
+    AkVector front;
+    front.X = listener->transform->GetVectorFront().x;
+    front.Y = listener->transform->GetVectorFront().y;
+    front.Z = listener->transform->GetVectorFront().z;
+
+    //Top orientation
+    AkVector top;
+    top.X = listener->transform->GetVectorTop().x;
+    top.Y = listener->transform->GetVectorTop().y;
+    top.Z = listener->transform->GetVectorTop().z;
+
+    //Position
+    AkVector pos;
+    pos.X = listener->transform->transform.position.x;
+    pos.Y = listener->transform->transform.position.y;
+    pos.Z = listener->transform->transform.position.z;
+
+    AkSoundPosition listenerPosition;
+    listenerPosition.Set(pos, front, top);
+
+    AK::SoundEngine::SetPosition(id, listenerPosition);
+}
+
+void ModuleAudio::PostEvent(AudioEvent* event, unsigned int id)
+{
+    if (event != nullptr)
+    {
+        event->event_id = AK::SoundEngine::PostEvent(event->name.c_str(), id);
+    }
+}
+
+void ModuleAudio::StopEvent(const AudioEvent* event, unsigned int id)
+{
+    if (event != nullptr)
+    {
+        AK::SoundEngine::ExecuteActionOnEvent(event->name.c_str(), AK::SoundEngine::AkActionOnEventType_Stop, id);
+
+    }
+}

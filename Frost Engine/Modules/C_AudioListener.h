@@ -16,7 +16,8 @@ public:
 	C_AudioListener(GameObject* gameObject);
 	~C_AudioListener();
 
-	
+	void Update() override;
+
 	void OnGui();
 
 	GameObject* ListenerGameObject;

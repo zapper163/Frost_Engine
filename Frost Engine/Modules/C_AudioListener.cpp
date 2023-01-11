@@ -23,7 +23,10 @@ C_AudioListener::~C_AudioListener()
 	App->audio->UnregisterGameObject(listenerID);
 }
 
+void C_AudioListener::Update()
+{
 
+}
 
 void C_AudioListener::OnGui()
 {

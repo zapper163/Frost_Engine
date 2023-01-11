@@ -348,6 +348,9 @@
     <ClInclude Include="Modules\C_AudioSource.h">
       <Filter>Sources\Components</Filter>
     </ClInclude>
+    <ClInclude Include="Modules\AudioEvent.h">
+      <Filter>Sources\Modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Modules\Application.cpp">
@@ -547,6 +550,9 @@
     </ClCompile>
     <ClCompile Include="Modules\C_AudioSource.cpp">
       <Filter>Sources\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\AudioEvent.cpp">
+      <Filter>Sources\Modules</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
