@@ -1,3 +1,7 @@
+# Build Settings
+theme: minima
+
+
 # Frost Engine
 A 3D Game Engine made by Alejandro Giralt at UPC's CITM
 
