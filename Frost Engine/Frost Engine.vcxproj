@@ -210,14 +210,6 @@
     <ClInclude Include="Modules\Timer.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Cat-Engine-UPC-main\Cat-Engine-UPC-main\Cat Engine\Source Code\External Libraries\Wwise\include\AK\SoundEngine\Common\AkDefaultLowLevelIODispatcher.cpp" />
-    <ClCompile Include="..\..\Cat-Engine-UPC-main\Cat-Engine-UPC-main\Cat Engine\Source Code\External Libraries\Wwise\include\AK\SoundEngine\Common\AkFileLocationBase.cpp" />
-    <ClCompile Include="..\..\Cat-Engine-UPC-main\Cat-Engine-UPC-main\Cat Engine\Source Code\External Libraries\Wwise\include\AK\SoundEngine\Common\AkFilePackage.cpp" />
-    <ClCompile Include="..\..\Cat-Engine-UPC-main\Cat-Engine-UPC-main\Cat Engine\Source Code\External Libraries\Wwise\include\AK\SoundEngine\Common\AkFilePackageLUT.cpp" />
-    <ClCompile Include="..\..\Cat-Engine-UPC-main\Cat-Engine-UPC-main\Cat Engine\Source Code\External Libraries\Wwise\include\AK\SoundEngine\Common\AkMultipleFileLocation.cpp" />
-    <ClCompile Include="..\..\Cat-Engine-UPC-main\Cat-Engine-UPC-main\Cat Engine\Source Code\External Libraries\Wwise\include\AK\SoundEngine\Win32\AkDefaultIOHookBlocking.cpp" />
-    <ClCompile Include="..\..\Cat-Engine-UPC-main\Cat-Engine-UPC-main\Cat Engine\Source Code\External Libraries\Wwise\include\AK\SoundEngine\Win32\AkDefaultIOHookDeferred.cpp" />
-    <ClCompile Include="..\..\Cat-Engine-UPC-main\Cat-Engine-UPC-main\Cat Engine\Source Code\External Libraries\Wwise\include\AK\SoundEngine\Win32\stdafx.cpp" />
     <ClCompile Include="Modules\Application.cpp" />
     <ClCompile Include="Modules\AudioEvent.cpp" />
     <ClCompile Include="Modules\Color.cpp" />
@@ -268,6 +260,14 @@
     <ClCompile Include="Modules\External_Libraries\MathGeoLib\include\Math\SSEMath.cpp" />
     <ClCompile Include="Modules\External_Libraries\MathGeoLib\include\Math\TransformOps.cpp" />
     <ClCompile Include="Modules\External_Libraries\MathGeoLib\include\Time\Clock.cpp" />
+    <ClCompile Include="Modules\External_Libraries\Wwise\include\AK\SoundEngine\Common\AkDefaultLowLevelIODispatcher.cpp" />
+    <ClCompile Include="Modules\External_Libraries\Wwise\include\AK\SoundEngine\Common\AkFileLocationBase.cpp" />
+    <ClCompile Include="Modules\External_Libraries\Wwise\include\AK\SoundEngine\Common\AkFilePackage.cpp" />
+    <ClCompile Include="Modules\External_Libraries\Wwise\include\AK\SoundEngine\Common\AkFilePackageLUT.cpp" />
+    <ClCompile Include="Modules\External_Libraries\Wwise\include\AK\SoundEngine\Common\AkMultipleFileLocation.cpp" />
+    <ClCompile Include="Modules\External_Libraries\Wwise\include\AK\SoundEngine\Win32\AkDefaultIOHookBlocking.cpp" />
+    <ClCompile Include="Modules\External_Libraries\Wwise\include\AK\SoundEngine\Win32\AkDefaultIOHookDeferred.cpp" />
+    <ClCompile Include="Modules\External_Libraries\Wwise\include\AK\SoundEngine\Win32\stdafx.cpp" />
     <ClCompile Include="Modules\GameObject.cpp" />
     <ClCompile Include="Modules\glmath.cpp" />
     <ClCompile Include="Modules\Light.cpp" />

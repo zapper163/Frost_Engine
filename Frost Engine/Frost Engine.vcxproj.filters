@@ -596,28 +596,28 @@
     <ClCompile Include="Modules\AudioEvent.cpp">
       <Filter>Sources\Modules</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Cat-Engine-UPC-main\Cat-Engine-UPC-main\Cat Engine\Source Code\External Libraries\Wwise\include\AK\SoundEngine\Win32\AkDefaultIOHookBlocking.cpp">
+    <ClCompile Include="Modules\External_Libraries\Wwise\include\AK\SoundEngine\Win32\AkDefaultIOHookBlocking.cpp">
       <Filter>Sources\Wwise</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Cat-Engine-UPC-main\Cat-Engine-UPC-main\Cat Engine\Source Code\External Libraries\Wwise\include\AK\SoundEngine\Win32\AkDefaultIOHookDeferred.cpp">
+    <ClCompile Include="Modules\External_Libraries\Wwise\include\AK\SoundEngine\Win32\AkDefaultIOHookDeferred.cpp">
       <Filter>Sources\Wwise</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Cat-Engine-UPC-main\Cat-Engine-UPC-main\Cat Engine\Source Code\External Libraries\Wwise\include\AK\SoundEngine\Common\AkDefaultLowLevelIODispatcher.cpp">
+    <ClCompile Include="Modules\External_Libraries\Wwise\include\AK\SoundEngine\Win32\stdafx.cpp">
       <Filter>Sources\Wwise</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Cat-Engine-UPC-main\Cat-Engine-UPC-main\Cat Engine\Source Code\External Libraries\Wwise\include\AK\SoundEngine\Common\AkFilePackage.cpp">
+    <ClCompile Include="Modules\External_Libraries\Wwise\include\AK\SoundEngine\Common\AkMultipleFileLocation.cpp">
       <Filter>Sources\Wwise</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Cat-Engine-UPC-main\Cat-Engine-UPC-main\Cat Engine\Source Code\External Libraries\Wwise\include\AK\SoundEngine\Common\AkFileLocationBase.cpp">
+    <ClCompile Include="Modules\External_Libraries\Wwise\include\AK\SoundEngine\Common\AkFilePackageLUT.cpp">
       <Filter>Sources\Wwise</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Cat-Engine-UPC-main\Cat-Engine-UPC-main\Cat Engine\Source Code\External Libraries\Wwise\include\AK\SoundEngine\Common\AkFilePackageLUT.cpp">
+    <ClCompile Include="Modules\External_Libraries\Wwise\include\AK\SoundEngine\Common\AkFilePackage.cpp">
       <Filter>Sources\Wwise</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Cat-Engine-UPC-main\Cat-Engine-UPC-main\Cat Engine\Source Code\External Libraries\Wwise\include\AK\SoundEngine\Common\AkMultipleFileLocation.cpp">
+    <ClCompile Include="Modules\External_Libraries\Wwise\include\AK\SoundEngine\Common\AkFileLocationBase.cpp">
       <Filter>Sources\Wwise</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Cat-Engine-UPC-main\Cat-Engine-UPC-main\Cat Engine\Source Code\External Libraries\Wwise\include\AK\SoundEngine\Win32\stdafx.cpp">
+    <ClCompile Include="Modules\External_Libraries\Wwise\include\AK\SoundEngine\Common\AkDefaultLowLevelIODispatcher.cpp">
       <Filter>Sources\Wwise</Filter>
     </ClCompile>
   </ItemGroup>
