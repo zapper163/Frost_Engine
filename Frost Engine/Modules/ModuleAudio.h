@@ -31,6 +31,13 @@
 
 class AudioEvent;
 
+
+struct WwiseData
+{
+	std::vector<std::string> events;
+	std::vector<std::string> banks;
+};
+
 class ModuleAudio : public Module
 {
 public:
@@ -60,8 +67,10 @@ public:
 	void AddListeners(unsigned int emitter_id, const AkGameObjectID listener_id);
 	void SetListenerPos(GameObject* listener, unsigned int id);
 
+	void GetAudioInfo();
 
 private:
 	CAkFilePackageLowLevelIOBlocking g_lowLevelIO;
+	WwiseData wwiseData;
 };
 

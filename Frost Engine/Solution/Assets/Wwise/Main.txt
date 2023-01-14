@@ -1,0 +1,6 @@
+Event	ID	Name			Wwise Object Path	Notes
+	2888924529	Ambient_Wind_Loop			\Default Work Unit\Ambient_Wind_Loop	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	783031998	Wind_Loop	C:\Users\zapin\Documents\WwiseProjects\Proyecto1\.cache\Windows\SFX\Wind_Loop_D79FB2B7.wem		\Actor-Mixer Hierarchy\Default Work Unit\Wind_Loop		2998864
+

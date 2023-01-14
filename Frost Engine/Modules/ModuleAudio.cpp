@@ -7,7 +7,7 @@
 #include "GameObject.h"
 #include "C_Camera.h"
 
-
+#include <string>
 
 #include <iostream>
 #include <filesystem>
@@ -123,7 +123,9 @@ bool ModuleAudio::InitSoundEngine()
 	}
 
 
-	g_lowLevelIO.SetBasePath(AKTEXT("Assets/SoundBanks/"));
+	GetAudioInfo();
+
+	g_lowLevelIO.SetBasePath(AKTEXT("Assets/Wwise/"));
 
 	AK::StreamMgr::SetCurrentLanguage(AKTEXT("English(US)"));
 
@@ -138,7 +140,7 @@ bool ModuleAudio::InitSoundEngine()
 		LOG("Couldn't find the bank: Main.bnk");
 		return false;
 	}
-   
+	
 
 	return true;
 }
@@ -213,4 +215,49 @@ void ModuleAudio::StopEvent(const AudioEvent* event, unsigned int id)
         AK::SoundEngine::ExecuteActionOnEvent(event->name.c_str(), AK::SoundEngine::AkActionOnEventType_Stop, id);
 
     }
+}
+
+void ModuleAudio::GetAudioInfo() 
+{
+	std::ifstream file("Assets/Wwise/Wwise_IDs.h");
+
+	std::string line;
+
+	while (std::getline(file, line))
+	{
+		if (line.find("EVENTS") != std::string::npos)
+		{
+			while (std::getline(file, line))
+			{
+				if (line.find("}") != std::string::npos)
+				{
+					break;
+				}
+				else if (line.find("AkUniqueID") != std::string::npos)
+				{
+					line = line.substr(0, line.find("=") - 1);
+					line = line.substr(line.find_last_of(" ") + 1, line.length());
+
+					wwiseData.events.push_back(line);
+				}
+			}
+		}
+		else if (line.find("BANKS") != std::string::npos)
+		{
+			while (std::getline(file, line))
+			{
+				if (line.find("}") != std::string::npos)
+				{
+					break;
+				}
+				else if (line.find("AkUniqueID") != std::string::npos)
+				{
+					line = line.substr(0, line.find("=") - 1);
+					line = line.substr(line.find_last_of(" ") + 1, line.length());
+
+					wwiseData.banks.push_back(line);
+				}
+			}
+		}
+	}
 }

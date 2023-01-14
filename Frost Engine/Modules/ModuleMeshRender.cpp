@@ -80,7 +80,7 @@ bool ModuleMeshRender::Start()
 	App->scene_intro->gameObjects[1] = Camera;
 	dynamic_cast<C_Camera*>(App->scene_intro->gameObjects[1]->CreateComponent(Component::TYPE::CAMERA));
 	
-	MeshLoader::LoadFile(filepath);
+	//MeshLoader::LoadFile(filepath);
 
 	
 	return true;

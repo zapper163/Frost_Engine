@@ -1,0 +1,43 @@
+{
+ "SoundBanksInfo": {
+  "Platform": "Windows",
+  "BasePlatform": "Windows",
+  "SchemaVersion": "12",
+  "SoundbankVersion": "140",
+  "RootPaths": {
+   "ProjectRoot": "C:\\Users\\zapin\\Documents\\WwiseProjects\\Proyecto1\\",
+   "SourceFilesRoot": "C:\\Users\\zapin\\Documents\\WwiseProjects\\Proyecto1\\.cache\\Windows\\",
+   "SoundBanksRoot": "C:\\Users\\zapin\\Documents\\WwiseProjects\\Proyecto1\\GeneratedSoundBanks\\Windows\\",
+   "ExternalSourcesInputFile": "",
+   "ExternalSourcesOutputRoot": "C:\\Users\\zapin\\Documents\\WwiseProjects\\Proyecto1\\GeneratedSoundBanks\\Windows"
+  },
+  "SoundBanks": [
+   {
+    "Id": "3161908922",
+    "GUID": "{90517D60-3595-4557-B2A3-C38B43B447EE}",
+    "Language": "SFX",
+    "Hash": "938716255",
+    "ObjectPath": "\\SoundBanks\\Default Work Unit\\Main",
+    "ShortName": "Main",
+    "Path": "Main.bnk",
+    "IncludedEvents": [
+     {
+      "Id": "2888924529",
+      "Name": "Ambient_Wind_Loop",
+      "ObjectPath": "\\Events\\Default Work Unit\\Ambient_Wind_Loop",
+      "GUID": "{A34C4700-35A4-4AE0-9011-4A72735F69F7}",
+      "DurationType": "Infinite"
+     }
+    ],
+    "IncludedMemoryFiles": [
+     {
+      "Id": "783031998",
+      "Language": "SFX",
+      "ShortName": "Wind_Loop.wav",
+      "Path": "SFX\\Wind_Loop_D79FB2B7.wem"
+     }
+    ]
+   }
+  ]
+ }
+}
