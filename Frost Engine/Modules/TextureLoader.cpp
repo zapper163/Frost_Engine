@@ -20,16 +20,16 @@ GLuint TextureLoader::LoadTextureFromFile(const char* path)
 		return loaded_textures[path];
 	}
 
-    if (ilLoadImage(path))
+    if (ilLoadImage((wchar_t*)path))
     {
 		ilEnable(IL_FILE_OVERWRITE);
-		ilSaveImage(path);
+		ilSaveImage((wchar_t*)path);
 
 		ILuint ImgId = 0;
 		ilGenImages(1, &ImgId);
 		ilBindImage(ImgId);
 
-		ilLoadImage(path);
+		ilLoadImage((wchar_t*)path);
 		
 		ImgId = ilutGLBindTexImage();
 		

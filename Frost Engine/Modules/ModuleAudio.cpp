@@ -31,6 +31,7 @@ bool ModuleAudio::Init()
 	bool ret = true;
     InitSoundEngine();
 
+    
 	return ret;
 }
 
@@ -62,87 +63,82 @@ bool ModuleAudio::CleanUp()
     App->editorGui->console.AddLog(__FILE__, __LINE__, "Destroying Module Audio");
    
 
-    AK::MusicEngine::Term();
+    //AK::MusicEngine::Term();
     AK::SoundEngine::Term();
 
     if (AK::IAkStreamMgr::Get())
         AK::IAkStreamMgr::Get()->Destroy();
 
-    AK::MemoryMgr::Term();
+    //AK::MemoryMgr::Term();// --------------------------------------->Esto Crashea al cerrar
     
 	return true;
 }
 
 bool ModuleAudio::InitSoundEngine()
 {
-    //--------------------------------------------------------------------------------------------------------------------
-	//Memory Manager
-    AkMemSettings memSettings;
+	AkMemSettings memSettings;
 	AK::MemoryMgr::GetDefaultSettings(memSettings);
 
 	if (AK::MemoryMgr::Init(&memSettings) != AK_Success)
 	{
-		assert(!"Could not create the memory manager.");
+		LOG("Couldn't create the Memory Manager");
+		return false;
+	}
+
+	AkStreamMgrSettings streamSettings;
+	AK::StreamMgr::GetDefaultSettings(streamSettings);
+
+	if (!AK::StreamMgr::Create(streamSettings))
+	{
+		LOG("Couldn't create the Stream Manager");
+		return false;
+	}
+
+	AkDeviceSettings devSettings;
+	AK::StreamMgr::GetDefaultDeviceSettings(devSettings);
+
+	if (g_lowLevelIO.Init(devSettings) != AK_Success)
+	{
+		LOG("Couldn't create the streaming device and Low-Level I/O system");
+		return false;
+	}
+
+	AkInitSettings initSettings;
+	AkPlatformInitSettings platfInitSettings;
+	AK::SoundEngine::GetDefaultInitSettings(initSettings);
+	AK::SoundEngine::GetDefaultPlatformInitSettings(platfInitSettings);
+
+	if (AK::SoundEngine::Init(&initSettings, &platfInitSettings) != AK_Success)
+	{
+		LOG("Couldn't initialize the sound engine");
+		return false;
+	}
+
+	AkSpatialAudioInitSettings spatialSettings;
+
+	if (AK::SpatialAudio::Init(spatialSettings) != AK_Success)
+	{
+		LOG("Couldn't initialize the spatial audio");
 		return false;
 	}
 
 
+	g_lowLevelIO.SetBasePath(AKTEXT("Assets/SoundBanks/"));
 
-    //----------------------------------------------------------------------------------------------------------------------------------
-    //Streaming Manager
-    
-    // Create and initialize an instance of the default streaming manager. Note
-    // that you can override the default streaming manager with your own. 
-    
-    AkStreamMgrSettings stmSettings;
-    AK::StreamMgr::GetDefaultSettings(stmSettings);
+	AK::StreamMgr::SetCurrentLanguage(AKTEXT("English(US)"));
 
-    // Customize the Stream Manager settings here.
-
-
-    if (!AK::StreamMgr::Create(stmSettings))
-    {
-        assert(!"Could not create the Streaming Manager");
-        return false;
-    }
-
+	AkBankID bankID = 0;
+	if (AK::SoundEngine::LoadBank(L"Init.bnk", bankID) != AK_Success)
+	{
+		LOG("Couldn't find the bank: Init.bnk");
+		return false;
+	}
+	if (AK::SoundEngine::LoadBank(L"Main.bnk", bankID) != AK_Success)
+	{
+		LOG("Couldn't find the bank: Main.bnk");
+		return false;
+	}
    
-    // Create a streaming device with blocking low-level I/O handshaking.
-    // Note that you can override the default low-level I/O module with your own. 
-
-
-    AkDeviceSettings deviceSettings;
-    AK::StreamMgr::GetDefaultDeviceSettings(deviceSettings);
-
-    // Customize the streaming device settings here.
-
-
-    // CAkFilePackageLowLevelIOBlocking::Init() creates a streaming device
-    // in the Stream Manager, and registers itself as the File Location Resolver.
-    /*if (g_lowLevelIO.Init(deviceSettings) != AK_Success)
-    {
-        assert(!"Could not create the streaming device and Low-Level I/O system");
-        return false;
-    }*/
-
-
-    //----------------------------------------------------------------------------------------------------------------------------------
-    //Sound Engine
-
-    // Create the Sound Engine
-    // Using default initialization parameters
-
-
-    AkInitSettings initSettings;
-    AkPlatformInitSettings platformInitSettings;
-    AK::SoundEngine::GetDefaultInitSettings(initSettings);
-    AK::SoundEngine::GetDefaultPlatformInitSettings(platformInitSettings);
-
-    if (AK::SoundEngine::Init(&initSettings, &platformInitSettings) != AK_Success)
-    {
-        assert(!"Could not initialize the Sound Engine.");
-        return false;
-    }
 
 	return true;
 }

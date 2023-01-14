@@ -46,6 +46,9 @@
     <Filter Include="Sources\Components">
       <UniqueIdentifier>{f8159ee9-5476-456d-9746-c2dec70fa3ac}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Wwise">
+      <UniqueIdentifier>{4f5a5a09-b2dd-411d-8618-6bc6112c3e07}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Modules\Application.h">
@@ -351,6 +354,45 @@
     <ClInclude Include="Modules\AudioEvent.h">
       <Filter>Sources\Modules</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Cat-Engine-UPC-main\Cat-Engine-UPC-main\Cat Engine\Source Code\External Libraries\Wwise\include\AK\SoundEngine\Win32\AkDefaultIOHookDeferred.h">
+      <Filter>Sources\Wwise</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Cat-Engine-UPC-main\Cat-Engine-UPC-main\Cat Engine\Source Code\External Libraries\Wwise\include\AK\SoundEngine\Win32\AkDefaultIOHookBlocking.h">
+      <Filter>Sources\Wwise</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Cat-Engine-UPC-main\Cat-Engine-UPC-main\Cat Engine\Source Code\External Libraries\Wwise\include\AK\SoundEngine\Common\AkDefaultLowLevelIODispatcher.h">
+      <Filter>Sources\Wwise</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Cat-Engine-UPC-main\Cat-Engine-UPC-main\Cat Engine\Source Code\External Libraries\Wwise\include\AK\SoundEngine\Common\AkFileHelpersBase.h">
+      <Filter>Sources\Wwise</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Cat-Engine-UPC-main\Cat-Engine-UPC-main\Cat Engine\Source Code\External Libraries\Wwise\include\AK\SoundEngine\Win32\AkFileHelpers.h">
+      <Filter>Sources\Wwise</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Cat-Engine-UPC-main\Cat-Engine-UPC-main\Cat Engine\Source Code\External Libraries\Wwise\include\AK\SoundEngine\Common\AkFileLocationBase.h">
+      <Filter>Sources\Wwise</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Cat-Engine-UPC-main\Cat-Engine-UPC-main\Cat Engine\Source Code\External Libraries\Wwise\include\AK\SoundEngine\Common\AkFilePackage.h">
+      <Filter>Sources\Wwise</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Cat-Engine-UPC-main\Cat-Engine-UPC-main\Cat Engine\Source Code\External Libraries\Wwise\include\AK\SoundEngine\Common\AkFilePackageLowLevelIO.h">
+      <Filter>Sources\Wwise</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Cat-Engine-UPC-main\Cat-Engine-UPC-main\Cat Engine\Source Code\External Libraries\Wwise\include\AK\SoundEngine\Win32\AkFilePackageLowLevelIOBlocking.h">
+      <Filter>Sources\Wwise</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Cat-Engine-UPC-main\Cat-Engine-UPC-main\Cat Engine\Source Code\External Libraries\Wwise\include\AK\SoundEngine\Win32\AkFilePackageLowLevelIODeferred.h">
+      <Filter>Sources\Wwise</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Cat-Engine-UPC-main\Cat-Engine-UPC-main\Cat Engine\Source Code\External Libraries\Wwise\include\AK\SoundEngine\Common\AkFilePackageLUT.h">
+      <Filter>Sources\Wwise</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Cat-Engine-UPC-main\Cat-Engine-UPC-main\Cat Engine\Source Code\External Libraries\Wwise\include\AK\SoundEngine\Common\AkMultipleFileLocation.h">
+      <Filter>Sources\Wwise</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Cat-Engine-UPC-main\Cat-Engine-UPC-main\Cat Engine\Source Code\External Libraries\Wwise\include\AK\SoundEngine\Win32\stdafx.h">
+      <Filter>Sources\Wwise</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Modules\Application.cpp">
@@ -554,6 +596,30 @@
     <ClCompile Include="Modules\AudioEvent.cpp">
       <Filter>Sources\Modules</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Cat-Engine-UPC-main\Cat-Engine-UPC-main\Cat Engine\Source Code\External Libraries\Wwise\include\AK\SoundEngine\Win32\AkDefaultIOHookBlocking.cpp">
+      <Filter>Sources\Wwise</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Cat-Engine-UPC-main\Cat-Engine-UPC-main\Cat Engine\Source Code\External Libraries\Wwise\include\AK\SoundEngine\Win32\AkDefaultIOHookDeferred.cpp">
+      <Filter>Sources\Wwise</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Cat-Engine-UPC-main\Cat-Engine-UPC-main\Cat Engine\Source Code\External Libraries\Wwise\include\AK\SoundEngine\Common\AkDefaultLowLevelIODispatcher.cpp">
+      <Filter>Sources\Wwise</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Cat-Engine-UPC-main\Cat-Engine-UPC-main\Cat Engine\Source Code\External Libraries\Wwise\include\AK\SoundEngine\Common\AkFilePackage.cpp">
+      <Filter>Sources\Wwise</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Cat-Engine-UPC-main\Cat-Engine-UPC-main\Cat Engine\Source Code\External Libraries\Wwise\include\AK\SoundEngine\Common\AkFileLocationBase.cpp">
+      <Filter>Sources\Wwise</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Cat-Engine-UPC-main\Cat-Engine-UPC-main\Cat Engine\Source Code\External Libraries\Wwise\include\AK\SoundEngine\Common\AkFilePackageLUT.cpp">
+      <Filter>Sources\Wwise</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Cat-Engine-UPC-main\Cat-Engine-UPC-main\Cat Engine\Source Code\External Libraries\Wwise\include\AK\SoundEngine\Common\AkMultipleFileLocation.cpp">
+      <Filter>Sources\Wwise</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Cat-Engine-UPC-main\Cat-Engine-UPC-main\Cat Engine\Source Code\External Libraries\Wwise\include\AK\SoundEngine\Win32\stdafx.cpp">
+      <Filter>Sources\Wwise</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Modules\External_Libraries\MathGeoLib\include\Geometry\KDTree.inl">
@@ -573,6 +639,9 @@
     </None>
     <None Include="Modules\External_Libraries\MathGeoLib\include\Math\Matrix.inl">
       <Filter>Sources\MathGeoLib\Math</Filter>
+    </None>
+    <None Include="..\..\Cat-Engine-UPC-main\Cat-Engine-UPC-main\Cat Engine\Source Code\External Libraries\Wwise\include\AK\SoundEngine\Common\AkFilePackageLowLevelIO.inl">
+      <Filter>Sources\Wwise</Filter>
     </None>
   </ItemGroup>
 </Project>

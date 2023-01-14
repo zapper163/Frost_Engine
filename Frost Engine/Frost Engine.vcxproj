@@ -21,14 +21,14 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -42,12 +42,12 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\ucrt;$(ProjectDir)\Modules\External_Libraries\Wwise\include;$(IncludePath)</IncludePath>
-    <ExternalIncludePath>$(VC_IncludePath);C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\ucrt;$(WindowsSDK_IncludePath)</ExternalIncludePath>
+    <ExternalIncludePath>C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\ucrt;$(VC_IncludePath);$(WindowsSDK_IncludePath)</ExternalIncludePath>
     <LibraryPath>C:\Program Files (x86)\Windows Kits\10\lib\10.0.19041.0\ucrt\x86;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IncludePath>C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\ucrt;$(ProjectDir)\Modules\External_Libraries\Wwise\include;$(IncludePath)</IncludePath>
-    <ExternalIncludePath>C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\ucrt;$(WindowsSDK_IncludePath);$(VC_IncludePath);$(ExternalIncludePath)</ExternalIncludePath>
+    <ExternalIncludePath>C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\ucrt;$(VC_IncludePath);$(WindowsSDK_IncludePath)</ExternalIncludePath>
     <LibraryPath>C:\Program Files (x86)\Windows Kits\10\lib\10.0.19041.0\ucrt\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -65,8 +65,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
-      <AdditionalLibraryDirectories>$(SolutionDir)\Modules\External_Libraries;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)\Modules\External_Libraries;$(SolutionDir)\Modules\External_Libraries\Wwise\lib\Deb;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;opengl32.lib;AkMemoryMgr.lib;AkMusicEngine.lib;AkSoundEngine.lib;AkSpatialAudio.lib;AkStreamMgr.lib;AkRoomVerbFX.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>msvcrt.lib</IgnoreSpecificDefaultLibraries>
     </Link>
   </ItemDefinitionGroup>
@@ -89,11 +89,24 @@
       <OptimizeReferences>true</OptimizeReferences>
       <SubSystem>Windows</SubSystem>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
-      <AdditionalLibraryDirectories>$(SolutionDir)\Modules\External_Libraries;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)\Modules\External_Libraries;$(SolutionDir)\Modules\External_Libraries\Wwise\lib\Deb;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;opengl32.lib;AkMemoryMgr.lib;AkMusicEngine.lib;AkSoundEngine.lib;AkSpatialAudio.lib;AkStreamMgr.lib;AkRoomVerbFX.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Cat-Engine-UPC-main\Cat-Engine-UPC-main\Cat Engine\Source Code\External Libraries\Wwise\include\AK\SoundEngine\Common\AkDefaultLowLevelIODispatcher.h" />
+    <ClInclude Include="..\..\Cat-Engine-UPC-main\Cat-Engine-UPC-main\Cat Engine\Source Code\External Libraries\Wwise\include\AK\SoundEngine\Common\AkFileHelpersBase.h" />
+    <ClInclude Include="..\..\Cat-Engine-UPC-main\Cat-Engine-UPC-main\Cat Engine\Source Code\External Libraries\Wwise\include\AK\SoundEngine\Common\AkFileLocationBase.h" />
+    <ClInclude Include="..\..\Cat-Engine-UPC-main\Cat-Engine-UPC-main\Cat Engine\Source Code\External Libraries\Wwise\include\AK\SoundEngine\Common\AkFilePackage.h" />
+    <ClInclude Include="..\..\Cat-Engine-UPC-main\Cat-Engine-UPC-main\Cat Engine\Source Code\External Libraries\Wwise\include\AK\SoundEngine\Common\AkFilePackageLowLevelIO.h" />
+    <ClInclude Include="..\..\Cat-Engine-UPC-main\Cat-Engine-UPC-main\Cat Engine\Source Code\External Libraries\Wwise\include\AK\SoundEngine\Common\AkFilePackageLUT.h" />
+    <ClInclude Include="..\..\Cat-Engine-UPC-main\Cat-Engine-UPC-main\Cat Engine\Source Code\External Libraries\Wwise\include\AK\SoundEngine\Common\AkMultipleFileLocation.h" />
+    <ClInclude Include="..\..\Cat-Engine-UPC-main\Cat-Engine-UPC-main\Cat Engine\Source Code\External Libraries\Wwise\include\AK\SoundEngine\Win32\AkDefaultIOHookBlocking.h" />
+    <ClInclude Include="..\..\Cat-Engine-UPC-main\Cat-Engine-UPC-main\Cat Engine\Source Code\External Libraries\Wwise\include\AK\SoundEngine\Win32\AkDefaultIOHookDeferred.h" />
+    <ClInclude Include="..\..\Cat-Engine-UPC-main\Cat-Engine-UPC-main\Cat Engine\Source Code\External Libraries\Wwise\include\AK\SoundEngine\Win32\AkFileHelpers.h" />
+    <ClInclude Include="..\..\Cat-Engine-UPC-main\Cat-Engine-UPC-main\Cat Engine\Source Code\External Libraries\Wwise\include\AK\SoundEngine\Win32\AkFilePackageLowLevelIOBlocking.h" />
+    <ClInclude Include="..\..\Cat-Engine-UPC-main\Cat-Engine-UPC-main\Cat Engine\Source Code\External Libraries\Wwise\include\AK\SoundEngine\Win32\AkFilePackageLowLevelIODeferred.h" />
+    <ClInclude Include="..\..\Cat-Engine-UPC-main\Cat-Engine-UPC-main\Cat Engine\Source Code\External Libraries\Wwise\include\AK\SoundEngine\Win32\stdafx.h" />
     <ClInclude Include="Modules\Application.h" />
     <ClInclude Include="Modules\AudioEvent.h" />
     <ClInclude Include="Modules\Color.h" />
@@ -197,6 +210,14 @@
     <ClInclude Include="Modules\Timer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Cat-Engine-UPC-main\Cat-Engine-UPC-main\Cat Engine\Source Code\External Libraries\Wwise\include\AK\SoundEngine\Common\AkDefaultLowLevelIODispatcher.cpp" />
+    <ClCompile Include="..\..\Cat-Engine-UPC-main\Cat-Engine-UPC-main\Cat Engine\Source Code\External Libraries\Wwise\include\AK\SoundEngine\Common\AkFileLocationBase.cpp" />
+    <ClCompile Include="..\..\Cat-Engine-UPC-main\Cat-Engine-UPC-main\Cat Engine\Source Code\External Libraries\Wwise\include\AK\SoundEngine\Common\AkFilePackage.cpp" />
+    <ClCompile Include="..\..\Cat-Engine-UPC-main\Cat-Engine-UPC-main\Cat Engine\Source Code\External Libraries\Wwise\include\AK\SoundEngine\Common\AkFilePackageLUT.cpp" />
+    <ClCompile Include="..\..\Cat-Engine-UPC-main\Cat-Engine-UPC-main\Cat Engine\Source Code\External Libraries\Wwise\include\AK\SoundEngine\Common\AkMultipleFileLocation.cpp" />
+    <ClCompile Include="..\..\Cat-Engine-UPC-main\Cat-Engine-UPC-main\Cat Engine\Source Code\External Libraries\Wwise\include\AK\SoundEngine\Win32\AkDefaultIOHookBlocking.cpp" />
+    <ClCompile Include="..\..\Cat-Engine-UPC-main\Cat-Engine-UPC-main\Cat Engine\Source Code\External Libraries\Wwise\include\AK\SoundEngine\Win32\AkDefaultIOHookDeferred.cpp" />
+    <ClCompile Include="..\..\Cat-Engine-UPC-main\Cat-Engine-UPC-main\Cat Engine\Source Code\External Libraries\Wwise\include\AK\SoundEngine\Win32\stdafx.cpp" />
     <ClCompile Include="Modules\Application.cpp" />
     <ClCompile Include="Modules\AudioEvent.cpp" />
     <ClCompile Include="Modules\Color.cpp" />
@@ -266,6 +287,7 @@
     <ClCompile Include="Modules\Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\Cat-Engine-UPC-main\Cat-Engine-UPC-main\Cat Engine\Source Code\External Libraries\Wwise\include\AK\SoundEngine\Common\AkFilePackageLowLevelIO.inl" />
     <None Include="Modules\External_Libraries\MathGeoLib\include\Geometry\KDTree.inl" />
     <None Include="Modules\External_Libraries\MathGeoLib\include\Geometry\QuadTree.inl" />
     <None Include="Modules\External_Libraries\MathGeoLib\include\Geometry\TriangleMesh_IntersectRay_AVX.inl" />
