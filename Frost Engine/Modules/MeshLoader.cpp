@@ -91,11 +91,18 @@ void MeshLoader::LoadFile(const char* file_path)
 			dynamic_cast<C_Mesh*>(App->scene_intro->gameObjects[mesh->ID]->CreateComponent(Component::TYPE::MESH))->SetMesh(mesh, scene->mRootNode->mChildren[i]->mName.C_Str());
 			GetNodeInfo(scene, scene->mRootNode->mChildren[i], App->scene_intro->gameObjects[mesh->ID]);
 
+			float3 sphere_pos(5, 0, 0);
+			float3 sphere_scale(1, 1, 1);
+			Quat sphere_rot(0, 0, 0, 0);
+
+
 			if (App->scene_intro->gameObjects[mesh->ID]->name == "Cube")
 			{
 				//Audio Source
 				dynamic_cast<C_AudioSource*>(App->scene_intro->gameObjects[mesh->ID]->CreateComponent(Component::TYPE::AUDIOSOURCE));
 				GetNodeInfo(scene, scene->mRootNode->mChildren[i], App->scene_intro->gameObjects[mesh->ID]);
+
+				dynamic_cast<C_Transform*>(App->scene_intro->gameObjects[mesh->ID]->GetComponent(Component::TYPE::TRANSFORM))->SetTransform(sphere_pos, sphere_rot, sphere_scale);
 			}
 			else if (App->scene_intro->gameObjects[mesh->ID]->name == "Sphere")
 			{

@@ -21,6 +21,7 @@ C_AudioListener::C_AudioListener(GameObject* gameObject) : Component(gameObject,
 C_AudioListener::~C_AudioListener()
 {
 	App->audio->UnregisterGameObject(listenerID);
+	App->audio->RemoveDefaultListener(listenerID);
 }
 
 void C_AudioListener::Update()
@@ -39,6 +40,17 @@ void C_AudioListener::OnGui()
 		ImGui::Checkbox("##AudioClip", &activeListener);
 		ImGui::SameLine();
 		ImGui::Text("Listen");
+
+		if (activeListener)
+		{
+			App->audio->SetDefaultListener(listenerID);
+		}
+		else if (activeListener == false)
+		{
+			App->audio->RemoveDefaultListener(listenerID);
+		}
 	}
+
+	
 
 }

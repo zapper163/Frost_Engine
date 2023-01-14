@@ -20,16 +20,12 @@ public:
 	GameObject* SourceGameObject;
 	uint sourceID;
 
-	vector<AudioEvent*> eventsList;
-	AudioEvent* emptyEvent = nullptr;
+	std::vector<std::string> events = App->audio->wwiseData.events;
+
 
 	void OnGui();
 
-	void PlayEvent(unsigned int index) const;
-	void StopEvent(unsigned int index) const;
-	void StopAllEvents() const;
-
 	float volume;
-
+	bool isPlaying = false;
 	std::string audioClip;
 };

@@ -14,7 +14,13 @@ C_AudioSource::C_AudioSource(GameObject* gameObject) : Component(gameObject, TYP
 	SourceGameObject = gameObject;
 	sourceID = gameObject->id;
 
+	events = App->audio->wwiseData.events;
+
 	App->audio->RegisterGameObject(sourceID);
+
+	audioClip = events[0];
+	App->audio->PostEvent(audioClip.c_str(), sourceID);
+	isPlaying = true;
 }
 
 C_AudioSource::~C_AudioSource()
@@ -22,31 +28,9 @@ C_AudioSource::~C_AudioSource()
 	App->audio->UnregisterGameObject(sourceID);
 }
 
-
-void C_AudioSource::PlayEvent(unsigned int index) const
-{
-	//App->audio->PostEvent(eventsList[index], sourceID);
-
-}
-
-void C_AudioSource::StopEvent(unsigned int index) const
-{
-	//App->audio->StopEvent(eventsList[index], sourceID);
-
-}
-
-void C_AudioSource::StopAllEvents() const
-{
-	for (int i = 0; i < eventsList.size(); ++i)
-	{
-		StopEvent(i);
-
-	}
-}
-
 void C_AudioSource::OnGui()
 {
-
+	
 	if (ImGui::CollapsingHeader("Audio Source"))
 	{
 		ImGui::Text("AudioClip");
@@ -57,7 +41,7 @@ void C_AudioSource::OnGui()
 			{
 				audioClip = "None";
 			}
-			std::vector<std::string> events = App->audio->wwiseData.events;
+			
 			for (int i = 0; i < events.size(); i++)
 			{
 				if (ImGui::Selectable(events[i].c_str()))
@@ -73,29 +57,35 @@ void C_AudioSource::OnGui()
 		ImGui::SameLine();
 		if (ImGui::SliderFloat("##Volume", &volume, 0.0f, 100.0f))
 		{
-			AK::SoundEngine::SetRTPCValue("Volume", volume, sourceID);
+			App->audio->SetRTPCValue("Volume", volume, sourceID);
 		}
-		
 		if (ImGui::Button("Play"))
 		{
-			App->audio->PostEvent(audioClip.c_str(), sourceID);
+			if (isPlaying == false)
+			{
+				App->audio->PostEvent(audioClip.c_str(), sourceID);
+				isPlaying = true;
+			}
 		}
 		ImGui::SameLine();
 		if (ImGui::Button("Pause"))
 		{
-			//PauseClip();
+			App->audio->PauseEvent(audioClip.c_str(), sourceID);
 		}
 		ImGui::SameLine();
 		if (ImGui::Button("Resume"))
 		{
-			//ResumeClip();
+			App->audio->ResumeEvent(audioClip.c_str(), sourceID);
 		}
 		ImGui::SameLine();
 		if (ImGui::Button("Stop"))
 		{
-			//StopClip();
+			App->audio->StopEvent(audioClip.c_str(), sourceID);
+			isPlaying = false;
 		}
 
 	}
+
+	
 
 }

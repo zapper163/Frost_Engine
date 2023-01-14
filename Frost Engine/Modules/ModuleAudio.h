@@ -60,10 +60,14 @@ public:
 
 	
 	void PostEvent(const char* event, unsigned int id);
-	void StopEvent(const AudioEvent* event, unsigned int id);
+	void StopEvent(const char* event, unsigned int id);
+	void PauseEvent(const char* event, unsigned int id);
+	void ResumeEvent(const char* event, unsigned int id);
 
+	void SetRTPCValue(const char* event, float volume, uint id);
 
 	void SetDefaultListener(const AkGameObjectID id);
+	void RemoveDefaultListener(const AkGameObjectID id);
 	void AddListeners(unsigned int emitter_id, const AkGameObjectID listener_id);
 	void SetListenerPos(GameObject* listener, unsigned int id);
 

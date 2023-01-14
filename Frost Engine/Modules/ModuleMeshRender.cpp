@@ -81,7 +81,11 @@ bool ModuleMeshRender::Start()
 	dynamic_cast<C_Camera*>(App->scene_intro->gameObjects[1]->CreateComponent(Component::TYPE::CAMERA));
 	
 	//MeshLoader::LoadFile(filepath);
+	const char* cube_filepath = "Basic_Shapes/cube.fbx";
+	MeshLoader::LoadFile(cube_filepath);
 
+	const char* sphere_filepath = "Basic_Shapes/sphere.fbx";
+	MeshLoader::LoadFile(sphere_filepath);
 	
 	return true;
 }

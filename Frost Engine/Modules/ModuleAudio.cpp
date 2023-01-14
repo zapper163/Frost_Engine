@@ -168,36 +168,30 @@ void ModuleAudio::SetDefaultListener(const AkGameObjectID id)
     AK::SoundEngine::SetDefaultListeners(&id, MAX_LISTENERS);
 }
 
+void ModuleAudio::RemoveDefaultListener(const AkGameObjectID id)
+{
+	AK::SoundEngine::RemoveDefaultListener(id);
+}
+
 void ModuleAudio::AddListeners(unsigned int emitter_id, const AkGameObjectID listener_id)
 {
     AK::SoundEngine::SetListeners(emitter_id, &listener_id, MAX_LISTENERS);
 }
 
+void ModuleAudio::SetRTPCValue(const char* event, float volume, uint id)
+{
+	AK::SoundEngine::SetRTPCValue("Volume", volume, id);
+}
 
 void ModuleAudio::SetListenerPos(GameObject* listener, unsigned int id)
 {
-    //Orientation
-    AkVector front;
-    front.X = listener->transform->GetVectorFront().x;
-    front.Y = listener->transform->GetVectorFront().y;
-    front.Z = listener->transform->GetVectorFront().z;
+	float3 position = listener->transform->transform.position;
 
-    //Top orientation
-    AkVector top;
-    top.X = listener->transform->GetVectorTop().x;
-    top.Y = listener->transform->GetVectorTop().y;
-    top.Z = listener->transform->GetVectorTop().z;
+	AkSoundPosition listenerPosition;
+	listenerPosition.SetOrientation({ 0,0,-1 }, { 0,1,0 });
+	listenerPosition.SetPosition(position.x, position.y, position.z);
 
-    //Position
-    AkVector pos;
-    pos.X = listener->transform->transform.position.x;
-    pos.Y = listener->transform->transform.position.y;
-    pos.Z = listener->transform->transform.position.z;
-
-    AkSoundPosition listenerPosition;
-    listenerPosition.SetPosition(pos.X, pos.Y, pos.Z);
-
-    AK::SoundEngine::SetPosition(id, listenerPosition);
+	AK::SoundEngine::SetPosition(id, listenerPosition);
 }
 
 void ModuleAudio::PostEvent(const char* event, unsigned int id)
@@ -213,13 +207,32 @@ void ModuleAudio::PostEvent(const char* event, unsigned int id)
     }
 }
 
-void ModuleAudio::StopEvent(const AudioEvent* event, unsigned int id)
+void ModuleAudio::StopEvent(const char* event, unsigned int id)
 {
     if (event != nullptr)
     {
-        AK::SoundEngine::ExecuteActionOnEvent(event->name.c_str(), AK::SoundEngine::AkActionOnEventType_Stop, id);
+        AK::SoundEngine::ExecuteActionOnEvent(event, AK::SoundEngine::AkActionOnEventType_Stop, id);
 
     }
+}
+
+void ModuleAudio::PauseEvent(const char* event, unsigned int id)
+{
+	if (event != nullptr)
+	{
+		AK::SoundEngine::ExecuteActionOnEvent(event, AK::SoundEngine::AkActionOnEventType_Pause, id);
+
+	}
+}
+
+
+void ModuleAudio::ResumeEvent(const char* event, unsigned int id)
+{
+	if (event != nullptr)
+	{
+		AK::SoundEngine::ExecuteActionOnEvent(event, AK::SoundEngine::AkActionOnEventType_Resume, id);
+
+	}
 }
 
 void ModuleAudio::GetAudioInfo() 
