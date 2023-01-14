@@ -5,6 +5,8 @@
 #include "C_Mesh.h"
 #include "C_Texture.h"
 #include "C_Camera.h"
+#include "C_AudioSource.h"
+#include "C_AudioListener.h"
 
 #pragma comment (lib, "Assimp/libx86/assimp.lib")
 
@@ -20,10 +22,6 @@ void MeshLoader::DebugMode()
 
 void MeshLoader::LoadFile(const char* file_path)
 {
-
-
-
-
 	const aiScene* scene = aiImportFile(file_path, aiProcessPreset_TargetRealtime_MaxQuality);
 	if (scene != nullptr && scene->HasMeshes())
 	{
@@ -93,6 +91,18 @@ void MeshLoader::LoadFile(const char* file_path)
 			dynamic_cast<C_Mesh*>(App->scene_intro->gameObjects[mesh->ID]->CreateComponent(Component::TYPE::MESH))->SetMesh(mesh, scene->mRootNode->mChildren[i]->mName.C_Str());
 			GetNodeInfo(scene, scene->mRootNode->mChildren[i], App->scene_intro->gameObjects[mesh->ID]);
 
+			if (App->scene_intro->gameObjects[mesh->ID]->name == "Cube")
+			{
+				//Audio Source
+				dynamic_cast<C_AudioSource*>(App->scene_intro->gameObjects[mesh->ID]->CreateComponent(Component::TYPE::AUDIOSOURCE));
+				GetNodeInfo(scene, scene->mRootNode->mChildren[i], App->scene_intro->gameObjects[mesh->ID]);
+			}
+			else if (App->scene_intro->gameObjects[mesh->ID]->name == "Sphere")
+			{
+				//Audio Source
+				dynamic_cast<C_AudioListener*>(App->scene_intro->gameObjects[mesh->ID]->CreateComponent(Component::TYPE::AUDIOLISTENER));
+				GetNodeInfo(scene, scene->mRootNode->mChildren[i], App->scene_intro->gameObjects[mesh->ID]);
+			}
 			/*
 			if (App->scene_intro->gameObjects[mesh->ID]->name == "City_building_040" || App->scene_intro->gameObjects[mesh->ID]->name == "City_building_039" || App->scene_intro->gameObjects[mesh->ID]->name == "City_building_035" || App->scene_intro->gameObjects[mesh->ID]->name == "City_building_031" || App->scene_intro->gameObjects[mesh->ID]->name == "City_building_030" || App->scene_intro->gameObjects[mesh->ID]->name == "City_building_028")
 			{
@@ -140,6 +150,8 @@ void MeshLoader::LoadFile(const char* file_path)
 				dynamic_cast<C_Texture*>(App->scene_intro->gameObjects[mesh->ID]->CreateComponent(Component::TYPE::TEXTURE))->SetTexture(mesh->textures[8]);
 			}*/
 			
+			
+
 
 			mesh->GenerateLocalBoundingBox();
 			

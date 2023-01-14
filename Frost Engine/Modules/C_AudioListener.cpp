@@ -9,7 +9,7 @@
 #include <string>
 #include <vector>
 
-C_AudioListener::C_AudioListener(GameObject* gameObject) : Component(gameObject, TYPE::TEXTURE)
+C_AudioListener::C_AudioListener(GameObject* gameObject) : Component(gameObject, TYPE::AUDIOLISTENER)
 {
 	ListenerGameObject = gameObject;
 	listenerID = gameObject->id;
@@ -25,18 +25,20 @@ C_AudioListener::~C_AudioListener()
 
 void C_AudioListener::Update()
 {
+	App->audio->SetListenerPos(ListenerGameObject, listenerID);
 
 }
 
 void C_AudioListener::OnGui()
 {
 
-	if (ImGui::CollapsingHeader("Texture"))
+	if (ImGui::CollapsingHeader("Audio Listener"))
 	{
-		ImGui::Text("Texture path:");
+		ImGui::Text("AudioClip");
+		ImGui::SameLine(ImGui::GetWindowWidth() * 0.65f);
+		ImGui::Checkbox("##AudioClip", &activeListener);
 		ImGui::SameLine();
-		ImGui::Text(name);
-
+		ImGui::Text("Listen");
 	}
 
 }

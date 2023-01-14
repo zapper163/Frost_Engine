@@ -18,7 +18,7 @@ public:
 	~C_AudioSource();
 
 	GameObject* SourceGameObject;
-	unsigned int sourceID;
+	uint sourceID;
 
 	vector<AudioEvent*> eventsList;
 	AudioEvent* emptyEvent = nullptr;
@@ -29,5 +29,7 @@ public:
 	void StopEvent(unsigned int index) const;
 	void StopAllEvents() const;
 
-	const char* name;
+	float volume;
+
+	std::string audioClip;
 };

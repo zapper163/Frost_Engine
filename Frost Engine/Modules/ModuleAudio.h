@@ -59,7 +59,7 @@ public:
 	void UnregisterGameObject(unsigned int id);
 
 	
-	void PostEvent(AudioEvent* event, unsigned int id);
+	void PostEvent(const char* event, unsigned int id);
 	void StopEvent(const AudioEvent* event, unsigned int id);
 
 
@@ -69,8 +69,10 @@ public:
 
 	void GetAudioInfo();
 
+	WwiseData wwiseData;
+
 private:
 	CAkFilePackageLowLevelIOBlocking g_lowLevelIO;
-	WwiseData wwiseData;
+	
 };
 

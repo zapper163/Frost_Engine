@@ -195,16 +195,21 @@ void ModuleAudio::SetListenerPos(GameObject* listener, unsigned int id)
     pos.Z = listener->transform->transform.position.z;
 
     AkSoundPosition listenerPosition;
-    listenerPosition.Set(pos, front, top);
+    listenerPosition.SetPosition(pos.X, pos.Y, pos.Z);
 
     AK::SoundEngine::SetPosition(id, listenerPosition);
 }
 
-void ModuleAudio::PostEvent(AudioEvent* event, unsigned int id)
+void ModuleAudio::PostEvent(const char* event, unsigned int id)
 {
+	AkPlayingID playingID;
     if (event != nullptr)
     {
-        event->event_id = AK::SoundEngine::PostEvent(event->name.c_str(), id);
+		playingID = AK::SoundEngine::PostEvent(event, id);
+		if (playingID == AK_INVALID_PLAYING_ID)
+		{
+			LOG("Post Event Failed")
+		}
     }
 }
 
