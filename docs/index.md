@@ -1,6 +1,8 @@
 # Frost Engine
 A 3D Game Engine made by Alejandro Giralt at UPC's CITM
-[yo](https://github.com/zapper163/Frost_Engine/blob/main/docs/media/Foto-yo.jpeg?raw=true)
+
+I'm Alejandro Giralt, and I programed this engine as part of an university assignment. This was a very exigent project, but it has served to improve my programming skills, and my time management and organization.
+![yo](https://github.com/zapper163/Frost_Engine/blob/main/docs/media/yo.jpeg?raw=true)
 Github: [zapper163](https://github.com/zapper163)
 
 ## Features:
