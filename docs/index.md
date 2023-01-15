@@ -29,7 +29,8 @@ All the features from v0.1 and v0.2 +
 - SoundBank loading and event management
 - Play, Pause, Resume and Stop the audio
 
-![v0.3](https://youtu.be/qmnpm5TEqwU?raw=true)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/G27xBVIa7fs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> <br>
+
 
 ## Controls:
 - While Right clicking, “WASD” for fps-like movement and free look around.
