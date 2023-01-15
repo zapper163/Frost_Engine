@@ -13,11 +13,13 @@ Github: [zapper163](https://github.com/zapper163)
 - Each GameObject has three components: Transform, Mesh & Texture
 
 ### v0.2
+All the features from v0.1 +
 - Camera as a component
 - Frustum Culling
 - Mouse Picking
 
 ### v0.3
+All the features from v0.1 and v0.2 +
 - Audio with Wwise library
 - Components SoundSource and SoundListener
 - SoundBank loading and event management
