@@ -40,13 +40,16 @@ void C_AudioSource::OnGui()
 			if (ImGui::Selectable("None"))
 			{
 				audioClip = "None";
+				nothingSelected = true;
 			}
 			
 			for (int i = 0; i < events.size(); i++)
 			{
 				if (ImGui::Selectable(events[i].c_str()))
 				{
+					nothingSelected = false;
 					audioClip = events[i];
+					
 				}
 			}
 
@@ -61,7 +64,7 @@ void C_AudioSource::OnGui()
 		}
 		if (ImGui::Button("Play"))
 		{
-			if (isPlaying == false)
+			if (isPlaying == false || nothingSelected == false)
 			{
 				App->audio->PostEvent(audioClip.c_str(), sourceID);
 				isPlaying = true;

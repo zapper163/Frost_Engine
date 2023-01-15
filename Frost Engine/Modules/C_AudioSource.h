@@ -27,5 +27,6 @@ public:
 
 	float volume;
 	bool isPlaying = false;
+	bool nothingSelected = false;
 	std::string audioClip;
 };
