@@ -53,7 +53,7 @@ void C_AudioSource::OnGui()
 			ImGui::EndCombo();
 		}
 
-		ImGui::Text("Volume");
+		ImGui::Text("Volume (Doesn't work)");
 		ImGui::SameLine();
 		if (ImGui::SliderFloat("##Volume", &volume, 0.0f, 100.0f))
 		{

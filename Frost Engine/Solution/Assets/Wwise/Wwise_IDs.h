@@ -13,7 +13,7 @@ namespace AK
 {
     namespace EVENTS
     {
-        static const AkUniqueID AMBIENT_WIND_LOOP = 2888924529U;
+        static const AkUniqueID BACKGROUND = 3650723969U;
     } // namespace EVENTS
 
     namespace GAME_PARAMETERS

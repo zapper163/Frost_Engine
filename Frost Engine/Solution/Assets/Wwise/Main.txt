@@ -1,6 +1,10 @@
 Event	ID	Name			Wwise Object Path	Notes
-	2888924529	Ambient_Wind_Loop			\Default Work Unit\Ambient_Wind_Loop	
+	3650723969	Background			\Default Work Unit\Background	
+
+Modulator Time	ID	Name			Wwise Object Path	Notes
+	149933434	Modulator Time (Custom)				
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
-	783031998	Wind_Loop	C:\Users\zapin\Documents\WwiseProjects\Proyecto1\.cache\Windows\SFX\Wind_Loop_D79FB2B7.wem		\Actor-Mixer Hierarchy\Default Work Unit\Wind_Loop		2998864
+	141014001	guitar_piano	C:\Users\zapin\Documents\WwiseProjects\Proyecto1\.cache\Windows\SFX\guitar_piano_E0DA7CF5.wem		\Actor-Mixer Hierarchy\Default Work Unit\Background\guitar_piano		6271552
+	894172613	rock	C:\Users\zapin\Documents\WwiseProjects\Proyecto1\.cache\Windows\SFX\rock_96D980F5.wem		\Actor-Mixer Hierarchy\Default Work Unit\Background\rock		6234688
 

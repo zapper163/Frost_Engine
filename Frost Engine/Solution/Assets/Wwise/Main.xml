@@ -8,19 +8,24 @@
 		<ExternalSourcesOutputRoot>C:\Users\zapin\Documents\WwiseProjects\Proyecto1\GeneratedSoundBanks\Windows</ExternalSourcesOutputRoot>
 	</RootPaths>
 	<SoundBanks>
-		<SoundBank Id="3161908922" GUID="{90517D60-3595-4557-B2A3-C38B43B447EE}" Language="SFX" Hash="938716255">
+		<SoundBank Id="3161908922" GUID="{90517D60-3595-4557-B2A3-C38B43B447EE}" Language="SFX" Hash="2417232357">
 			<ObjectPath>\SoundBanks\Default Work Unit\Main</ObjectPath>
 			<ShortName>Main</ShortName>
 			<Path>Main.bnk</Path>
 			<IncludedEvents>
-				<Event Id="2888924529" Name="Ambient_Wind_Loop" ObjectPath="\Events\Default Work Unit\Ambient_Wind_Loop" GUID="{A34C4700-35A4-4AE0-9011-4A72735F69F7}" DurationType="Infinite"/>
+				<Event Id="3650723969" Name="Background" ObjectPath="\Events\Default Work Unit\Background" GUID="{24811D9E-9DA8-46CD-8051-66FD7FF53F9D}" DurationType="OneShot" DurationMin="32.664001" DurationMax="32.664001">
+					<IncludedMemoryFiles>
+						<File Id="141014001" Language="SFX">
+							<ShortName>guitar_piano.wav</ShortName>
+							<Path>SFX\guitar_piano_E0DA7CF5.wem</Path>
+						</File>
+						<File Id="894172613" Language="SFX">
+							<ShortName>rock.wav</ShortName>
+							<Path>SFX\rock_96D980F5.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
 			</IncludedEvents>
-			<IncludedMemoryFiles>
-				<File Id="783031998" Language="SFX">
-					<ShortName>Wind_Loop.wav</ShortName>
-					<Path>SFX\Wind_Loop_D79FB2B7.wem</Path>
-				</File>
-			</IncludedMemoryFiles>
 		</SoundBank>
 	</SoundBanks>
 </SoundBanksInfo>
