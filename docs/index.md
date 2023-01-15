@@ -12,13 +12,14 @@ Github: [zapper163](https://github.com/zapper163)
 - GameObject structure & Hierarchy
 - Each GameObject has three components: Transform, Mesh & Texture
 
-![v0.1](https://github.com/zapper163/Frost_Engine/blob/main/docs/media/v0.1.jpg?raw=true)
+![v0.1](https://github.com/zapper163/Frost_Engine/blob/main/docs/media/v0.1.jpeg?raw=true)
 
 ### v0.2
 All the features from v0.1 +
 - Camera as a component
 - Frustum Culling
 - Mouse Picking
+![v0.2](https://github.com/zapper163/Frost_Engine/blob/main/docs/media/v0.2.jpeg?raw=true)
 
 ### v0.3
 All the features from v0.1 and v0.2 +
