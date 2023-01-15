@@ -20,7 +20,7 @@ Github: [zapper163](https://github.com/zapper163)
 ### v0.3
 - Audio with Wwise library
 - Components SoundSource and SoundListener
-- SoundBank loading
+- SoundBank loading and event management
 - Play, Pause, Resume and Stop the audio
 
 ## Controls:
