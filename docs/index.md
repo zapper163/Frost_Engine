@@ -5,12 +5,23 @@ Github: [zapper163](https://github.com/zapper163)
 
 ## Features:
 
+### v0.1
 - FBX & Texture loader
 - Drag & Drop of FBX and PNG
 - Unity-like Camera
 - GameObject structure & Hierarchy
 - Each GameObject has three components: Transform, Mesh & Texture
 
+### v0.2
+- Camera as a component
+- Frustum Culling
+- Mouse Picking
+
+### v0.3
+- Audio with Wwise library
+- Components SoundSource and SoundListener
+- SoundBank loading
+- Play, Pause, Resume and Stop the audio
 
 ## Controls:
 - While Right clicking, “WASD” for fps-like movement and free look around.
