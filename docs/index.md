@@ -19,6 +19,7 @@ All the features from v0.1 +
 - Camera as a component
 - Frustum Culling
 - Mouse Picking
+
 ![v0.2](https://github.com/zapper163/Frost_Engine/blob/main/docs/media/v0.2.jpeg?raw=true)
 
 ### v0.3
@@ -42,7 +43,8 @@ All the features from v0.1 and v0.2 +
 * [JSON Parser](https://github.com/json-parser/json-parser) 1.1.0
 * [MathGeoLib](https://github.com/juj/MathGeoLib) 1.15
 * [Assimp](https://assimp-docs.readthedocs.io/en/v5.1.0) 5.1.0
-* [DevIL](https://openil.sourceforge.net)
+* [DevIL](https://openil.sourceforge.net) 1.8.0
+* [Wwise](https://www.audiokinetic.com/en/download/) 2021.1.11
 
 ## MIT License
 
